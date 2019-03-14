@@ -11,9 +11,12 @@
 |
 */
  
-$router->get('/', function () {
-	
-	return "hello";	
+$router->get('/', function (App\Wechat\Merchant\Merchant  $merchant) {
+	dd($merchant);
+	$app = app('wechat.official_account');
+	$list = $merchant->list()['products_info'];
+	// dd($list);
+	return view('hello',compact('list'));	
 });
 
 $router->post('express','ExpressController@order');
