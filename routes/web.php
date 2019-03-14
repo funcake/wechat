@@ -11,10 +11,9 @@
 |
 */
  
-$router->get('/', function (App\Wechat\Merchant\Merchant  $merchant) {
-	dd($merchant);
+$router->get('/', function () {
 	$app = app('wechat.official_account');
-	$list = $merchant->list()['products_info'];
+	$list = $app->merchant->list()['products_info'];
 	// dd($list);
 	return view('hello',compact('list'));	
 });
