@@ -13,8 +13,8 @@
  
 $router->get('/', function () {
 	$app = app('wechat.official_account');
-dd($app);
-	$list = $app->merchant->list()['products_info'];
+// dd($app);
+	$list = $app->user->select($app->user->list()['data']['openid'])['user_info_list'];
 	// dd($list);
 	return view('hello',compact('list'));	
 });

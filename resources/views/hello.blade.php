@@ -11,8 +11,8 @@
 
 @foreach($list as $user)
 	<div class="list">
-	<img src="{{$user['product_base']['img'][0]}}" alt="">
-	<span>{{$user['product_base']['name']}}</span><a href="express" title="发货">发货</a>
+	<img src="{{$user['headimgurl']}}" alt="">
+	<span>{{$user['nickname']}}</span><a href="express" title="发货">发货</a>
 	</div>
 @endforeach
 
