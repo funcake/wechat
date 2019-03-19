@@ -19,5 +19,9 @@ $router->get('/', function () {
 	return view('hello',compact('list'));	
 });
 
+$router->get('wechat', 'WeChatController@serve');
+
+$router->post('wechat', 'WeChatController@serve');
+
 $router->post('express','ExpressController@order');
 
