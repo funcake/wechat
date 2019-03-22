@@ -1,21 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta name="referer" content="never">
-	<title>hello</title>
-</head>
-<body>
-	<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" charset="utf-8">
-</script>
-
+@extends("layout")
+@section("content")
 @foreach($list as $user)
-	<div class="list">
-	<img src="{{$user['headimgurl']}}" alt="">
-	<span>{{$user['nickname']}}</span><a href="express" title="发货">发货</a>
+<div class="row">
+	<div class="col-sm-3">
+		<img src="{{$user['headimgurl']}}" alt="">
 	</div>
+	<div class="col-sm-3">
+		<span class="text-success">{{$user['nickname']}}</span>
+	</div>
+	<div class="col-sm-3"><p class="btn btn-default">saldkfjslkdfj</p></div>
+	<div class="col-sm-3"><p class="bg-danger"><a href="express" title="发货" class="btn btn-default">发货</a></p></div>
+</div>
+<hr>
 @endforeach
-
-</form>
-</body>
-</html>
+@endsection
