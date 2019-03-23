@@ -18,6 +18,16 @@ class WeChatController extends Controller
 
         $app = app('wechat.official_account');
 
-        return $app->server->serve();
+       $list = $app->user->select($app->user->list()['data']['openid'])['user_info_list'];
+
+        return view('hello',compact('list'));   
     }
+
+    public function order() {
+        $app = app('wechat.official_account');
+
+        
+    }
+
+
 }

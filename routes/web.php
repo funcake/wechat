@@ -12,7 +12,7 @@
 */
 
 $router->group(['middleware'=>['oauth']], function () use ($router){
-	$router->get('wechat/order','WechatController@order');
+	$router->get('wechat','WechatController@serve');
 });
 
 
