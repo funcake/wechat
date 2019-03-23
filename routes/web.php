@@ -12,7 +12,13 @@
 */
 
 $router->group(['middleware'=>['oauth']], function () use ($router){
-	$router->get('','WechatController@serve');
+	$router->get('',function() {
+		 $app = app('wechat.official_account');
+
+       $list = $app->user->select($app->user->list()['data']['openid'])['user_info_list'];
+
+        return view('hello',compact('list'));   
+	});
 });
 
 $router->post('express','ExpressController@order');
