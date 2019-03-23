@@ -12,7 +12,7 @@
 */
 
 $router->group(['middleware'=>['oauth']], function () use ($router){
-	$router->get('/',function () {
+	$router->get('wechat',function () {
 		$app = app('wechat.official_account');
 
 		$list = $app->user->select($app->user->list()['data']['openid'])['user_info_list'];
