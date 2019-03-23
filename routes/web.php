@@ -10,14 +10,17 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
- 
-$router->get('/', function () {
-	$app = app('wechat.official_account');
-// dd($app);
-	$list = $app->user->select($app->user->list()['data']['openid'])['user_info_list'];
-	// dd($list);
-	return view('hello',compact('list'));	
+
+$router->group(['middleware'=>['oauth']], function () use ($router){
+	$router->get('/',function () {
+		$app = app('wechat.official_account');
+
+		$list = $app->user->select($app->user->list()['data']['openid'])['user_info_list'];
+
+		return view('hello',compact('list'));	
+	});
 });
+
 
 $router->get('wechat', 'WeChatController@serve');
 
