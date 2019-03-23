@@ -12,7 +12,7 @@
 */
 
 $router->group(['middleware'=>['oauth']], function () use ($router){
-	$router->get('wechat','WechatController@serve');
+	$router->get('','WechatController@serve');
 });
 
 $router->post('express','ExpressController@order');
