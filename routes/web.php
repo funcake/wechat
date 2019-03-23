@@ -11,7 +11,7 @@
 |
 */
 
-$router->group(['middleware'=>['web','oauth']], function () use ($router){
+$router->group(['middleware'=>['oauth']], function () use ($router){
 	$router->get('wechat','WechatController@serve');
 });
 
