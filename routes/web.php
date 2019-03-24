@@ -11,11 +11,8 @@
 |
 */
 
-	$router->get('',[
-		'middleware'=>'oauth',
-		''=>'WeChatController@serve'
-	]
-);
+
+$router->get('','WeChatController@serve');
 
 $router->post('express','ExpressController@order');
 

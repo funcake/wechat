@@ -7,6 +7,9 @@ use Log;
 class WeChatController extends Controller
 {
 
+    public function __construct() {
+        $this->middleware('oauth');
+    }
     /**
      * 处理微信的请求消息
      *
