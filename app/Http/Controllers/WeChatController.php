@@ -8,7 +8,7 @@ class WeChatController extends Controller
 {
 
     public function __construct() {
-        $this->middleware('oauth');
+        // $this->middleware('oauth');
     }
     /**
      * 处理微信的请求消息
@@ -21,15 +21,13 @@ class WeChatController extends Controller
 
         $app = app('wechat.official_account');
 
-       $list = $app->user->select($app->user->list()['data']['openid'])['user_info_list'];
-
+       $list = $app->merchant->list()['products_info'];
+// dd($list);
         return view('hello',compact('list'));   
     }
 
     public function order() {
         $app = app('wechat.official_account');
-
-        
     }
 
 
