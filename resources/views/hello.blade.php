@@ -3,7 +3,7 @@
 @foreach($list as $product)
 <div class="row">
 	<div class="col-sm-3 col-3">
-		<img src="{{$product['product_base']['main_img']}}" alt="" class="img-responsive img-thumbnail">
+		<img src="{{chop($product['product_base']['main_img'],'?wx_fmt=jpeg')}}" alt="" class="img-responsive img-thumbnail">
 	</div>
 	<div class="col-sm-3 col-3"></div>
 	<div class="col-sm-3 col-3">
