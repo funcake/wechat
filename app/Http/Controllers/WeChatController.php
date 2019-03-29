@@ -8,7 +8,7 @@ class WeChatController extends Controller
 {
 
     public function __construct() {
-        // $this->middleware('oauth');
+        $this->middleware('oauth:snsapi_userinfo');
     }
     /**
      * 处理微信的请求消息
@@ -18,6 +18,8 @@ class WeChatController extends Controller
     public function serve()
     {
         // Log::info('request arrived.'); # 注意：Log 为 Laravel 组件，所以它记的日志去 Laravel 日志看，而不是 EasyWeChat 日志
+$user = session('oauth');
+dd($user);
 
         $app = app('wechat.official_account');
 
