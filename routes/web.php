@@ -12,5 +12,7 @@
 */
 $router->get('','WeChatController@serve');
 
+$router->post('','WeChatController@update');
+
 $router->post('express','ExpressController@order');
 
