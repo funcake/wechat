@@ -29,7 +29,7 @@
 		var posts = $(this).prev().children('input');
 		$.ajax({
 			type : 'POST',
-			url : 'http://fljy.shop',
+			url : '',
 			data:
 			{	
 				"product_id" : $(this).attr('id'),
