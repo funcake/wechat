@@ -23,12 +23,12 @@ class WeChatController extends Controller
     {
 
         // Log::info('request arrived.'); # 注意：Log 为 Laravel 组件，所以它记的日志去 Laravel 日志看，而不是 EasyWeChat 日志
-
         $app = app('wechat.official_account');
 
        $list = $app->merchant->list()['products_info'];
 // dd($list);
-        return view('hello',compact('list'));   
+       $token = $app->access_token->getToken()['access_token']; // token 字符串
+        return view('hello',compact('list','token'));   
     }
 
     public function order() {
@@ -36,7 +36,8 @@ class WeChatController extends Controller
     }
 
     public function update() {
-        dd($_POST);
+        return $_POST;
+
     }
 
 
