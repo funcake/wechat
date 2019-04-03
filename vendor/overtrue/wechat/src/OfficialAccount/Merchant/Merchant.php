@@ -87,14 +87,23 @@ class Merchant extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function remark(string $openid, string $remark)
+    public function update(array $post)
     {
-        $params = [
-            'openid' => $openid,
-            'remark' => $remark,
-        ];
-
-        return $this->httpPostJson('cgi-bin/user/info/updateremark', $params);
+          $params = [
+            'product_id' =>$post['id'],
+            'product_base' => [
+                'name' => $post['name'],
+                'buy_limit' => $post['limit'],
+            ],
+            'sku_list' => [
+                [
+                    'price' => $post['price'],
+                ]
+            ]
+            
+         ];
+         // return $params;
+        return $this->httpPost('merchant/update', $params);
     }
 
     /**
