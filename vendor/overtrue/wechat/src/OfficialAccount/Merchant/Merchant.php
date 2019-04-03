@@ -176,7 +176,7 @@ class Merchant extends BaseClient
     ]
 
 ];
-        return $this->httpPostJson('merchant/create', $params);
+        return $this->httpPostJson('merchant/update', $params);
     }
 
     /**
