@@ -95,11 +95,7 @@ class Merchant extends BaseClient
                 'name' => $post['name'],
                 'buy_limit' => $post['limit'],
             ],
-            'sku_list' => [
-                [
-                    'price' => $post['price'],
-                ]
-            ]
+           
             
          ];
          // return $params;
