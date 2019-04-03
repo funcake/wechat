@@ -91,19 +91,9 @@ class Merchant extends BaseClient
     {
         $params =[
 
-    // "product_id"=> "p13XCwfgwm9NkBtBB1xR4Nxvme6I",
+    "product_id"=> "p13XCwfgwm9NkBtBB1xR4Nxvme6I",
 
     "product_base"=> [
-
-        "category_id"=> [
-            "536903132"
-        ],
-
-        "property"=> [
-
-        ],
-
-        "name"=> "12",
 
         "sku_info"=> [
         ],
@@ -176,7 +166,7 @@ class Merchant extends BaseClient
     ]
 
 ];
-        return $this->httpPostJson('merchant/create', $params);
+        return $this->httpPostJson('merchant/update', $params);
     }
 
     /**
