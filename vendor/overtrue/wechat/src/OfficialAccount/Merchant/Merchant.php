@@ -87,19 +87,96 @@ class Merchant extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function update(array $post)
+    public function update(array $post,string $lang = 'zh_CN')
     {
-          $params = [
-            'product_id' =>$post['id'],
-            'product_base' => [
-                'name' => $post['name'],
-                'buy_limit' => $post['limit'],
-            ],
-           
-            
-         ];
-         // return $params;
-        return $this->httpPost('merchant/update', $params);
+        $params =[
+
+    "product_id"=> "p13XCwfgwm9NkBtBB1xR4Nxvme6I",
+
+    "product_base"=> [
+
+        "category_id"=> [
+
+        ],
+
+        "property"=> [
+
+        ],
+
+        "name"=> "",
+
+        "sku_info"=> [
+        ],
+
+        "main_img"=> "https=>\/\/mmbiz.qpic.cn\/mmbiz_jpg\/zjU4wTBaB7eQ41ibl9wVdoeyEwkuzGJIxr3xlDFNvyHsT1HOictm4Y1PibzjVx4bsFy3giaI1iayFt65guUsso57W8w\/0?wx_fmt=jpeg",
+
+        "img"=> [        ],
+
+        "detail"=> [
+        ],
+
+        "buy_limit"=> 3,
+
+    ],
+
+    "sku_list"=> [
+
+        [
+
+            "sku_id"=> "",
+
+            "price"=> 30,
+
+            "icon_url"=> "",
+
+            "product_code"=> "testing",
+
+            "ori_price"=> 9000000,
+
+            "quantity"=> 800
+
+        ],
+
+    ],
+
+    "attrext"=> [
+
+        "location"=> [
+
+            "country"=> "",
+
+            "province"=> "",
+
+            "city"=> "",
+
+            "address"=> ""
+
+        ],
+
+        "isPostFree"=> 0,
+
+        "isHasReceipt"=> 0,
+
+        "isUnderGuaranty"=> 0,
+
+        "isSupportReplace"=> 0
+
+    ],
+
+    "delivery_info"=> [
+
+        "delivery_type"=> 0,
+
+        "template_id"=> 0,
+
+        "express"=> [
+
+        ]
+
+    ]
+
+];
+        return $this->httpPostJson('merchant/create', $params);
     }
 
     /**

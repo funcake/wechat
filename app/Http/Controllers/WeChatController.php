@@ -25,7 +25,7 @@ class WeChatController extends Controller
         $app = app('wechat.official_account');
 
        $list = $app->merchant->list()['products_info'];
-
+// return $list[0];
         return view('hello',compact('list'));   
     }
 
@@ -37,7 +37,7 @@ class WeChatController extends Controller
          $app = app('wechat.official_account');
        
 
-        return $app->merchant->update($_POST);
+        return $app->merchant->update($_POST );
 
     }
 
