@@ -96,14 +96,14 @@ class Merchant extends BaseClient
     "product_base"=> [
 
         "category_id"=> [
-
+            "536903132"
         ],
 
         "property"=> [
 
         ],
 
-        "name"=> "",
+        "name"=> "12",
 
         "sku_info"=> [
         ],
