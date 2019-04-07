@@ -82,6 +82,7 @@
 				$('#price').val(data[i].sku_list[0].price/100);
 				$('.submit').attr('key',i);
 			});
-		},);
+		}
+	);
 	</script>
 	@endsection
