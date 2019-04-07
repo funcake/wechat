@@ -10,9 +10,12 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-$router->get('','WeChatController@serve');
+$router->get('','WeChatController@home');
+
+$router->get('{status}','WeChatController@serve');
 
 $router->post('','WeChatController@update');
+// $router->get('test','WeChatController@update');
 
 $router->post('express','ExpressController@order');
 
