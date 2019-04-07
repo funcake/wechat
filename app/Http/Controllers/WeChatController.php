@@ -12,11 +12,15 @@ class WeChatController extends Controller
 {
 
     public function __construct() {
-        // $this->middleware('oauth:snsapi_userinfo');
+        $this->middleware('work:snsapi_userinfo');
     }
 
     public function home() {
         return view('hello');
+    }
+
+    public function user() {
+      return 123;
     }
     /**
      * 处理微信的请求消息

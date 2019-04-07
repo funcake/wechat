@@ -15,8 +15,8 @@
 			<label for="price" class="ui-hidden-accessible">价:</label>
 			            <input type="range" name="price" id="price" value="" min="0" max="100" data-highlight="true" data-clear-btn="true" >
 
-			            <label for="select-choice-1" class="select">价域</label>
-			            <select name="select-choice-1" id="select-choice-1">
+			            <label for="select-choice-1" class="select" data-inline='true'>价域</label>
+			            <select name="select-choice-1" id="select-choice-1" data-mini='true' data-inline='true'>
 				                <option value="standard">￥1000</option>
 				                <option value="rush">￥5000</option>
 				                <option value="express">￥10000</option>
