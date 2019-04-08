@@ -16,7 +16,7 @@ $router->get('{status}','WeChatController@serve');
 
 $router->post('','WeChatController@update');
 
-$router->get('test','WeChatController@user');
+// $router->get('test','WeChatController@user');
 
 $router->post('express','ExpressController@order');
 

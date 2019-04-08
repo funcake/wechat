@@ -8,14 +8,30 @@ use EasyWeChat\Kernel\AccessToken;
 
 use illuminate\http\Request;
 
+use Illuminate\Support\Arr;
+use Overtrue\Socialite\User as SocialiteUser;
+
+
+
 class WeChatController extends Controller
 {
 
     public function __construct() {
+      // $user = new SocialiteUser([
+      //           'id' => 123,
+      //           'name' => 123,
+      //           'nickname' => 123,
+      //           'avatar' => 123,
+      //           'email' => null,
+      //           'original' => [],
+      //           'provider' => 'WeChat',
+      //       ]);
+      // session(['wechat.oauth_user.default' => $user]);
         $this->middleware('oauth:snsapi_userinfo'); 
     }
 
     public function home() {
+      dd(session());
         return view('hello');
     }
 
