@@ -31,8 +31,8 @@ class WeChatController extends Controller
     }
 
     public function home() {
-      dd(session('wechat.work.default'));
       dd(session('wechat.oauth_user.default'));
+      dd(session('wechat.work.default'));
         return view('hello');
     }
 
