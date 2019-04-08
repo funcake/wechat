@@ -27,11 +27,12 @@ class WeChatController extends Controller
       //           'provider' => 'WeChat',
       //       ]);
       // session(['wechat.oauth_user.default' => $user]);
-        $this->middleware('oauth:snsapi_userinfo'); 
+        $this->middleware('work:snsapi_userinfo'); 
     }
 
     public function home() {
       dd(session('wechat.work.default'));
+      dd(session('wechat.oauth_user.default'));
         return view('hello');
     }
 
