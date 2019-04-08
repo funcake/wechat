@@ -17,15 +17,15 @@ class WeChatController extends Controller
 {
 
     public function __construct() {
-
-        // $this->middleware('work:snsapi_userinfo'); 
-        $this->middleware('oauth:snsapi_userinfo'); 
+// dd(app('wechat.work'));
+        $this->middleware('work:snsapi_userinfo'); 
+        // $this->middleware('oauth:snsapi_userinfo'); 
     }
 
     public function home() {
       // dd(session());
-      dd(session('wechat.oauth_user.default'));
-      // dd(session('wechat.work.default'));
+      // dd(session('wechat.oauth_user.default'));
+      dd(session('wechat.work.default'));
         return view('hello');
     }
 
