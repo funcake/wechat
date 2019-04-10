@@ -32,6 +32,8 @@ class WeWorkProvider extends AbstractProvider implements ProviderInterface
      */
     protected $detailed = false;
 
+
+    protected $stateless = true; 
     /**
      * Set agent id.
      *
