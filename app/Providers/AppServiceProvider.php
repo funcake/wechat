@@ -13,6 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+    	$this->app->singleton('App\Wechat',function() {
+    		return  app('wechat.official_account');
+    	});
     }
 }

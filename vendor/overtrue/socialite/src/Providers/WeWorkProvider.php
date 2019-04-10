@@ -22,6 +22,7 @@ use Overtrue\Socialite\User;
  */
 class WeWorkProvider extends AbstractProvider implements ProviderInterface
 {
+    protected $stateless = true;
     /**
      * @var string
      */

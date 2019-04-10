@@ -10,22 +10,21 @@ use illuminate\http\Request;
 
 use Illuminate\Support\Arr;
 use Overtrue\Socialite\User as SocialiteUser;
-
+// use App\Wechat;
 
 
 class WeChatController extends Controller
 {
 
     public function __construct() {
-// dd(app('wechat.work'));
-        $this->middleware('work:snsapi_userinfo'); 
         // $this->middleware('oauth:snsapi_userinfo'); 
+        $this->middleware('work:snsapi_userinfo'); 
     }
 
     public function home() {
       // dd(session());
       // dd(session('wechat.oauth_user.default'));
-      dd(session('wechat.work.default'));
+      // dd(session('wechat.work.default'));
         return view('hello');
     }
 
@@ -39,8 +38,8 @@ class WeChatController extends Controller
      */
     public function serve(int $status = 0)
     {   
-        $app = app('wechat.official_account');
-
+        $app = app('wechat.work');
+        dd($app->oauth->user());
        $list = $app->merchant->list()['products_info'];
  /*       $list =  
             [

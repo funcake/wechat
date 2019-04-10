@@ -23,7 +23,7 @@ class ServiceProvider implements ServiceProviderInterface
             $socialite = (new SocialiteManager([
                 'wework' => [
                     'client_id' => $app['config']['corp_id'],
-                    'client_secret' => null,
+                    'client_secret' => $app['config']['secret'],
                     'redirect' => $this->prepareCallbackUrl($app),
                 ],
             ], $app['request']))->driver('wework');

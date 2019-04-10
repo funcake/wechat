@@ -50,7 +50,6 @@ class OAuthAuthenticateWork
         }
 
         $session = session($sessionKey, []);
-// dd(123);
         if (!$session) {
             if ($request->has('code')) {
                 session([$sessionKey => $officialAccount->oauth->user() ?? []]);
