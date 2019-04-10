@@ -36,7 +36,7 @@ class AccessToken extends BaseAccessToken
      * @return array
      */
     protected function getCredentials(): array
-    {
+    {dd($this->app['config']);
         return [
             'corpid' => $this->app['config']['corp_id'],
             'corpsecret' => $this->app['config']['secret'],
