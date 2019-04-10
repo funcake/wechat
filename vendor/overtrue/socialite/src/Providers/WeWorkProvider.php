@@ -22,7 +22,6 @@ use Overtrue\Socialite\User;
  */
 class WeWorkProvider extends AbstractProvider implements ProviderInterface
 {
-    protected $stateless = true;
     /**
      * @var string
      */
@@ -40,6 +39,8 @@ class WeWorkProvider extends AbstractProvider implements ProviderInterface
      *
      * @return $this
      */
+
+
     public function setAgentId($agentId)
     {
         $this->agentId = $agentId;

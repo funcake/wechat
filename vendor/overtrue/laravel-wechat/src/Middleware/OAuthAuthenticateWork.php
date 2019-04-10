@@ -45,6 +45,7 @@ class OAuthAuthenticateWork
         $officialAccount = app(\sprintf('wechat.work.%s', $account));
         $scopes = $scopes ?: array_get($config, 'oauth.scopes', ['snsapi_base']);
 
+
         if (is_string($scopes)) {
             $scopes = array_map('trim', explode(',', $scopes));
         }
@@ -52,7 +53,7 @@ class OAuthAuthenticateWork
         $session = session($sessionKey, []);
         if (!$session) {
             if ($request->has('code')) {
-                session([$sessionKey => $officialAccount->oauth->user() ?? []]);
+                session([$sessionKey => $officialAccount->oauth->stateless()->user() ?? []]);
                 $isNewSession = true;
 
                 Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
