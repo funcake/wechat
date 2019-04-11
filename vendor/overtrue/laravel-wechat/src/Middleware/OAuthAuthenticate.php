@@ -50,7 +50,9 @@ class OAuthAuthenticate
         }
 
         $session = session($sessionKey, []);
-
+if ($session) {
+    dd($session);
+}
         if (!$session) {
             if ($request->has('code')) {
                 session([$sessionKey => $officialAccount->oauth->user() ?? []]);
