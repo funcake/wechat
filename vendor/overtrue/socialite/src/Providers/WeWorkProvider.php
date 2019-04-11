@@ -133,16 +133,6 @@ class WeWorkProvider extends AbstractProvider implements ProviderInterface
         return null;
     }
 
- public function getAccessToken($code)
-    {
-        $response = $this->getHttpClient()->get($this->getTokenUrl(), [
-            'headers' => ['Accept' => 'application/json'],
-            'query' => $this->getTokenFields($code),
-        ]);
-
-        return $this->parseAccessToken($response->getBody());
-    }
-
     /**
      * @param \Overtrue\Socialite\AccessTokenInterface $token
      *
