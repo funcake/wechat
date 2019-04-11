@@ -63,11 +63,12 @@ class OAuthAuthenticateWork
             }
 
             session()->forget($sessionKey);
+            dd($officialAccount->oauth->scopes($scopes));
             return $officialAccount->oauth->scopes($scopes)->redirect($request->fullUrl());
         }
 
         Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
-dd($request);
+
         return $next($request);
     }
 
