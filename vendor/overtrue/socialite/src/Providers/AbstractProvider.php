@@ -188,7 +188,7 @@ abstract class AbstractProvider implements ProviderInterface
         if (is_null($token) && $this->hasInvalidState()) {
             throw new InvalidStateException();
         }
-dd($token);
+
         $token = $token ?: $this->getAccessToken($this->getCode());
 
         $user = $this->getUserByToken($token);
