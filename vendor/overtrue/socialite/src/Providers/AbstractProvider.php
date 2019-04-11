@@ -190,11 +190,11 @@ abstract class AbstractProvider implements ProviderInterface
         }
 
         $token = $token ?: $this->getAccessToken($this->getCode());
+
         $user = $this->getUserByToken($token);
 
         $user = $this->mapUserToObject($user)->merge(['original' => $user]);
 
-        dd( $user->setToken($token));
         return $user->setToken($token)->setProviderName($this->getName());
     }
 
