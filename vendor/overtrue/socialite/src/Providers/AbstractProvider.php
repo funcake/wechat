@@ -184,7 +184,7 @@ abstract class AbstractProvider implements ProviderInterface
      * {@inheritdoc}
      */
     public function user(AccessTokenInterface $token = null)
-    {
+    {dd($token);
         if (is_null($token) && $this->hasInvalidState()) {
             throw new InvalidStateException();
         }
