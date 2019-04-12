@@ -51,6 +51,7 @@ class OAuthAuthenticateWork
         }
 
         $session = session($sessionKey, []);
+        dd($session);
 if ($session) {
     dd($session);
 }
@@ -61,7 +62,7 @@ if ($session) {
                 $isNewSession = true;
                 
                 Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
-                dd(session($sessionKey));
+                // dd(session($sessionKey));
                 return redirect()->to($this->getTargetUrl($request));
             }
 
