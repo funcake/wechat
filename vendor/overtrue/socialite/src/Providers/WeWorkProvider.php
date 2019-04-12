@@ -12,6 +12,8 @@
 namespace Overtrue\Socialite\Providers;
 
 use Overtrue\Socialite\AccessTokenInterface;
+use Overtrue\Socialite\InvalidArgumentException;
+
 use Overtrue\Socialite\ProviderInterface;
 use Overtrue\Socialite\User;
 
@@ -141,6 +143,10 @@ class WeWorkProvider extends AbstractProvider implements ProviderInterface
     protected function getUserByToken(AccessTokenInterface $token)
     {
         $userInfo = $this->getUserInfo($token);
+
+        if (array_key_exists('errcode', $userInfo)) {
+            throw new InvalidArgumentException($userInfo['errcode'].' '.$userInfo['errmsg'], 1);
+        }
 
         if ($this->detailed && isset($userInfo['user_ticket'])) {
             return $this->getUserDetail($token, $userInfo['user_ticket']);
