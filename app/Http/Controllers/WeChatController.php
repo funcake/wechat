@@ -38,10 +38,10 @@ class WeChatController extends Controller
      */
     public function serve(int $status = 0)
     {   
-        $app = app('wechat.official_account');
+        $app = app('wechat.work');
+dd($app);
 
-
-       $list = $app->merchant->list()['products_info'];
+       // $list = $app->merchant->list()['products_info'];
  /*       $list =  
             [
                  [
