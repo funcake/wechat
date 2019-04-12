@@ -41,8 +41,8 @@ class OAuthAuthenticate
 
         $isNewSession = false;
         $sessionKey = \sprintf('wechat.oauth_user.%s', $account);
-        $config = config(\sprintf('wechat.official_account.%s', $account), []);
-        $officialAccount = app(\sprintf('wechat.official_account.%s', $account));
+        $config = config(\sprintf('wechat.work.%s', $account), []);
+        $officialAccount = app(\sprintf('wechat.work.%s', $account));
         $scopes = $scopes ?: array_get($config, 'oauth.scopes', ['snsapi_base']);
 
         if (is_string($scopes)) {
