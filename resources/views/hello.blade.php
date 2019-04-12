@@ -64,8 +64,8 @@
 			var html = "";
 			// console.log(data);
 			data.forEach( function(e, i) {
-				e.['product_base']['main_img'].replace[/https/,'http'];
-				e.['product_base']['img'].forEach(function(e){e.replace[/https/,'http']});
+				e['product_base']['main_img'].replace(/https/,'http');
+				e['product_base']['img'].forEach(function(e){e.replace(/https/,'http')});
 				html +=
 				`
 				<li id="${i}"><a href="#">
