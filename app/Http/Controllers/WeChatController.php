@@ -24,6 +24,7 @@ class WeChatController extends Controller
     }
 
     public function home() {
+      dd(session('wechat.oauth_user.snsapi_userinfo'));
       // dd(session('wechat.oauth_user.default'));
       // dd(session('wechat.work.default'));
         return view('hello');
@@ -39,7 +40,7 @@ class WeChatController extends Controller
      */
     public function serve(int $status = 0)
     {   
-      
+
         $app = app('wechat.work');
 
        // $list = $app->merchant->list()['products_info'];
