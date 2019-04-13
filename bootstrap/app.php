@@ -117,20 +117,4 @@ $app->alias('session', 'Illuminate\Session\SessionManager');
 
 $app->configure('session');
 
-if (! function_exists('session')) {
-    function session($key = null, $default = null)
-    {
-        $session = app('session');
-
-        if (is_null($key)) {
-            return $session;
-        }
-        if (is_array($key)) {
-            return $session->put($key);
-        }
-
-        return $session->get($key, $default);
-    }
-}
-
 return $app;
