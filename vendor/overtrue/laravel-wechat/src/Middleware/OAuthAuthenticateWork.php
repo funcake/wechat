@@ -63,7 +63,7 @@ if ($session) {
                 // dd(session($sessionKey));
 
                 // Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
-                return redirect()->to('/');
+                return $request;
             }
 
             session()->forget($sessionKey);
