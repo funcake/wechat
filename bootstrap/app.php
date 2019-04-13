@@ -68,7 +68,7 @@ $app->singleton(
 // ]);
 $app->routeMiddleware([
 	'work' =>\Overtrue\LaravelWeChat\Middleware\OAuthAuthenticateWork::class,
-    // 'oauth' =>\Overtrue\LaravelWeChat\Middleware\OAuthAuthenticate::class,
+    'oauth' =>\Overtrue\LaravelWeChat\Middleware\OAuthAuthenticate::class,
 ]);
 // 3、注册StartSession中间件
 $app->middleware([
