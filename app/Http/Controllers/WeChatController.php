@@ -20,7 +20,7 @@ class WeChatController extends Controller
 
 
         $this->middleware('oauth:snsapi_userinfo'); 
-        $this->middleware('work:snsapi_userinfo'); 
+        // $this->middleware('work:snsapi_userinfo'); 
     }
 
     public function home() {
