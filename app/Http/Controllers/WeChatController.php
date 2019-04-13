@@ -18,7 +18,7 @@ class WeChatController extends Controller
 
     public function __construct() {
 
-var_dump(session()->all());
+dd(session()->all());
         $this->middleware('work:snsapi_userinfo'); 
         $this->middleware('oauth:snsapi_userinfo'); 
     }
