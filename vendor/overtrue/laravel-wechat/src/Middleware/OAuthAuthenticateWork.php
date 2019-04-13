@@ -61,7 +61,7 @@ if ($session) {
                 $isNewSession = true;
                 
 
-                // Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
+                Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
                 return redirect()->to($this->getTargetUrl($request));
             }
 

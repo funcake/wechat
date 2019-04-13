@@ -19,8 +19,8 @@ class WeChatController extends Controller
     public function __construct() {
 
 
-        $this->middleware('work:snsapi_userinfo'); 
-        // $this->middleware('oauth:snsapi_userinfo'); 
+        // $this->middleware('work:snsapi_userinfo'); 
+        $this->middleware('oauth:snsapi_userinfo'); 
     }
 
     public function home() {
@@ -39,8 +39,8 @@ class WeChatController extends Controller
      */
     public function serve(int $status = 0)
     {   
+      
         $app = app('wechat.work');
-dd($app);
 
        // $list = $app->merchant->list()['products_info'];
  /*       $list =  
