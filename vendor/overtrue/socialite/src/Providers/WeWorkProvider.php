@@ -144,9 +144,9 @@ class WeWorkProvider extends AbstractProvider implements ProviderInterface
     {
         $userInfo = $this->getUserInfo($token);
 
-        // if ($userInfo['errcode']!= 0) {
-        //     throw new InvalidArgumentException($userInfo['errcode'].' '.$userInfo['errmsg'], 1);
-        // }
+        if ($userInfo['errcode']!= 0) {
+            throw new InvalidArgumentException($userInfo['errcode'].' '.$userInfo['errmsg'], 1);
+        }
 
         if ($this->detailed && isset($userInfo['user_ticket'])) {
             return $this->getUserDetail($token, $userInfo['user_ticket']);
