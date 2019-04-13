@@ -58,10 +58,10 @@ if ($session) {
         if (!$session) {
 
             if ($request->has('code')) {
-               $session =  session([$sessionKey => $officialAccount->oauth->user() ?? []]);
+                session([$sessionKey => $officialAccount->oauth->user() ?? []]);
                 $isNewSession = true;
-                dd($session);
-                
+                dd(session($sessionKey));
+
                 Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
                 return redirect()->to($this->getTargetUrl($request));
             }
