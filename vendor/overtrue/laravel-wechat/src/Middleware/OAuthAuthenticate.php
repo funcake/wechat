@@ -50,12 +50,12 @@ class OAuthAuthenticate
         }
 
         $session = session($sessionKey, []);
-
+if($session) {dd($session);}
         if (!$session) {
             if ($request->has('code')) {
                 session([$sessionKey => $officialAccount->oauth->user() ?? []]);
                 $isNewSession = true;
-dd(session($sessionKey));
+
                 Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
 
                 return redirect()->to($this->getTargetUrl($request));
