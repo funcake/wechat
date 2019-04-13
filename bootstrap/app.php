@@ -66,14 +66,16 @@ $app->singleton(
 // $app->routeMiddleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);
-$app->routeMiddleware([
-	'work' =>\Overtrue\LaravelWeChat\Middleware\OAuthAuthenticateWork::class,
-    'oauth' =>\Overtrue\LaravelWeChat\Middleware\OAuthAuthenticate::class,
-]);
-// 3、注册StartSession中间件
 $app->middleware([
     Illuminate\Session\Middleware\StartSession::class
 ]);
+
+
+$app->routeMiddleware([
+    'work' =>\Overtrue\LaravelWeChat\Middleware\OAuthAuthenticateWork::class,
+    'oauth' =>\Overtrue\LaravelWeChat\Middleware\OAuthAuthenticate::class,
+]);
+// 3、注册StartSession中间件
 
 /*
 |--------------------------------------------------------------------------

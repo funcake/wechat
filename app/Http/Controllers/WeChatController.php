@@ -105,24 +105,24 @@ class WeChatController extends Controller
               'express' => 
               [
               ],
-          ],
-          'product_id' => 'p13XCwZzrIz4Ib6qlXnE0OpaPcRc',
-          'status' => 2,
-          'attrext' => 
-          [
-              'isPostFree' => 0,
-              'isHasReceipt' => 0,
-              'isUnderGuaranty' => 0,
-              'isSupportReplace' => 0,
-              'location' => 
-              [
-                'country' => '中国',
-                'province' => '上海',
-                'city' => '卢湾',
-                'address' => '',
-            ],
-            ],
-            ],
+                ],
+                'product_id' => 'p13XCwZzrIz4Ib6qlXnE0OpaPcRc',
+                'status' => 2,
+                'attrext' => 
+                [
+                    'isPostFree' => 0,
+                    'isHasReceipt' => 0,
+                    'isUnderGuaranty' => 0,
+                    'isSupportReplace' => 0,
+                    'location' => 
+                    [
+                      'country' => '中国',
+                      'province' => '上海',
+                      'city' => '卢湾',
+                      'address' => '',
+                  ],
+                  ],
+                  ],
         ];*/
 // dd($list);
         return $list;
