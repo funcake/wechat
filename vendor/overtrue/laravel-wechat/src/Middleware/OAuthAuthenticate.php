@@ -44,7 +44,7 @@ class OAuthAuthenticate
         $config = config(\sprintf('wechat.official_account.%s', $account), []);
         $officialAccount = app(\sprintf('wechat.official_account.%s', $account));
         $scopes = $scopes ?: array_get($config, 'oauth.scopes', ['snsapi_base']);
-dd($sessionKey);
+
         if (is_string($scopes)) {
             $scopes = array_map('trim', explode(',', $scopes));
         }
