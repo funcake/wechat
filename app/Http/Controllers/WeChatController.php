@@ -18,7 +18,7 @@ class WeChatController extends Controller
 
     public function __construct() {
 
-var_dump(session('work'));
+var_dump(session('test'));
 
 
         // $this->middleware('oauth:snsapi_userinfo'); 
@@ -29,17 +29,17 @@ var_dump(session('work'));
             $app = app('wechat.work');
           $config = config(\sprintf('wechat.work.%s', 'default'), []);
         $scopes = array_get($config, 'oauth.scopes', ['snsapi_base']);
-        var_dump(session('work'));
       if(!session('work')){
         if($request->has('code')){
 
       $user = $app->oauth->user();
       dd($user);
-      session(['work' =>$user]);
+      session(['work' =>$user,'test'=>'test']);
       return redirect() ->to('fljy.shop');
         }
 
         session()->forget('work');
+        session()->forget('test');
         return $app->oauth->scopes($config)->redirect($request->fullUrl());
       }
 dd(session('work'));
