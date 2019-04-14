@@ -30,8 +30,8 @@ var_dump(session()->all());
       $user = $app->oauth->user();
       session(['work' =>$user]);
       }else {
-        
-      var_dump(session()->all());
+
+      dd(session()->all());
       }
         
 
