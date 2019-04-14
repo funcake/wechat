@@ -18,7 +18,7 @@ class WeChatController extends Controller
 
     public function __construct() {
 
-var_dump(session()->all());
+var_dump(session('work'));
 
 
         // $this->middleware('oauth:snsapi_userinfo'); 
@@ -29,6 +29,7 @@ var_dump(session()->all());
             $app = app('wechat.work');
           $config = config(\sprintf('wechat.work.%s', 'default'), []);
         $scopes = array_get($config, 'oauth.scopes', ['snsapi_base']);
+        var_dump(session('work'));
       if(!session('work')){
         if($request->has('code')){
 
