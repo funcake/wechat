@@ -34,7 +34,7 @@ var_dump(session()->all());
         }
 
         session()->forget('work');
-        return $app->oauth->scopes()->redirect('');
+        return $app->oauth->scopes('snsapi_userinfo')->redirect('');
       }
         dd(session()->all());
 
