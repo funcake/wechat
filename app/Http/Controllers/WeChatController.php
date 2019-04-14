@@ -19,7 +19,7 @@ class WeChatController extends Controller
     public function __construct() {
 
 var_dump(session()->all());
-if($session = session('wechat.official_account.default')) {
+if($session = session('wechat.oauth_user.default')) {
   dd($session);
 }
         $this->middleware('oauth:snsapi_userinfo'); 
