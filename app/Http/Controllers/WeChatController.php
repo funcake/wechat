@@ -26,6 +26,8 @@ var_dump(session()->all());
 
     public function home(Request $request) {
       $app = app('wechat.work');
+          $config = config(\sprintf('wechat.work.%s', 'default'), []);
+        $scopes = array_get($config, 'oauth.scopes', ['snsapi_base']);
       if(!session('work')){
         if($request->has('code')){
 
@@ -34,7 +36,7 @@ var_dump(session()->all());
         }
 
         session()->forget('work');
-        return $app->oauth->scopes(['snsapi_userinfo'])->redirect('');
+        return $app->oauth->scopes($config)->redirect('');
       }
         dd(session()->all());
 

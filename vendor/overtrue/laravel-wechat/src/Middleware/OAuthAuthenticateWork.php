@@ -45,7 +45,6 @@ class OAuthAuthenticateWork
         $officialAccount = app(\sprintf('wechat.work.%s', $account));
         $scopes = $scopes ?: array_get($config, 'oauth.scopes', ['snsapi_base']);
 
-
         if (is_string($scopes)) {
             $scopes = array_map('trim', explode(',', $scopes));
         }
