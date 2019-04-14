@@ -40,7 +40,7 @@ var_dump(session()->all());
     }
 
     public function home() {
-
+dd(session('work'));
 
       // dd(session('wechat.oauth_user.default'));
       // dd(session('wechat.work.default'));
