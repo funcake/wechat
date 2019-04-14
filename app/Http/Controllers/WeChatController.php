@@ -24,11 +24,17 @@ var_dump(session()->all());
         // $this->middleware('work:snsapi_userinfo'); 
     }
 
-    public function home() {
+    public function home(Request $request) {
       $app = app('wechat.work');
       if(!session('work')){
+        if($request->has('code')){
+
       $user = $app->oauth->user();
       session(['work' =>$user]);
+        }
+
+        session()->forget('work');
+        return $app->oauth->scopes()->redirect('');
       }
         dd(session()->all());
 
