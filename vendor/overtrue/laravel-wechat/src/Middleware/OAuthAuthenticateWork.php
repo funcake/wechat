@@ -51,9 +51,6 @@ class OAuthAuthenticateWork
         }
 
         $session = session($sessionKey, []);
-if ($session) {
-    dd($session);
-}
 
         if (!$session) {
 
@@ -72,7 +69,7 @@ dd(session()->all());
             return $officialAccount->oauth->scopes($scopes)->redirect($request->fullUrl());
         }
 
-        // Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
+        Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
         return $next($request);
     }
 
