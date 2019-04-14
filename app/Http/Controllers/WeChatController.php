@@ -21,11 +21,19 @@ class WeChatController extends Controller
 var_dump(session()->all());
 
         // $this->middleware('oauth:snsapi_userinfo'); 
-        $this->middleware('work:snsapi_userinfo'); 
+        // $this->middleware('work:snsapi_userinfo'); 
     }
 
     public function home() {
+      $app = app('wechat.work');
+      if(!session('work')){
+      $user = $app->oauth->user();
+      session(['work' =>$user]);
+      }else {
+        
       var_dump(session()->all());
+      }
+        
 
       // dd(session('wechat.oauth_user.default'));
       // dd(session('wechat.work.default'));
