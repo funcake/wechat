@@ -32,7 +32,6 @@ var_dump(session('work'));
         if($request->has('code')){
 
       $user = $app->oauth->user();
-      dd($user);
       session(['work' =>'test']);
       return redirect() ->to('fljy.shop');
         }
