@@ -24,7 +24,7 @@ class WeChatController extends Controller
         // $this->middleware('work:snsapi_userinfo'); 
     }
 
-    public function home(Request $request,SocialiteUser $user) {
+    public function home(Request $request {
             $app = app('wechat.work');
           $config = config(\sprintf('wechat.work.%s', 'default'), []);
         $scopes = array_get($config, 'oauth.scopes', ['snsapi_base']);
