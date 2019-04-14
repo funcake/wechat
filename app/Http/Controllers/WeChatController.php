@@ -39,7 +39,6 @@ var_dump(session('test'));
         }
 
         session()->forget('work');
-        session()->forget('test');
         return $app->oauth->scopes($config)->redirect($request->fullUrl());
       }
 dd(session('work'));
