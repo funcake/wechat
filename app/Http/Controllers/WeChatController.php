@@ -16,10 +16,17 @@ use Overtrue\Socialite\User as SocialiteUser;
 class WeChatController extends Controller
 {
 
-    public function __construct(Request $request) {
+    public function __construct() {
 
 var_dump(session()->all());
-      $app = app('wechat.work');
+
+
+        // $this->middleware('oauth:snsapi_userinfo'); 
+        // $this->middleware('work:snsapi_userinfo'); 
+    }
+
+    public function home(Request $request) {
+            $app = app('wechat.work');
           $config = config(\sprintf('wechat.work.%s', 'default'), []);
         $scopes = array_get($config, 'oauth.scopes', ['snsapi_base']);
       if(!session('work')){
@@ -34,12 +41,6 @@ var_dump(session()->all());
         session()->forget('work');
         return $app->oauth->scopes($config)->redirect($request->fullUrl());
       }
-
-        // $this->middleware('oauth:snsapi_userinfo'); 
-        // $this->middleware('work:snsapi_userinfo'); 
-    }
-
-    public function home() {
 dd(session('work'));
 
       // dd(session('wechat.oauth_user.default'));
