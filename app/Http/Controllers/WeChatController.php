@@ -29,11 +29,8 @@ var_dump(session()->all());
       if(!session('work')){
       $user = $app->oauth->user();
       session(['work' =>$user]);
-      }else {
-
-      dd(session()->all());
       }
-        
+        dd(session()->all());
 
       // dd(session('wechat.oauth_user.default'));
       // dd(session('wechat.work.default'));
