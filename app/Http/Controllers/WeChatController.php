@@ -16,7 +16,7 @@ use Overtrue\Socialite\User as SocialiteUser;
 class WeChatController extends Controller
 {
 
-    public function __construct() {
+    public function __construct(Request $request) {
 
 var_dump(session()->all());
       $app = app('wechat.work');
@@ -39,7 +39,7 @@ var_dump(session()->all());
         // $this->middleware('work:snsapi_userinfo'); 
     }
 
-    public function home(Request $request) {
+    public function home() {
 
 
       // dd(session('wechat.oauth_user.default'));
