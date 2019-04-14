@@ -26,6 +26,7 @@ var_dump(session()->all());
         if($request->has('code')){
 
       $user = $app->oauth->user();
+      dd($user);
       session(['work' =>$user]);
       return redirect() ->to('fljy.shop');
         }
@@ -33,7 +34,6 @@ var_dump(session()->all());
         session()->forget('work');
         return $app->oauth->scopes($config)->redirect($request->fullUrl());
       }
-        dd(session()->all());
 
         // $this->middleware('oauth:snsapi_userinfo'); 
         // $this->middleware('work:snsapi_userinfo'); 
