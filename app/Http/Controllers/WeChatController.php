@@ -33,6 +33,7 @@ var_dump(session()->all());
 
       $user = $app->oauth->user();
       session(['work' =>$user]);
+      return redirect() ->to('fljy.shop');
         }
 
         session()->forget('work');
