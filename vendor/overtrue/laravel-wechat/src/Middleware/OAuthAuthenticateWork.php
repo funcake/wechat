@@ -14,7 +14,7 @@ namespace Overtrue\LaravelWeChat\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Event;
 use http\Env\Request;
-use Overtrue\LaravelWeChat\Events\WeChatUserAuthorized;
+use Overtrue\LaravelWeChat\Events\WeWorkUserAuthorized;
 
 /**
  * Class OAuthAuthenticate.
