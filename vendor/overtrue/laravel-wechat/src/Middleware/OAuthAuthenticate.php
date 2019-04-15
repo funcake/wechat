@@ -65,7 +65,7 @@ class OAuthAuthenticate
             return $officialAccount->oauth->scopes($scopes)->redirect($request->fullUrl());
         }
 
-        Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
+        // Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
 
         return $next($request);
     }
