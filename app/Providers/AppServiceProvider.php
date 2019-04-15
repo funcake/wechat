@@ -16,5 +16,9 @@ class AppServiceProvider extends ServiceProvider
     	$this->app->singleton('App\Wechat',function() {
     		return  app('wechat.official_account');
     	});
+
+        $this->app->singleton('App\Wechat',function() {
+            return app('wechat.work');
+        });
     }
 }
