@@ -25,22 +25,7 @@ class WeChatController extends Controller
     }
 
     public function home(Request $request) {
-            $app = app('wechat.work');
-          $config = config(\sprintf('wechat.work.%s', 'default'), []);
-        $scopes = array_get($config, 'oauth.scopes', ['snsapi_base']);
-      if(!session('work')){
-        if($request->has('code')){
-
-      $user = $app->oauth->user();
-      session(['work' =>'test']);
-      return redirect() ->to('');
-        }
-
-        session()->forget('work');
-        return $app->oauth->scopes($config)->redirect($request->fullUrl());
-      }
-
-dd(session('work'));
+       
       // dd(session('wechat.oauth_user.default'));
       // dd(session('wechat.work.default'));
         return view('hello');
