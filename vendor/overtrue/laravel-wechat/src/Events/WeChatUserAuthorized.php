@@ -32,6 +32,7 @@ class WeChatUserAuthorized
      */
     public function __construct(User $user, $isNewSession = false, string $account)
     {
+        dd($user);
         $this->user = $user;
         $this->isNewSession = $isNewSession;
         $this->account = $account;
