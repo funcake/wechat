@@ -143,7 +143,7 @@ class WeWorkProvider extends AbstractProvider implements ProviderInterface
     protected function getUserByToken(AccessTokenInterface $token)
     {
         $userInfo = $this->getUserInfo($token);
-
+dd($userInfo);
         if ($userInfo['errcode']!= 0) {
             throw new InvalidArgumentException($userInfo['errcode'].' '.$userInfo['errmsg'], 1);
         }
