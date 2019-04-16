@@ -23,7 +23,7 @@ class WeChatController extends Controller
     }
 
     public function home() {
-      $user = session('wechat.work.default');
+      $user = session('wechat.oauth_user.default');
       return $user->getName();
       // dd(session('wechat.oauth_user.default'));
       // dd(session('wechat.work.default'));
