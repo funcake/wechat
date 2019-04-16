@@ -42,7 +42,7 @@ class OAuthAuthenticateWork
         $isNewSession = false;
         $sessionKey = \sprintf('wechat.work.%s', $account);
         $config = config(\sprintf('wechat.work.%s', $account), []);
-        $officialAccount = app(\sprintf('wechat.work.%s', $account));
+        $workAccount = app(\sprintf('wechat.work.%s', $account));
         $scopes = $scopes ?: array_get($config, 'oauth.scopes', ['snsapi_base']);
 
         if (is_string($scopes)) {
@@ -54,18 +54,16 @@ class OAuthAuthenticateWork
         if (!$session) {
 
             if ($request->has('code')) {
-                $user = $officialAccount->oauth->detailed()->user();
-                serialize(new WeChatUserAuthorized($user));
+                session([$sessionKey => $workAccount->oauth->detailed()->user() ?? []]);
                 $isNewSession = true;
 
-                // Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
+                Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
                 return redirect()->to($this->getTargetUrl($request));
             }
 
             session()->forget($sessionKey);
-            return $officialAccount->oauth->scopes($scopes)->redirect($request->fullUrl());
+            return $workAccount->oauth->scopes($scopes)->redirect($request->fullUrl());
         }
-unserialize(session($sessionKey));
         // Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
         return $next($request);
     }
