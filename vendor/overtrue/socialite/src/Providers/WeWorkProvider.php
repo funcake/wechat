@@ -186,11 +186,9 @@ class WeWorkProvider extends AbstractProvider implements ProviderInterface
      */
     protected function getUserDetail(AccessTokenInterface $token, $ticket)
     {dd($ticket);
-        $response = $this->getHttpClient()->post('https://qyapi.weixin.qq.com/cgi-bin/user/get', [
+        $response = $this->getHttpClient()->get('https://qyapi.weixin.qq.com/cgi-bin/user/get', [
             'query' => [
                 'access_token' => $token->getToken(),
-            ],
-            'json' => [
                 'userid' => $ticket,
             ],
         ]);
