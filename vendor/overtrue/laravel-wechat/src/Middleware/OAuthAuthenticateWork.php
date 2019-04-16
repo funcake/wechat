@@ -57,7 +57,7 @@ class OAuthAuthenticateWork
                 $user = $workAccount->oauth->detailed()->user();
                 session([$sessionKey => $user->getOriginal() ?? []]);
                 $isNewSession = true;
-dd(session($sessionKey));
+// dd(session($sessionKey));
                 // Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
                 return redirect()->to($this->getTargetUrl($request));
             }
