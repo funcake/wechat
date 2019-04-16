@@ -50,7 +50,7 @@ class OAuthAuthenticateWork
         }
 
         $session = session($sessionKey, []);
-
+dd($session,$sessionKey);
         if (!$session) {
 
             if ($request->has('code')) {
