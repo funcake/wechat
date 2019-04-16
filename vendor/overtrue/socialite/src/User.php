@@ -27,7 +27,7 @@ class User implements ArrayAccess, UserInterface, JsonSerializable
      * @param array $attributes
      */
     public function __construct(array $attributes)
-    {
+    {dd($this);
         $this->attributes = $attributes;
     }
 
