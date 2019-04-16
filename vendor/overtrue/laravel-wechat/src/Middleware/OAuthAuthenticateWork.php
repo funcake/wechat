@@ -54,12 +54,11 @@ class OAuthAuthenticateWork
         if (!$session) {
 
             if ($request->has('code')) {
-                // $ticket = $workAccount->oauth->user()->getId();
+                
                 $user = $workAccount->oauth->detailed()->user();
-                dd($user);
                 session([$sessionKey => $user ?? []]);
                 $isNewSession = true;
-// dd(session($sessionKey));
+
                 // Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
                 return redirect()->to($this->getTargetUrl($request));
             }
