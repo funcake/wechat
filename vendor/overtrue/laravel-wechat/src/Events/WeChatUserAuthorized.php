@@ -23,7 +23,6 @@ class WeChatUserAuthorized
     public $isNewSession;
 
     public $account;
-
     /**
      * Create a new event instance.
      *

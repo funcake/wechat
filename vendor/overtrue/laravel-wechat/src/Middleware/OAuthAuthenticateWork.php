@@ -54,18 +54,18 @@ class OAuthAuthenticateWork
         if (!$session) {
 
             if ($request->has('code')) {
-                session([$sessionKey => $officialAccount->oauth->detailed()->user() ?? []]);
+                session([$sessionKey => serialize($officialAccount->oauth->detailed()->user()) ?? []]);
                 $isNewSession = true;
-                Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
-session([$sessionKey=>'sessoned']);
+
+                // Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
                 return redirect()->to($this->getTargetUrl($request));
             }
 
             session()->forget($sessionKey);
             return $officialAccount->oauth->scopes($scopes)->redirect($request->fullUrl());
         }
-dd(session($sessionKey));
-        Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
+dd(unserialize(session($sessionKey)));
+        // Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
         return $next($request);
     }
 
