@@ -97,69 +97,47 @@ $post['product_base']['detail'][0]['test'] = '<h1> sldkfj</h1><p>123132</p>';
         return $this->httpPostJson('merchant/update', $post);
     }
 
-    /**
-     * Get black list.
-     *
-     * @param string|null $beginOpenid
-     *
-     * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
-     *
-     * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
-     */
-    public function blacklist(string $beginOpenid = null)
-    {
-        $params = ['begin_openid' => $beginOpenid];
+    public function shelf() {
 
-        return $this->httpPostJson('cgi-bin/tags/members/getblacklist', $params);
+        $post = ['shelf_id'=>1,
+    "shelf_data"=>[
+      "module_infos"=>[
+       
+
+        [
+          "group_infos"=>[
+            "groups"=>[
+     
+              [
+                "group_id"=>512519882
+              ]
+            ],
+            "img"=>"http://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7fCM4PaQ3tia6zU8bvgxT8q28YkDNPNwkj97M23s0IwZIcRYaPjdq2AWGDDqXTMd3IiaCUEzbsn6ojQ/0"
+          ],
+          "eid"=>3
+        ], [
+          "group_infos"=>[
+            "groups"=>[
+     
+              [
+                "group_id"=>512519882
+              ]
+            ],
+            "img"=>"http://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7fCM4PaQ3tia6zU8bvgxT8q28YkDNPNwkj97M23s0IwZIcRYaPjdq2AWGDDqXTMd3IiaCUEzbsn6ojQ/0"
+          ],
+          "eid"=>3
+        ]
+
+      ]
+    ], 
+    "shelf_banner"=>"http://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7fCM4PaQ3tia6zU8bvgxT8q28YkDNPNwkj97M23s0IwZIcRYaPjdq2AWGDDqXTMd3IiaCUEzbsn6ojQ/0", 
+    "shelf_name"=>"货架"
+];
+
+
+
+        return $this->httpPostJson('merchant/shelf/add',$post);
+
     }
 
-    /**
-     * Batch block user.
-     *
-     * @param array|string $openidList
-     *
-     * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
-     *
-     * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
-     */
-    public function block($openidList)
-    {
-        $params = ['openid_list' => (array) $openidList];
-
-        return $this->httpPostJson('cgi-bin/tags/members/batchblacklist', $params);
-    }
-
-    /**
-     * Batch unblock user.
-     *
-     * @param array $openidList
-     *
-     * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
-     *
-     * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
-     */
-    public function unblock($openidList)
-    {
-        $params = ['openid_list' => (array) $openidList];
-
-        return $this->httpPostJson('cgi-bin/tags/members/batchunblacklist', $params);
-    }
-
-    /**
-     * @param string $oldAppId
-     * @param array  $openidList
-     *
-     * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
-     *
-     * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
-     */
-    public function changeOpenid(string $oldAppId, array $openidList)
-    {
-        $params = [
-            'from_appid' => $oldAppId,
-            'openid_list' => $openidList,
-        ];
-
-        return $this->httpPostJson('cgi-bin/changeopenid', $params);
-    }
 }

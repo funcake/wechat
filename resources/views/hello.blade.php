@@ -2,7 +2,7 @@
 @section("content")
 <section id="home" data-role="page">
 	<header data-role="header">
-		<h1>上架商品管理</h1>
+		<h1>{{$name}}商品管理</h1>
 	</header><!-- /header -->
 
 	<ul data-role="listview" data-split-icon="gear" data-inset="true">
