@@ -25,7 +25,6 @@
 				<a href="" data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini submit"  key="${i}">button</a>
 				    <a href="" data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini">Cancel</a>
 			            </fieldset>
-			     
 		</form>
 
 	</div>
@@ -63,9 +62,10 @@
 			data = d;
 			var html = "";
 			// console.log(data);
+			console.log('sdfsdfsdf'.replace(/sdf/,'为'));
 			data.forEach( function(e, i) {
-				e['product_base']['main_img'].replace(/https/,'http');
-				e['product_base']['img'].forEach(function(e){e.replace(/https/,'http')});
+				e['product_base']['main_img'] = e['product_base']['main_img'].replace(/https/,'http');
+				e['product_base']['img'] = e['product_base']['img'].map(function(e){e.replace(/https/,'http')});
 				html +=
 				`
 				<li id="${i}"><a href="#">
