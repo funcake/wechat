@@ -18,19 +18,17 @@ class WeChatController extends Controller
 
     public function __construct() {
 
-        $this->middleware('work:snsapi_userinfo'); 
+        // $this->middleware('work:snsapi_userinfo'); 
         // $this->middleware('oauth:snsapi_userinfo'); 
     }
 
     public function home() {
-     $user = session('wechat.work.default');
-        
-     $name =  $user['name'];
+       $property =  app('wechat.official_account')->merchant->getproperty();
 
-     $app = app('wechat.official_account');
-
-     $list = $app->merchant->list()['products_info'];
-        return view('hello',compact('list','name'));
+       $material = $property[array_search('种地分类', array_column($property, 'name'))];
+       $usage = $property[array_search('适用场景', array_column($property, 'name'))];
+       $style = $property[array_search('款式', array_column($property, 'name'))];
+        return view('hello',compact('material','usage','style'));
     }
 
     public function user() {
@@ -47,9 +45,8 @@ class WeChatController extends Controller
         $app = app('wechat.official_account');
 
        $list = $app->merchant->list()['products_info'];
-
-        return $list;
-        return view('hello',compact('list'));
+return $list;
+        return view('hello',compact('list','material'));
     }
 
     public function order() {
@@ -63,7 +60,13 @@ class WeChatController extends Controller
 
     }
 
+    public function create() {
+        return app('wechat.official_account')->merchant->create();
+    }
 
+    public function test() {
 
+        
+    }
 
 }
