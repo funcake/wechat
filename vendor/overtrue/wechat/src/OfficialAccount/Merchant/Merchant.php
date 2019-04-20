@@ -133,8 +133,6 @@ $post['product_base']['detail'][0]['test'] = '<h1> sldkfj</h1><p>123132</p>';
             "shelf_name"=>"货架"
             ];
 
-
-
         return $this->httpPostJson('merchant/shelf/add',$post);
 
     }
@@ -244,9 +242,15 @@ $post['product_base']['detail'][0]['test'] = '<h1> sldkfj</h1><p>123132</p>';
         return $this->httpPostJson('merchant/create',$post);
     }
 
-    public function getproperty() {
+    public function getProperty() {
         $post = ['cate_id' =>536903132];
         return $this->httpPostJson('merchant/category/getproperty',$post)['properties'];
+
+    }
+
+    public function group($group_id = 12) {
+        $post = ['group_id' => $group_id];
+        return $this->httpPostJson('merchant/group/getbyid',$post);
 
     }
 
