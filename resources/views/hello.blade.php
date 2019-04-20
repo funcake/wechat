@@ -64,11 +64,11 @@
 						    <fieldset class="ui-grid-a">
 							<div class="ui-block-a">
 								
-								<button href="" data-rel="back" class="ui-shadow ui-btn  ui-btn-a ui-corner-all   ui-icon-action ui-btn-icon-left"  key="" id="submit">提交</button>
+								<a href="" data-rel="back" class="ui-shadow ui-btn  ui-btn-a ui-corner-all   ui-icon-action ui-btn-icon-left"  key="" id="submit">提交</a>
 							</div>
 							<div class="ui-block-b">
 								
-								    <button href="" data-rel="back" class="ui-shadow ui-btn ui-btn-b ui-corner-all ">取消</button>
+								    <a href="" data-rel="back" class="ui-shadow ui-btn ui-btn-b ui-corner-all ">取消</a>
 							</div>
 						            </fieldset>
 						
