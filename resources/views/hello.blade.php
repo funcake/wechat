@@ -117,7 +117,7 @@ $(function(){
 	$('#submit2').on("click",function() {
 		var key = $(this).attr("key");
 		post = data.status2[key];
-		post.product_base.name=$('#name2').val();
+		post.product_base.name=$('#name').val();
 		post.sku_list[0].price=$('#price2').val()*100;
 
 		post.product_base.property = 
