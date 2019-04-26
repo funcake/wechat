@@ -15,10 +15,11 @@ use Overtrue\Socialite\User as SocialiteUser;
 
 class WeChatController extends Controller
 {
-
     public function __construct() {
-
-        // $this->middleware('work:snsapi_userinfo'); 
+        // if(!session('wechat.work.default',[])) {
+        //     session(['wechat.work.default' =>['name'=>'吴可','alias'=>512519882]]);
+        // }
+        $this->middleware('work:snsapi_userinfo'); 
         // $this->middleware('oauth:snsapi_userinfo'); 
     }
 
@@ -28,12 +29,10 @@ class WeChatController extends Controller
        $material = $property[array_search('种地分类', array_column($property, 'name'))];
        $usage = $property[array_search('适用场景', array_column($property, 'name'))];
        $style = $property[array_search('款式', array_column($property, 'name'))];
+
         return view('hello',compact('material','usage','style'));
     }
 
-    public function user() {
-      return 123;
-    }
     /**
      * 处理微信的请求消息
      *
@@ -41,11 +40,9 @@ class WeChatController extends Controller
      */
     public function serve(int $status = 0)
     {   
-
         $app = app('wechat.official_account');
 
-       $list = $app->merchant->list()['products_info'];
-return $list;
+       return $app->merchant->list($status);
         return view('hello',compact('list','material'));
     }
 
@@ -64,9 +61,9 @@ return $list;
         return app('wechat.official_account')->merchant->create();
     }
 
-    public function test() {
-        return  app('wechat.official_account')->merchant->group(512519882);
-        
+    public function group() {
+        $group =  app('wechat.official_account')->merchant->group(session("wechat.work.default")['alias']);
+        return $group;
     }
 
 }

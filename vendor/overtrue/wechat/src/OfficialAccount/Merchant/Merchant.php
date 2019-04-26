@@ -32,11 +32,7 @@ class Merchant extends BaseClient
      */
     public function get(string $productId, string $lang = 'zh_CN')
     {
-        $params = [
-            'product_id' => $productId,
-        ];
-
-        return $this->httpPostJson('merchant/get', $params);
+        return $this->httpPostJson('merchant/get', ['product_id'=>$productId])['product_info'];
     }
 
     /**
@@ -74,7 +70,7 @@ public function list(int $status = 0)
 {
     $params = ['status' => $status];
 
-    return $this->httpPostJson  ('merchant/getbystatus', $params);
+    return $this->httpPostJson  ('merchant/getbystatus', $params)['products_info'];
 }
 
     /**
@@ -89,10 +85,7 @@ public function list(int $status = 0)
      */
     public function update(array $post,string $lang = 'zh_CN')
     {
-        // return $post['sku_list'];
-$post['product_base']['detail'][0]['test'] = '<h1> sldkfj</h1><p>123132</p>';
         $post['sku_list'][0]['icon_url'] = "http://mmbiz.qpic.cn/mmbiz/4whpV1VZl28bJj62XgfHPibY3ORKicN1oJ4CcoIr4BMbfA8LqyyjzOZzqrOGz3f5KWq1QGP3fo6TOTSYD3TBQjuw/0";
-
 
         return $this->httpPostJson('merchant/update', $post);
     }
@@ -248,10 +241,19 @@ $post['product_base']['detail'][0]['test'] = '<h1> sldkfj</h1><p>123132</p>';
 
     }
 
-    public function group($group_id = 12) {
+    public function group($group_id = 0) {
         $post = ['group_id' => $group_id];
-        return $this->httpPostJson('merchant/group/getbyid',$post);
-
+        $group = $this->httpPostJson('merchant/group/getbyid',$post)['group_detail']['product_list'];
+        $list = ['status1'=>[],'status2'=>[]];
+         foreach ($group as $key => $id) {
+            $product =  $this->get($id);
+            if($product['status'] === 1) {
+                $list['status1'][] = $product;
+            } else {
+                $list['status2'][] = $product;
+            }
+        }
+        return $list;
     }
 
 }
