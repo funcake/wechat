@@ -1,39 +1,44 @@
 @extends("layout")
 @section("content")
 <section id="status1" data-role='page'>	
-<div data-role="header" data-position="fixed">
-	<h1>已上架管理</h1>
-</div><!-- /header -->
-	<ul data-role="listview" id="list1" class="products"  data-split-icon="gear" data-inset="true" data-filter="true" data-filter-placeholder = "查找">
-	</ul>
+	<div data-role="header" >
+		<h1>已上架管理</h1>
+	</div><!-- /header -->
+	<ul data-role="listview" id="list1" class="products"  data-split-icon="gear" data-inset="true" data-filter="true" data-filter-placeholder = "查找"></ul>
 	<div data-role="popup" id="popup1" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
-		<label for="name2" class="ui-hidden-accessible"></label><input type="text" name="name" id="name2" value="" data-clear-btn="true" placeholder="名" >
-		<br>
+    	<a href="" title="" data-rel="back" class=" ui-btn ui-btn-a ui-corner-all delete" style="background: red;color:white" key="">删除</a>
+    	<br>
 		<select name="level" id = "level1" onchange="select1(this.value)">
 			<option value="1000" >千元档</option>
 			<option value="5000" >五千档</option>
 			<option value="10000" >万元档</option>
 		</select>
 	    <label for="price1" class="ui-hidden-accessible">价:</label><input type="range" name="price" id="price1" value="" min="0" max="100" step="" data-highlight="true" data-popup-enable="true" >
+	    
+	    <fieldset class="ui-grid-a">
+	    	<div class="ui-block-a"><a href="" data-rel="back" class="ui-shadow ui-btn  ui-btn-a ui-corner-all  "  key="" id="submit1">提交</a></div>
+	    	<div class="ui-block-b"><a href="" data-rel="back" class="ui-shadow ui-btn ui-btn-b ui-corner-all ">取消</a></div>
+	    </fieldset>
    </div>
 </section>
 
 <section id="status2" data-role="page">
-	<div data-role="header" data-position="fixed">
+	<div data-role="header" >
 		<h1>未上架管理</h1>
 	</div><!-- /header -->
 	<ul data-role="listview" id="list2" class="products"  data-split-icon="gear" data-inset="true" data-filter="true" data-filter-placeholder = "查找">
 	</ul>
 	<div data-role="popup" id="popup2" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
 		<form>
-			<label for="name2" class="ui-hidden-accessible"></label><input type="text" name="name" id="name2" value="" data-clear-btn="true" placeholder="名" >
+			<label for="name2" class="ui-hidden-accessible"></label><input type="text" name="name" id="name" value="" data-clear-btn="true" placeholder="名" >
 			<br>
-			<select name="level" id = "level2" onchange="select(this.value) use (this)">
+			<select name="level" id = "level2" onchange="select2(this.value)">
 				<option value="1000" >千元档</option>
 				<option value="5000" >五千档</option>
 				<option value="10000" >万元档</option>
 			</select>
 		    <label for="price2" class="ui-hidden-accessible">价:</label><input type="range" name="price" id="price2" value="" min="0" max="100" step="" data-highlight="true" data-popup-enable="true" >
+
 		    <br>
 			<label for="material" class="select" data-inline='true'>料:</label>
 			<select id="material" name="material" key="{{$material['id']}}" class='select' data-inline='true' >
@@ -58,24 +63,26 @@
 			</fieldset>
 			<br>
 			<fieldset class="ui-grid-a">
-				<div class="ui-block-a"><a href="" data-rel="back" class="ui-shadow ui-btn  ui-btn-a ui-corner-all   ui-icon-action ui-btn-icon-left"  key="" id="submit2">提交</a></div>
+				<div class="ui-block-a"><a href="" data-rel="back" class="ui-shadow ui-btn  ui-btn-a ui-corner-all  "  key="" id="submit2">提交</a></div>
 				<div class="ui-block-b"><a href="" data-rel="back" class="ui-shadow ui-btn ui-btn-b ui-corner-all ">取消</a></div>
 			</fieldset>
 		</form>
 	</div>
 </section><!-- /page -->
 
+<section id="admin" data-role="page">
+
+</section>
+
+
 <footer data-role="footer" data-position="fixed">
 	<div data-role="navbar">
 		<ul>
 			<li>	<a href="#status1" class="" data-icon="check">上架</a></li>
 			<li>	<a href="#status2" class="" data-icon="carat-d">未上架</a></li>
-			<li>	<a href="#manage" class="" data-icon="carat-d">财务</a></li>
+			<li>	<a href="#admin" class="" data-icon="bullets">管理</a></li>
 		</ul>
-		
 	</div>
-
-
 </footer><!-- /footer -->
 
 
@@ -90,12 +97,28 @@ $(function(){
 
 	var data = [];
 
-	//根据id设置popup中form默认值
+//根据id设置popup中form默认值
+
+	//已上架商品
+	$('#submit1').on("click",function() {
+		var key = $(this).attr("key");
+		post = data.status1[key];
+		post.sku_list[0].price=$('#price1').val()*100;
+
+		$("#status1 [key='"+key+"'] p").html('￥'+$('#price1').val());
+		$.post('',
+			post ,
+			function(data) {
+				console.log(data);
+			}
+		);
+	});
+	//未上架商品
 	$('#submit2').on("click",function() {
 		var key = $(this).attr("key");
 		post = data.status2[key];
-		post.product_base.name=$('#name').val();
-		post.sku_list[0].price=$('#price').val()*100;
+		post.product_base.name=$('#name2').val();
+		post.sku_list[0].price=$('#price2').val()*100;
 
 		post.product_base.property = 
 		[
@@ -113,14 +136,20 @@ $(function(){
 			}
 		];		
 
-		$("#"+key+' h2').html($('#name').val());
-		$("#"+key+" p").html('￥'+$('#price').val());
+		$("#status2 [key='"+key+"'] h2").html($('#name').val());
+		$("#status2 [key='"+key+"'] p").html('￥'+$('#price2').val());
 		$.post('',
 			post ,
 			function(data) {
 				console.log(data);
 			}
 		);
+	});
+	//删除商品
+	$('#delete').on("click",function() {
+		var key = $(this).attr("key");
+		post = data.status1[key];
+		post.sku_list[0].price = $('#price1').val();
 	});
 
 	function select1(val) {
@@ -168,29 +197,14 @@ $(function(){
 			data = d;
 			var html2 = "";
 			var html1 = "";
-			data.status2.forEach( 
-				function(e, i) {
-					e['product_base']['main_img'] = e['product_base']['main_img'].replace(/https/,'http');
-					e['product_base']['img'] = e['product_base']['img'].map(function(e){e.replace(/https/,'http')});
-					html2 +=
-					`
-					<li id="${i}"><a href="#">
-					<img src="${e['product_base']['main_img']}" alt="">
-					<h2>${e['product_base']['name']}</h2>
-					<p>￥${e['sku_list'][0]['price']/100}</p>
-					<a href="#popup2" class="pop2" key='${i}' data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
-					</a></li>
-					`;
-				}
-			);
-			$('#list2').html(html2);
+
 			data.status1.forEach( 
 				function(e, i) {
 					e['product_base']['main_img'] = e['product_base']['main_img'].replace(/https/,'http');
 					e['product_base']['img'] = e['product_base']['img'].map(function(e){e.replace(/https/,'http')});
 					html1 +=
 					`
-					<li id="${i}"><a href="#">
+					<li key="${i}"><a href="#">
 					<img src="${e['product_base']['main_img']}" alt="">
 					<h2>${e['product_base']['name']}</h2>
 					<p>￥${e['sku_list'][0]['price']/100}</p>
@@ -201,6 +215,24 @@ $(function(){
 			);
 			$('#list1').html(html1);
 			$('#list1').listview("refresh");
+
+			data.status2.forEach( 
+				function(e, i) {
+					e['product_base']['main_img'] = e['product_base']['main_img'].replace(/https/,'http');
+					e['product_base']['img'] = e['product_base']['img'].map(function(e){e.replace(/https/,'http')});
+					html2 +=
+					`
+					<li key="${i}"><a href="#">
+					<img src="${e['product_base']['main_img']}" alt="">
+					<h2>${e['product_base']['name']}</h2>
+					<p>￥${e['sku_list'][0]['price']/100}</p>
+					<a href="#popup2" class="pop2" key='${i}' data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
+					</a></li>
+					`;
+				}
+			);
+			$('#list2').html(html2);
+
 			$('.pop1').on('click',function() {
 				var i = $(this).attr('key');
 				$('#name1').val(data.status1[i].product_base.name);
