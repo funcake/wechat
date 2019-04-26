@@ -24,7 +24,7 @@ class WeChatController extends Controller
     }
 
     public function home() {
-        dd(session('wechat.work.default'));
+        return session('wechat.work.default');
        $property =  app('wechat.official_account')->merchant->getProperty();
 
        $material = $property[array_search('种地分类', array_column($property, 'name'))];
