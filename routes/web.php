@@ -21,6 +21,7 @@ $router->post('','WeChatController@update');
 $router->get('user/create','UserController@create');
 // $router->get('admin','WeChatController@group');
 $router->get('user/change','UserController@change');
+$router->post('user/change','UserController@change');
 
 $router->post('express','ExpressController@order');
 

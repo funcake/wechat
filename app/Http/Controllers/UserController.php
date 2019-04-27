@@ -19,6 +19,6 @@ class UserController extends Controller
     }
 
     public function change() {
-        return app('wechat.work.user')->server->serve();
+        return  app('wechat.work.user')->server->serve();
     }
 }
