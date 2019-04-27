@@ -124,8 +124,14 @@ return [
         'default' => [
             'corp_id' => 'ww830c183cf99b5d18',
             'agent_id' => 1000010,
-            'secret'   => env('WECHAT_WORK_AGENT_CONTACTS_SECRET', ''),
+            'secret'   => env('WECHAT_WORK_FLJY_SECRET', ''),
              //...
          ],
+         'user' => [
+            'corp_id' => 'ww830c183cf99b5d18',
+            'secret'   => env('WECHAT_WORK_USER_SECRET',''),
+            'token' => env('WECHAT_WORK_USER_TOKEN',''),
+            'aes_key' => env('WECHAT_WORK_USER_AES_KEY',''),
+         ]
     ],
 ];

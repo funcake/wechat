@@ -16,15 +16,14 @@ use Overtrue\Socialite\User as SocialiteUser;
 class WeChatController extends Controller
 {
     public function __construct() {
-        // if(!session('wechat.work.default',[])) {
-        //     session(['wechat.work.default' =>['name'=>'吴可','alias'=>512519882]]);
-        // }
-        $this->middleware('work:snsapi_userinfo'); 
+        if(!session('wechat.work.default',[])) {
+            session(['wechat.work.default' =>['userid'=>'WuKe','name'=>'吴可','hide_mobile'=>512519882,'order'=>'12423','email'=>'123123@123.com']]);
+        }
+        // $this->middleware('work:snsapi_userinfo'); 
         // $this->middleware('oauth:snsapi_userinfo'); 
     }
 
     public function home() {
-        return session('wechat.work.default');
        $property =  app('wechat.official_account')->merchant->getProperty();
 
        $material = $property[array_search('种地分类', array_column($property, 'name'))];
