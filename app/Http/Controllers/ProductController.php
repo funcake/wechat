@@ -25,7 +25,6 @@ class ProductController extends Controller
     }
 
     public function home() {
-        // Redis::get('testRedis','RedisController@testRedis')->name('testRedis');
        $property =  app('wechat.official_account')->merchant->getProperty();
 
        $material = $property[array_search('种地分类', array_column($property, 'name'))];
