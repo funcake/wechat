@@ -5,8 +5,8 @@
 		<h1>已上架管理</h1>
 	</div><!-- /header -->
 	<ul data-role="listview" id="list1" class="products"  data-split-icon="gear" data-inset="true" data-filter="true" data-filter-placeholder = "查找"></ul>
-	<div data-role="popup" id="popup1" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
-    	<a href="" title="" data-rel="back" class=" ui-btn ui-btn-a ui-corner-all delete" style="background: red;color:white" key="">删除</a>
+	<div data-role="popup" id="popup1" data-theme="a" data-overlay-theme="b" class="ui-content" style="width:280px; padding-bottom:2em;">
+    	<a href="" title="" data-rel="back" class=" ui-btn ui-btn-a ui-corner-all " id="delete" style="background: red;color:white" key="">删除</a>
     	<br>
 		<select name="level" id = "level1" onchange="select1(this.value)">
 			<option value="1000" >千元档</option>
@@ -63,7 +63,7 @@
 			</fieldset>
 			<br>
 			<fieldset class="ui-grid-a">
-				<div class="ui-block-a"><a href="" data-rel="back" class="ui-shadow ui-btn  ui-btn-a ui-corner-all  "  key="" id="submit2">提交</a></div>
+				<div class="ui-block-a"><a href="" data-rel="back" class="ui-shadow ui-btn  ui-btn-a ui-corner-all  "  key="" id="submit2">上架</a></div>
 				<div class="ui-block-b"><a href="" data-rel="back" class="ui-shadow ui-btn ui-btn-b ui-corner-all ">取消</a></div>
 			</fieldset>
 		</form>
@@ -148,8 +148,14 @@ $(function(){
 	//删除商品
 	$('#delete').on("click",function() {
 		var key = $(this).attr("key");
-		post = data.status1[key];
-		post.sku_list[0].price = $('#price1').val();
+		post ={'product_id':data.status1[key].product_id};
+		$("#status1 li[key='"+key+"']").remove();
+		$.post('delete',
+				post,
+				function(data) {
+					console.log(data);
+				}
+			)
 	});
 
 	function select1(val) {
@@ -252,6 +258,7 @@ $(function(){
 					$('#level1').prev().html('万元档');
 				}
 				$('#price1').val($price);
+				$("#delete").attr('key',i);
 				$('#submit1').attr('key',i);
 			});
 			$('.pop2').on('click',function() {

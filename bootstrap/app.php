@@ -25,7 +25,7 @@ $app = new Laravel\Lumen\Application(
 
 $app->withFacades();
 
-// $app->withEloquent();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +93,8 @@ $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Overtrue\LaravelWeChat\ServiceProvider::class);
 $app->register(Illuminate\Session\SessionServiceProvider::class);
+// redis
+$app->register(Illuminate\Redis\RedisServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -113,7 +115,7 @@ $app->router->group([
 
 // 4、设置session别名
 
-$app->alias('wechat','Overtrue\LaravelWeChat\Facade::class');
+// $app->alias('wechat','Overtrue\LaravelWeChat\Facade::class');
 
 $app->alias('session', 'Illuminate\Session\SessionManager');
 

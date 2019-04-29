@@ -35,27 +35,6 @@ class Merchant extends BaseClient
         return $this->httpPostJson('merchant/get', ['product_id'=>$productId])['product_info'];
     }
 
-    /**
-     * Batch get users.
-     *
-     * @param array  $openids
-     * @param string $lang
-     *
-     * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
-     *
-     * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
-     */
-    public function select(array $openids, string $lang = 'zh_CN')
-    {
-        return $this->httpPostJson('cgi-bin/user/info/batchget', [
-            'user_list' => array_map(function ($openid) use ($lang) {
-                return [
-                    'openid' => $openid,
-                    'lang' => $lang,
-                ];
-            }, $openids),
-        ]);
-    }
 
 /**
      * List users.
@@ -83,15 +62,13 @@ public function list(int $status = 0)
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function update(array $post,string $lang = 'zh_CN')
+    public function update(string $lang = 'zh_CN')
     {
-        $post['sku_list'][0]['icon_url'] = "http://mmbiz.qpic.cn/mmbiz/4whpV1VZl28bJj62XgfHPibY3ORKicN1oJ4CcoIr4BMbfA8LqyyjzOZzqrOGz3f5KWq1QGP3fo6TOTSYD3TBQjuw/0";
-
-        return $this->httpPostJson('merchant/update', $post);
+        $_POST['sku_list'][0]['icon_url'] = "http://mmbiz.qpic.cn/mmbiz/4whpV1VZl28bJj62XgfHPibY3ORKicN1oJ4CcoIr4BMbfA8LqyyjzOZzqrOGz3f5KWq1QGP3fo6TOTSYD3TBQjuw/0";
+        return $this->httpPostJson('merchant/update', $_POST);
     }
 
     public function shelf() {
-
         $post = ['shelf_id'=>1,
         "shelf_data"=>[
           "module_infos"=>[
@@ -127,7 +104,6 @@ public function list(int $status = 0)
             ];
 
         return $this->httpPostJson('merchant/shelf/add',$post);
-
     }
 
 
@@ -235,10 +211,13 @@ public function list(int $status = 0)
         return $this->httpPostJson('merchant/create',$post);
     }
 
+    public function delete() {
+        return $this->httpPostJson('merchant/del',$_POST);
+    }
+
     public function getProperty() {
         $post = ['cate_id' =>536903132];
         return $this->httpPostJson('merchant/category/getproperty',$post)['properties'];
-
     }
 
     public function group($group_id = 0) {
