@@ -43,7 +43,7 @@ class ProductController extends Controller
     {   
         $app = app('wechat.official_account');
 
-       return $app->merchant->list($status);
+        return $app->merchant->list($status);
         return view('hello',compact('list','material'));
     }
 
@@ -52,7 +52,7 @@ class ProductController extends Controller
     }
 
     public function update() {
-         $app = app('wechat.official_account');
+        $app = app('wechat.official_account');
 
         return $app->merchant->update();
 

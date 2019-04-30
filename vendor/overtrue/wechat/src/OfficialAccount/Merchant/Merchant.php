@@ -65,7 +65,10 @@ public function list(int $status = 0)
     public function update(string $lang = 'zh_CN')
     {
         $_POST['sku_list'][0]['icon_url'] = "http://mmbiz.qpic.cn/mmbiz/4whpV1VZl28bJj62XgfHPibY3ORKicN1oJ4CcoIr4BMbfA8LqyyjzOZzqrOGz3f5KWq1QGP3fo6TOTSYD3TBQjuw/0";
-        return $this->httpPostJson('merchant/update', $_POST);
+        
+        $this->httpPostJson('merchant/update', $_POST);
+
+        return $this->httpPostJson('merchant/modproductstatus',['product_id'=>$_POST['product_id'],'status'=>1]);
     }
 
     public function shelf() {
@@ -105,9 +108,6 @@ public function list(int $status = 0)
 
         return $this->httpPostJson('merchant/shelf/add',$post);
     }
-
-
-
 
     public function create() {
         $post = 
@@ -220,6 +220,7 @@ public function list(int $status = 0)
         return $this->httpPostJson('merchant/category/getproperty',$post)['properties'];
     }
 
+
     public function group($group_id = 0) {
         $post = ['group_id' => $group_id];
         $group = $this->httpPostJson('merchant/group/getbyid',$post)['group_detail']['product_list'];
@@ -227,9 +228,9 @@ public function list(int $status = 0)
          foreach ($group as $key => $id) {
             $product =  $this->get($id);
             if($product['status'] === 1) {
-                $list['status1'][] = $product;
+                array_unshift($list['status1'], $product);
             } else {
-                $list['status2'][] = $product;
+                array_unshift($list['status2'], $product);
             }
         }
         return $list;

@@ -30,7 +30,7 @@
 	</ul>
 	<div data-role="popup" id="popup2" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
 		<form>
-			<label for="name2" class="ui-hidden-accessible"></label><input type="text" name="name" id="name" value="" data-clear-btn="true" placeholder="名" >
+			<label for="name" class="ui-hidden-accessible"></label><input type="text" name="name" id="name" value="" data-clear-btn="true" placeholder="名" >
 			<br>
 			<select name="level" id = "level2" onchange="select2(this.value)">
 				<option value="1000" >千元档</option>
@@ -119,7 +119,7 @@ $(function(){
 		post = data.status2[key];
 		post.product_base.name=$('#name').val();
 		post.sku_list[0].price=$('#price2').val()*100;
-
+		post.status = 1;
 		post.product_base.property = 
 		[
 			{
@@ -136,8 +136,10 @@ $(function(){
 			}
 		];		
 
-		$("#status2 [key='"+key+"'] h2").html($('#name').val());
-		$("#status2 [key='"+key+"'] p").html('￥'+$('#price2').val());
+		$("#status2 [key='"+key+"']").remove();
+		data.status1.unshift(post);
+		init1()
+		data.status1.push(post);
 		$.post('',
 			post ,
 			function(data) {
@@ -197,11 +199,7 @@ $(function(){
 		}
 	}
 
-	$.get(
-		'group',
-		function(d) {
-			data = d;
-			var html2 = "";
+	function init1() {
 			var html1 = "";
 
 			data.status1.forEach( 
@@ -222,26 +220,8 @@ $(function(){
 			$('#list1').html(html1);
 			$('#list1').listview("refresh");
 
-			data.status2.forEach( 
-				function(e, i) {
-					e['product_base']['main_img'] = e['product_base']['main_img'].replace(/https/,'http');
-					e['product_base']['img'] = e['product_base']['img'].map(function(e){e.replace(/https/,'http')});
-					html2 +=
-					`
-					<li key="${i}"><a href="#">
-					<img src="${e['product_base']['main_img']}" alt="">
-					<h2>${e['product_base']['name']}</h2>
-					<p>￥${e['sku_list'][0]['price']/100}</p>
-					<a href="#popup2" class="pop2" key='${i}' data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
-					</a></li>
-					`;
-				}
-			);
-			$('#list2').html(html2);
-
 			$('.pop1').on('click',function() {
 				var i = $(this).attr('key');
-				$('#name1').val(data.status1[i].product_base.name);
 				$price = data.status1[i].sku_list[0].price/100;
 				if ($price<1000) 
 				{	
@@ -261,9 +241,33 @@ $(function(){
 				$("#delete").attr('key',i);
 				$('#submit1').attr('key',i);
 			});
+	}
+
+	function init2() {
+			var html2 = "";
+
+			data.status2.forEach( 
+				function(e, i) {
+					e['product_base']['main_img'] = e['product_base']['main_img'].replace(/https/,'http');
+					e['product_base']['img'] = e['product_base']['img'].map(function(e){e.replace(/https/,'http')});
+					html2 +=
+					`
+					<li key="${i}"><a href="#">
+					<img src="${e['product_base']['main_img']}" alt="">
+					<h2>${e['product_base']['name']}</h2>
+					<p>￥${e['sku_list'][0]['price']/100}</p>
+					<a href="#popup2" class="pop2" key='${i}' data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
+					</a></li>
+					`;
+				}
+			);
+			$('#list2').html(html2);
+			// 上架商品pop键
+			
+			// 未上架商品pop
 			$('.pop2').on('click',function() {
 				var i = $(this).attr('key');
-				$('#name2').val(data.status2[i].product_base.name);
+				$('#name').val(data.status2[i].product_base.name);
 				$price = data.status2[i].sku_list[0].price/100;
 				if ($price<1000) 
 				{	
@@ -282,6 +286,14 @@ $(function(){
 				$('#price2').val($price);
 				$('#submit2').attr('key',i);
 			});
+	}
+
+	$.get(
+		'group',
+		function(d) {
+			data = d;
+			init1();
+			init2();
 		}
 	);
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use EasyWeChat\Kernel\Messages\Message;
+
 class UserController extends Controller
 {
     /**
@@ -18,7 +20,14 @@ class UserController extends Controller
         return 123;
     }
 
+    public function update(array $message) {
+        $post = ['name'=>$message['name']+$message['name']];
+        return app('wechat.work.user')->user->update(session('wechat.work.default')['userid'],$post);
+    }
+
     public function change() {
-        return  app('wechat.work.user')->server->serve();
+        $server = app('wechat.work.user')->server;
+        $server->push($this->update($server->getMessage()), Message::EVENT);
+        return  $server->serve();
     }
 }
