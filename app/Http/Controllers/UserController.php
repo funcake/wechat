@@ -35,7 +35,7 @@ class UserController extends Controller
         $message = $server->getMessage();
         switch ($message['ChangeType']) {
             case 'create_party': 
-                if ($message['ParentId'] == 5) {
+                if ($message['ParentId'] == 11) {
                     $id = app('wechat.official_account')->merchant->groupAdd($message['Name']);
                     app('wechat.work.user')->department->update($id,['name'=>$message['Name'],'parentid'=>5]);
                 }
