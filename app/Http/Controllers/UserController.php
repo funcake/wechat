@@ -33,9 +33,19 @@ class UserController extends Controller
     public function change() {
         $server = app('wechat.work.user')->server;
         $message = $server->getMessage();
-                            $id = app('wechat.official_account')->merchant->groupAdd($message['Name']);
-                    app('wechat.work.user')->department->create($id,['name'=>$message['Name'],'parentid'=>5]);
-
+        switch ($message['ChangeType']) {
+            case 'create_party': 
+                if ($message['ParentId'] == 11) {
+                    $id = app('wechat.official_account')->merchant->groupAdd($message['Name']);
+                    app('wechat.work.user')->department->update($message['Id'],['name'=>123,'parentid'=>5]);
+                }
+                break;
+            case 'update_user':
+                $this->update($message);
+                break;
+            default:
+                break;
+        }
         return  $server->serve();
     }
 }
