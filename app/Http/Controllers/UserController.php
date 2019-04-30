@@ -28,7 +28,7 @@ class UserController extends Controller
 
     public function change() {
         $server = app('wechat.work.user')->server;
-        $server->push($this->update($server->getMessage()), Message::EVENT);
+        // $server->push($this->update($server->getMessage()), Message::EVENT);
         return  $server->serve();
     }
 }
