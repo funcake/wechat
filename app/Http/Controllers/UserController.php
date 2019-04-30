@@ -21,7 +21,7 @@ class UserController extends Controller
     }
 
     public function update(array $message) {
-        $post = ['name'=>$message['ChangeType']];
+        $post = ['name'=>$message['UserID']];
 
         return app('wechat.work.user')->user->update('Wuke',$post);
     }
