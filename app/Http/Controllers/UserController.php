@@ -20,15 +20,15 @@ class UserController extends Controller
         return 123;
     }
 
-    public function update() {
+    public function update(array $message) {
         $post = ['name'=>'吴可可'];
         return app('wechat.work.user')->user->update('WuKe',$post);
     }
 
     public function change() {
         $server = app('wechat.work.user')->server;
-        $this->update();
-        // $server->push($this->update($server->getMessage()), Message::EVENT);
+        return $server->getMessage();
+        $server->push($this->update($server->getMessage()), Message::EVENT);
         return  $server->serve();
     }
 }
