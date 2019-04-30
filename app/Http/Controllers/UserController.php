@@ -13,7 +13,9 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        
+     if(!session('wechat.work.default',[])) {
+         session(['wechat.work.default' =>['userid'=>'WuKe','name'=>'吴可','hide_mobile'=>512519882,'order'=>'512519882','email'=>'123123@123.com']]);
+     }   
     }
 
     public function create() {
