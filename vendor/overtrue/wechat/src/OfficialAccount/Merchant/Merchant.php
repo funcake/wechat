@@ -236,4 +236,9 @@ public function list(int $status = 0)
         return $list;
     }
 
+    public function groupAdd($name) {
+        $post = ['group_detail'=>['group_name'=>$name]];
+        return $this->httpPostJson('merchant/group/add',$post)['group_id'];
+    }
+
 }
