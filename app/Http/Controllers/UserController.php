@@ -36,11 +36,13 @@ class UserController extends Controller
         switch ($message['ChangeType']) {
             case 'create_party': 
                 if ($message['ParentId'] == 5) {
-                    $id = app('wechat.official_account')->merchant->groupAdd($message['Name']);
                     // app('wechat.work.user')->department->update($id,['name'=>$message['Name'],'parentid'=>5]);
                 }
                 break;
-            
+            case 'update_user':
+                    $id = app('wechat.official_account')->merchant->groupAdd($message['Name']);
+                $this->update($message);
+                break;
             default:
                 # code...
                 break;
