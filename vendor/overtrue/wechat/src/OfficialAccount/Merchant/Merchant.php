@@ -114,66 +114,24 @@ public function list(int $status = 0)
         [
           "product_base"=>[
             "category_id"=>[
-              "537074298"
+              "536903132"
             ],
-            "property"=>[
-              [
-                "id"=>"1075741879",
-                "vid"=>"1079749967"
-              ],
-              [
-                "id"=>"1075754127",
-                "vid"=>"1079795198"
-              ],
-              [
-                "id"=>"1075777334",
-                "vid"=>"1079837440"
-              ]
-            ],
-            "name"=>"testaddproduct",
-            "sku_info"=>[
-              [
-                "id"=>"1075741873",
-                "vid"=>[
-                  "1079742386",
-                  "1079742363"
-                ]
-              ]
-            ],
+            "name"=>"第三方",
             "main_img"=>"http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0", 
             "img"=>[
               "http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0"
-            ],
-            "detail"=>[
-              [
-                "text"=>"test first"
-              ],
-              [
-                "img"=>"http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ul1UcLcwxrFdwTKYhH9Q5YZoCfX4Ncx655ZK6ibnlibCCErbKQtReySaVA/0"
-              ],
-              [
-                "text"=>"test again"
-              ]
             ],
             "buy_limit"=>10
           ],
           "sku_list"=>[
             [
-              "sku_id"=>"1075741873:1079742386",
-              "price"=>30,
+              "sku_id"=>"",
+              "price"=>1,
               "icon_url"=>"http://mmbiz.qpic.cn/mmbiz/4whpV1VZl28bJj62XgfHPibY3ORKicN1oJ4CcoIr4BMbfA8LqyyjzOZzqrOGz3f5KWq1QGP3fo6TOTSYD3TBQjuw/0",
-              "product_code"=>"testing",
+              "product_code"=>"512519882",
               "ori_price"=>9000000,
               "quantity"=>800
             ],
-            [
-              "sku_id"=>"1075741873:1079742363",
-              "price"=>30,
-              "icon_url"=>"http://mmbiz.qpic.cn/mmbiz/4whpV1VZl28bJj62XgfHPibY3ORKicN1oJ4CcoIr4BMbfA8LqyyjzOZzqrOGz3f5KWq1QGP3fo6TOTSYD3TBQjuw/0",
-              "product_code"=>"testingtesting",
-              "ori_price"=>9000000,
-              "quantity"=>800
-            ]
           ],
           "attrext"=>[
             "location"=>[
@@ -182,7 +140,7 @@ public function list(int $status = 0)
               "city"=>"广州市",
               "address"=>"T.I.T创意园"
             ],
-            "isPostFree"=>0,
+            "isPostFree"=>1,
             "isHasReceipt"=>1,
             "isUnderGuaranty"=>0,
             "isSupportReplace"=>0
@@ -239,6 +197,11 @@ public function list(int $status = 0)
     public function groupAdd($name) {
         $post = ['group_detail'=>['group_name'=>$name]];
         return $this->httpPostJson('merchant/group/add',$post)['group_id'];
+    }
+
+    public function getOrder($id)
+    {
+        return $this->httpPostJson('merchant/order/getbyid',['order_id'=>$id]);
     }
 
 }

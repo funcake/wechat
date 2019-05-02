@@ -25,6 +25,8 @@ class ProductController extends Controller
     }
 
     public function home() {
+        // return Redis::hgetall('512519882');
+        // return app('wechat.official_account')->merchant->create();
        $property =  app('wechat.official_account')->merchant->getProperty();
 
        $material = $property[array_search('种地分类', array_column($property, 'name'))];
@@ -47,9 +49,7 @@ class ProductController extends Controller
         return view('hello',compact('list','material'));
     }
 
-    public function order() {
-        $app = app('wechat.official_account');
-    }
+
 
     public function update() {
         $app = app('wechat.official_account');

@@ -104,7 +104,7 @@ $(function(){
 		var key = $(this).attr("key");
 		post = data.status1[key];
 		post.sku_list[0].price=$('#price1').val()*100;
-
+		console.log(post);
 		$("#status1 [key='"+key+"'] p").html('￥'+$('#price1').val());
 		$.post('',
 			post ,
@@ -139,7 +139,6 @@ $(function(){
 		$("#status2 [key='"+key+"']").remove();
 		data.status1.unshift(post);
 		init1()
-		data.status1.push(post);
 		$.post('',
 			post ,
 			function(data) {
@@ -205,7 +204,7 @@ $(function(){
 			data.status1.forEach( 
 				function(e, i) {
 					e['product_base']['main_img'] = e['product_base']['main_img'].replace(/https/,'http');
-					e['product_base']['img'] = e['product_base']['img'].map(function(e){e.replace(/https/,'http')});
+					// e['product_base']['img'] = e['product_base']['img'].map(function(e){e.replace(/https/,'http')});
 					html1 +=
 					`
 					<li key="${i}"><a href="#">
@@ -249,7 +248,7 @@ $(function(){
 			data.status2.forEach( 
 				function(e, i) {
 					e['product_base']['main_img'] = e['product_base']['main_img'].replace(/https/,'http');
-					e['product_base']['img'] = e['product_base']['img'].map(function(e){e.replace(/https/,'http')});
+					// e['product_base']['img'] = e['product_base']['img'].map(function(e){e.replace(/https/,'http')});
 					html2 +=
 					`
 					<li key="${i}"><a href="#">
