@@ -6,7 +6,7 @@
 	</div><!-- /header -->
 	<ul data-role="listview" id="list1" class="products"  data-split-icon="gear" data-inset="true" data-filter="true" data-filter-placeholder = "查找"></ul>
 	<div data-role="popup" id="popup1" data-theme="a" data-overlay-theme="b" class="ui-content" style="width:280px; padding-bottom:2em;">
-    	<a href="" title="" data-rel="back" class=" ui-btn ui-btn-a ui-corner-all " id="delete" style="background: red;color:white" key="">删除</a>
+    	<a href="" title="" data-rel="back" class=" ui-btn ui-btn-a ui-corner-all " id="delete" style="background: #b5193f;color:white" key="">删除</a>
     	<br>
 		<select name="level" id = "level1" onchange="select1(this.value)">
 			<option value="1000" >千元档</option>
@@ -14,7 +14,7 @@
 			<option value="10000" >万元档</option>
 		</select>
 	    <label for="price1" class="ui-hidden-accessible">价:</label><input type="range" name="price" id="price1" value="" min="0" max="100" step="" data-highlight="true" data-popup-enable="true" >
-	    
+	    <br>
 	    <fieldset class="ui-grid-a">
 	    	<div class="ui-block-a"><a href="" data-rel="back" class="ui-shadow ui-btn  ui-btn-a ui-corner-all  "  key="" id="submit1">提交</a></div>
 	    	<div class="ui-block-b"><a href="" data-rel="back" class="ui-shadow ui-btn ui-btn-b ui-corner-all ">取消</a></div>
@@ -30,16 +30,14 @@
 	</ul>
 	<div data-role="popup" id="popup2" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
 		<form>
-			<label for="name" class="ui-hidden-accessible"></label><input type="text" name="name" id="name" value="" data-clear-btn="true" placeholder="名" >
-			<br>
+			<label for="name" class="">名 称:</label><input type="text" name="name" id="name" value="" data-clear-btn="true" placeholder="名" >
+			<label for="price2" class="">价 格:</label>
 			<select name="level" id = "level2" onchange="select2(this.value)">
 				<option value="1000" >千元档</option>
 				<option value="5000" >五千档</option>
 				<option value="10000" >万元档</option>
 			</select>
 		    <label for="price2" class="ui-hidden-accessible">价:</label><input type="range" name="price" id="price2" value="" min="0" max="100" step="" data-highlight="true" data-popup-enable="true" >
-
-		    <br>
 			<label for="material" class="select" data-inline='true'>料:</label>
 			<select id="material" name="material" key="{{$material['id']}}" class='select' data-inline='true' >
 			@foreach($material['property_value'] as $p)
@@ -47,7 +45,7 @@
 			@endforeach
 			</select>
 			<fieldset data-role = "controlgroup" data-type="horizontal" >
-				<legend >属性:</legend>
+				<legend >属 性:</legend>
 				<label for="usage" class="select" data-inline='true'>适用场景</label>
 				<select id="usage" name="usage" key="{{$usage['id']}}" class='select' data-inline='true' >
 				@foreach($usage['property_value'] as $p)
@@ -63,8 +61,9 @@
 			</fieldset>
 			<br>
 			<fieldset class="ui-grid-a">
-				<div class="ui-block-a"><a href="" data-rel="back" class="ui-shadow ui-btn  ui-btn-a ui-corner-all  "  key="" id="submit2">上架</a></div>
+				<div class="ui-block-a"><a href="" data-rel="back" class="ui-shadow ui-btn  ui-btn-a ui-corner-all " style="outline:#b5193f solid;outline-offset: -3px"  key="" id="submit2">上架</a></div>
 				<div class="ui-block-b"><a href="" data-rel="back" class="ui-shadow ui-btn ui-btn-b ui-corner-all ">取消</a></div>
+				<label> !!!上架后除价格外,其他内容不得修改</label>
 			</fieldset>
 		</form>
 	</div>
@@ -136,7 +135,7 @@ $(function(){
 			}
 		];		
 
-		$("#status2 [key='"+key+"']").remove();
+		$("#list2 [key='"+key+"']").remove();
 		data.status1.unshift(post);
 		init1()
 		$.post('',

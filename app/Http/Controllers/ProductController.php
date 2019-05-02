@@ -25,7 +25,7 @@ class ProductController extends Controller
     }
 
     public function home() {
-        // return Redis::hgetall('512519882');
+        return Redis::hgetall(Redis::spop('512519882'));
         // return app('wechat.official_account')->merchant->create();
        $property =  app('wechat.official_account')->merchant->getProperty();
 
