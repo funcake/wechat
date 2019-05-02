@@ -18,7 +18,7 @@ $router->post('','ProductController@update');
 
 $router->post('delete','ProductController@delete');
 
-$router->get('wechat','ProductController@serve');
+$router->get('wechat','WeChatController@test');
 $router->post('wechat','WeChatController@serve');
 
 $router->get('user/create','UserController@create');
