@@ -19,7 +19,7 @@ $router->post('','ProductController@update');
 $router->post('delete','ProductController@delete');
 
 $router->get('wechat','WeChatController@test');
-$router->post('wechat','WeChatController@serve');
+// $router->post('wechat','WeChatController@serve');
 
 $router->get('user/create','UserController@create');
 // $router->get('admin','WeChatController@group');
