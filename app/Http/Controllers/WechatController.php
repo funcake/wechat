@@ -19,19 +19,24 @@ class WechatController extends Controller
 	public function serve() {
 		$server = app('wechat.official_account')->server;
 		$message = $server->getMessage();
-		$merchant = app('wechat.official_account')->merchant;
-		switch ($message['Event']) {
-			case 'merchant_order':
-				$order = $merchant->getOrder($message['OrderId']);
-				$product = $merchant->get($message['ProductId']);
-				Redis::sadd($product['sku_list'][0]['product_code'],$message['OrderId']);
-				Redis::hmset($message['OrderId'],$product['product_id'],$product['product_base']['main_img']);
-				break;
-				
-			default:
+		if(isset($message['Event'])) {
+			$merchant = app('wechat.official_account')->merchant;
+			switch ($message['Event']) {
+				case 'merchant_order':
+					$order = $merchant->getOrder($message['OrderId']);
+					$product = $merchant->get($order['products'][0]['product_id']);
+					Redis::sadd($product['sku_list'][0]['product_code'],$message['OrderId']);
+					foreach ($order['products'] as $value) {
+						$products[$value['product_img']] = $value['product_price'];
+					}
+					Redis::hmset($message['OrderId'],$products);
+					break;
+					
+				default:
 
-				# code...
-				break;
+					# code...
+					break;
+			}
 		}
 		return $server->serve();
 	}

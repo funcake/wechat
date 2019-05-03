@@ -201,7 +201,7 @@ public function list(int $status = 0)
 
     public function getOrder($id)
     {
-        return $this->httpPostJson('merchant/order/getbyid',['order_id'=>$id]);
+        return $this->httpPostJson('merchant/order/getbyid',['order_id'=>$id])['order'];
     }
 
 }
