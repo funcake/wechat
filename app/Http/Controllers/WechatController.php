@@ -47,7 +47,7 @@ class WechatController extends Controller
 	public function change() {
 	    $server = app('wechat.work.user')->server;
 	    $message = $server->getMessage();
-	    switch ($message['ChangeType']) {
+	    /*switch ($message['ChangeType']) {
 	        case 'create_party': 
 	            if ($message['ParentId'] == 11) {
 	                $id = app('wechat.official_account')->merchant->groupAdd($message['Name']);
@@ -57,7 +57,7 @@ class WechatController extends Controller
 	            break;
 	        default:
 	            break;
-	    }
+	    }*/
 	    return  $server->serve();
 	}
 }
