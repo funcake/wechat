@@ -10,25 +10,45 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-$router->get('','ProductController@home');
+$router->group([],function($router) {
 
-$router->get('group','ProductController@group');
+	$router->get('','ProductController@home');
 
-$router->post('','ProductController@update');
+	$router->get('group','ProductController@group');
 
-$router->post('delete','ProductController@delete');
+	$router->post('','ProductController@update');
 
-$router->get('create','ProductController@create');
+	$router->post('delete','ProductController@delete');
 
+	$router->get('create','ProductController@create');
+
+});
+
+//通知路由
 $router->get('wechat','WechatController@serve');
 
 $router->post('wechat','WechatController@serve');
 
-$router->get('user/create','UserController@create');
-// $router->get('admin','WeChatController@group');
-$router->get('user/change','UserController@change');
+$router->get('change','WechatController@change');
 
-$router->post('user/change','UserController@change');
+$router->post('change','WechatController@change');
+
+//用户路由
+$router->group(['prefix'=>'user'],function($router) {
+
+	$router->get('create','UserController@create');
+	// $router->get('admin','WeChatController@group');
+
+});
+
+//管理员路由
+$router->group(['prefix'=>'admin'],function($router) {
+
+	$router->get('order','AdminController@order');
+
+	// $router->get('')
+
+});
 
 $router->post('express','ExpressController@order');
 

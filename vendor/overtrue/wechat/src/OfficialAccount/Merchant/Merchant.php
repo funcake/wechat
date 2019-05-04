@@ -199,9 +199,18 @@ public function list(int $status = 0)
         return $this->httpPostJson('merchant/group/add',$post)['group_id'];
     }
 
+    public function groupAll()
+    {
+        return $this->httpGet('merchant/group/getall')['groups_detail'];
+    }
+
     public function getOrder($id)
     {
         return $this->httpPostJson('merchant/order/getbyid',['order_id'=>$id])['order'];
     }
 
+    public function orderList(int $status = 2)
+    {
+        return $this->httpPostJson('merchant/order/getbyfilter',['status'=>2])['order_list'];
+    }
 }

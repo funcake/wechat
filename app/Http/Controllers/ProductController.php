@@ -25,7 +25,11 @@ class ProductController extends Controller
     }
 
     public function home() {
-        return Redis::smembers('512519882');
+        // return Redis::smembers('512519882');
+        // foreach ($order['products'] as $value) {
+        //     $products[$value['product_img']] = $value['product_price'];
+        // }
+        // return Redis::hmset($message['OrderId'],$products);
        $property =  app('wechat.official_account')->merchant->getProperty();
 
        $material = $property[array_search('种地分类', array_column($property, 'name'))];

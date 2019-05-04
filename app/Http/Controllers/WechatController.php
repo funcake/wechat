@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Redis;
 
 class WechatController extends Controller
 {
+
 	public function serve() {
 		$server = app('wechat.official_account')->server;
 		$message = $server->getMessage();
@@ -25,11 +26,11 @@ class WechatController extends Controller
 				case 'merchant_order':
 					$order = $merchant->getOrder($message['OrderId']);
 					$product = $merchant->get($order['products'][0]['product_id']);
-					Redis::sadd($product['sku_list'][0]['product_code'],$message['OrderId']);
+					Redis::sadd($product['sku_list'][0]['product_code'],$order['order_id']);
 					foreach ($order['products'] as $value) {
 						$products[$value['product_img']] = $value['product_price'];
 					}
-					Redis::hmset($message['OrderId'],$products);
+					Redis::hmset($order['order_id'],$products);
 					break;
 					
 				default:
@@ -41,8 +42,22 @@ class WechatController extends Controller
 		return $server->serve();
 	}
 
-	public function order()
-	{
-		# code...
+
+
+	public function change() {
+	    $server = app('wechat.work.user')->server;
+	    $message = $server->getMessage();
+	    switch ($message['ChangeType']) {
+	        case 'create_party': 
+	            if ($message['ParentId'] == 11) {
+	                $id = app('wechat.official_account')->merchant->groupAdd($message['Name']);
+	                app('wechat.work.user')->department->create(['id'=>$id,'name'=>$message['Name'],'parentid'=>5]);
+	                app('wechat.work.user')->department->delete($message['Id']);
+	            }
+	            break;
+	        default:
+	            break;
+	    }
+	    return  $server->serve();
 	}
 }
