@@ -25,13 +25,13 @@ $router->group([],function($router) {
 });
 
 //通知路由
-$router->get('wechat','WechatController@serve');
+$router->get('wechat','ServeController@wechat');
 
-$router->post('wechat','WechatController@serve');
+$router->post('wechat','ServeController@wechat');
 
-$router->get('change','WechatController@change');
+$router->get('change','ServeController@work');
 
-$router->post('change','WechatController@change');
+$router->post('change','ServeController@work');
 
 //用户路由
 $router->group(['prefix'=>'user'],function($router) {
