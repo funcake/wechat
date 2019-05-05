@@ -52,7 +52,7 @@ class AdminController extends Controller
                 Redis::hmset($order['order_id'],$products);
             }
         });
-        $all = [];
+        $users = [];
         //获取部门id,名称列表,
         foreach (Redis::hgetall('groups') as $key => $group) {
             //根据部门id,获取订单列表

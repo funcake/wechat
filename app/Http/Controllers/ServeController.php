@@ -48,7 +48,8 @@ class ServeController extends Controller
 	    $server = app('wechat.work.user')->server;
 	    $message = $server->getMessage();
 
-		    	$this->dispatch(new RegistDepartment($message));
+		$this->dispatch(new RegistDepartment($message));
+		return 1;
 	   /* switch ($message['ChangeType']) {
 	        case 'create_party': 
 		    	$this->dispatch(new RegistDepartment($message));
