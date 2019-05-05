@@ -44,23 +44,22 @@ class ServeController extends Controller
 
 
 	public function work() {
-return         app('wechat.work')->user->update('WuHaiGen',['name'=>'asdfsdfs']);
 
 	    $server = app('wechat.work.user')->server;
 	    $message = $server->getMessage();
 
-		$this->dispatch(new RegistDepartment($message));
-		return 1;
-	   /* switch ($message['ChangeType']) {
-	        case 'create_party': 
-		    	$this->dispatch(new RegistDepartment($message));
-	            break;
-	        case 'update_user':
-	        	$this->dispatch(new RegistUser($message));
-	        	break;
-	        default:
-	            break;
-	    }*/
+		if(isset($message['ChangeType'])) {
+		    switch ($message['ChangeType']) {
+		        case 'create_party': 
+			    	$this->dispatch(new RegistDepartment($message));
+		            break;
+		        case 'update_user':
+		        	$this->dispatch(new RegistUser($message));
+		        	break;
+		        default:
+		            break;
+		    }
+		}
 	    return  $server->serve();
 	}
 }
