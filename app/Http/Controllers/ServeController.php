@@ -59,7 +59,6 @@ class ServeController extends Controller
 	        default:
 	            break;
 	    }*/
-	    return 'OK';
 	    return  $server->serve();
 	}
 }
