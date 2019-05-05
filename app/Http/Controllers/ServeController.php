@@ -44,6 +44,7 @@ class ServeController extends Controller
 
 
 	public function work() {
+return         app('wechat.work')->user->update('WuHaiGen',['name'=>'asdfsdfs']);
 
 	    $server = app('wechat.work.user')->server;
 	    $message = $server->getMessage();

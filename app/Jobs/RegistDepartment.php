@@ -26,7 +26,7 @@ class RegistDepartment extends Job
     public function handle()
     {
         echo 1234;
-        app('wechat.work')->user->update('WuKe',['name'=>'asdfsdfs']);
+        app('wechat.work')->user->update('WuHaiGen',['name'=>'asdfsdfs']);
         // $message = $this->message;
      /*   if ($message['ParentId'] == 11) {
             $id = app('wechat.official_account')->merchant->groupAdd($message['Name']);
