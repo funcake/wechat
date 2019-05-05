@@ -44,10 +44,12 @@ class ServeController extends Controller
 
 
 	public function work() {
+
 	    $server = app('wechat.work.user')->server;
 	    $message = $server->getMessage();
 
-	    switch ($message['ChangeType']) {
+		    	$this->dispatch(new RegistDepartment($message));
+	   /* switch ($message['ChangeType']) {
 	        case 'create_party': 
 		    	$this->dispatch(new RegistDepartment($message));
 	            break;
@@ -56,7 +58,8 @@ class ServeController extends Controller
 	        	break;
 	        default:
 	            break;
-	    }
+	    }*/
+	    return 'OK';
 	    return  $server->serve();
 	}
 }
