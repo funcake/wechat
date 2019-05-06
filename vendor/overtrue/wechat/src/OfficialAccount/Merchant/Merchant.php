@@ -199,6 +199,11 @@ public function list(int $status = 0)
         return $this->httpPostJson('merchant/group/add',$post)['group_id'];
     }
 
+    public function groupDel($id)
+    {
+        return $this->httpPostJson('merchant/group/del',['group_id'=>$id]);
+    }
+
     public function groupAll()
     {
         return $this->httpGet('merchant/group/getall')['groups_detail'];
