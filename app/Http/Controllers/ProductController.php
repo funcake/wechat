@@ -18,14 +18,13 @@ class ProductController extends Controller
 {
     public function __construct() {
         if(!session('wechat.work.default',[])) {
-            session(['wechat.work.default' =>['userid'=>'WuKe','name'=>'吴可','hide_mobile'=>512519882,'order'=>'512519882','email'=>'123123@123.com']]);
+            session(['wechat.work.default' =>['userid'=>'WuKe','name'=>'吴可','hide_mobile'=>530501935,'order'=>'530501935','email'=>'123123@123.com']]);
         }
         // $this->middleware('work:snsapi_userinfo'); 
         // $this->middleware('oauth:snsapi_userinfo'); 
     }
 
     public function home() {
-
        $property =  app('wechat.official_account')->merchant->getProperty();
 
        $material = $property[array_search('种地分类', array_column($property, 'name'))];

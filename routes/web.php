@@ -38,7 +38,6 @@ $router->group(['prefix'=>'user'],function($router) {
 
 	$router->get('create','UserController@create');
 	// $router->get('admin','WeChatController@group');
-
 });
 
 //管理员路由

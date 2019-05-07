@@ -26,12 +26,12 @@ class RegistDepartment extends Job
      */
     public function handle()
     {
-        // $message = $this->message;
-        // $id = app('wechat.official_account')->merchant->groupAdd($message['Name']);
-        // $this->id = $id;
-        // app('wechat.work.user')->department->create(['id'=>$id,'name'=>$message['Name'],'parentid'=>5]);
-        // app('wechat.work.user')->department->delete($message['Id']);
-        // Redis::hset('groups',[$this->id=>$message['Name']]);
+        $message = $this->message;
+        $id = app('wechat.official_account')->merchant->groupAdd($message['Name']);
+        $this->id = $id;
+        app('wechat.work.user')->department->create(['id'=>$id,'name'=>$message['Name'],'parentid'=>5]);
+        app('wechat.work.user')->department->delete($message['Id']);
+        Redis::hset('groups',[$this->id=>$message['Name']]);
     } 
 
     public function failed() {

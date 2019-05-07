@@ -45,12 +45,12 @@ class Merchant extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-public function list(int $status = 0)
-{
-    $params = ['status' => $status];
+    public function list(int $status = 0)
+    {
+        $params = ['status' => $status];
 
-    return $this->httpPostJson  ('merchant/getbystatus', $params)['products_info'];
-}
+        return $this->httpPostJson  ('merchant/getbystatus', $params)['products_info'];
+    }
 
     /**
      * Set user remark.
@@ -65,9 +65,9 @@ public function list(int $status = 0)
     public function update(string $lang = 'zh_CN')
     {
         $_POST['sku_list'][0]['icon_url'] = "http://mmbiz.qpic.cn/mmbiz/4whpV1VZl28bJj62XgfHPibY3ORKicN1oJ4CcoIr4BMbfA8LqyyjzOZzqrOGz3f5KWq1QGP3fo6TOTSYD3TBQjuw/0";
-        
+        //编辑商品
         $this->httpPostJson('merchant/update', $_POST);
-
+        //上架商品
         return $this->httpPostJson('merchant/modproductstatus',['product_id'=>$_POST['product_id'],'status'=>1]);
     }
 
@@ -116,12 +116,12 @@ public function list(int $status = 0)
             "category_id"=>[
               "536903132"
             ],
-            "name"=>"第三方",
+            "name"=>"",
             "main_img"=>"http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0", 
             "img"=>[
               "http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0"
             ],
-            "buy_limit"=>10
+            "buy_limit"=>1
           ],
           "sku_list"=>[
             [
@@ -129,8 +129,8 @@ public function list(int $status = 0)
               "price"=>1,
               "icon_url"=>"http://mmbiz.qpic.cn/mmbiz/4whpV1VZl28bJj62XgfHPibY3ORKicN1oJ4CcoIr4BMbfA8LqyyjzOZzqrOGz3f5KWq1QGP3fo6TOTSYD3TBQjuw/0",
               "product_code"=>"512519882",
-              "ori_price"=>9000000,
-              "quantity"=>800
+              "ori_price"=>'',
+              "quantity"=>1
             ],
           ],
           "attrext"=>[

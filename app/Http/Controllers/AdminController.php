@@ -31,15 +31,13 @@ class AdminController extends Controller
     }
 
     private function flushGroups()  {
-        // return app('wechat.official_account')->merchant->groupAll();
-         return   app('wechat.official_account')->merchant->groupAdd('123');
         foreach (app('wechat.official_account')->merchant->groupAll() as $group) {
+            $groups[$group['group_id']] = $group['group_name'];
         };
         Redis::hmset('groups',$groups);
     }
 
     public function order() {
-        return $this->flushGroups();
         $merchant = app('wechat.official_account')->merchant;
 
         $list = $merchant->orderList();
