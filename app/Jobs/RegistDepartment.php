@@ -31,7 +31,7 @@ class RegistDepartment extends Job
         $this->id = $id;
         app('wechat.work.user')->department->create(['id'=>$id,'name'=>$message['Name'],'parentid'=>5]);
         app('wechat.work.user')->department->delete($message['Id']);
-        Redis::hset('groups',$this->id,$message['Name']]);
+        Redis::hset('groups',$this->id,$message['Name']);
     } 
 
     public function failed() {
