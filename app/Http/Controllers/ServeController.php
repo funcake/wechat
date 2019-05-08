@@ -45,18 +45,33 @@ class ServeController extends Controller
 
 	public function work() {
 	    $server = app('wechat.work.user')->server;
-	    $message = $server->getMessage();
 	    $server->serve()->send();
+	    $message = $server->getMessage();
 		if(isset($message['ChangeType'])) {
 		    switch ($message['ChangeType']) {
 		        case 'create_party': 
 			        if ($message['ParentId'] == 11) {
-				    	$this->dispatch(new RegistDepartment($message));
+				    	$message = $this->message;
+				    	$id = app('wechat.official_account')->merchant->groupAdd($message['Name']);
+				    	$this->id = $id;
+				    	app('wechat.work.user')->department->create(['id'=>$id,'name'=>$message['Name'],'parentid'=>5]);
+				    	app('wechat.work.user')->department->delete($message['Id']);
+				    	Redis::hset('groups',$this->id,$message['Name']]);
 				    }
 		            break;
 		        case 'update_user':
 		        	if (isset($message['IsLeaderInDept']) && $message['IsLeaderInDept'] == 1) {
-			        	$this->dispatch(new RegistUser());
+		        		$user = app('wechat.work.user')->user->get($message['UserID']);
+			        	Redis::hmset($user['Department'][0],
+			        	    [
+			        	        'avatar'=>$user['avatar'],
+			        	        'userid'=>$user['userid'],
+			        	        'name'=$user['name'],
+			        	        'mobile'=>$user['mobile'],
+			        	        'address'=>$user['address'],
+			        	        'finance'=>$user['extattr']['attrs'][0]['value'],
+			        	    ]
+			        	);
 		        	}
 		        	break;
 		        default:
