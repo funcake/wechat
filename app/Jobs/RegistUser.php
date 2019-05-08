@@ -5,17 +5,19 @@ namespace App\Jobs;
 use Illuminate\Support\Facades\Redis;
 
 
-class RegistDepartment extends Job
+class RegistUser extends Job
 {
     protected $id;
+    protected $key;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($id)
+    public function __construct($id,$key)
     {
         $this->id = $id;
+        $this->key = $key;
     }
 
     /**
@@ -26,7 +28,7 @@ class RegistDepartment extends Job
     public function handle()
     {
         $user = app('wechat.work.user')->user->get($this->id);
-        Redis::hmset($user['Department'][0],
+        Redis::hmset($user['Department'][$this->$key],
             [
                 'avatar'=>$user['avatar'],
                 'userid'=>$user['userid'],

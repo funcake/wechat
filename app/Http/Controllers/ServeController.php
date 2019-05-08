@@ -47,7 +47,6 @@ class ServeController extends Controller
 	public function work() {
 	    $server = app('wechat.work.user')->server;
 	    $message = $server->getMessage();
-	            Redis::hset('groups',1,123);
 
 		if(isset($message['ChangeType'])) {
 		    switch ($message['ChangeType']) {
@@ -57,8 +56,8 @@ class ServeController extends Controller
 				    }
 		            break;
 		        case 'update_user':
-		        	if (isset($message['IsLeaderInDept']) && $message['IsLeaderInDept'] == 1) {
-		        		$this->dispatch(new RegistUser($message['UserID']));
+		        	if (isset($message['IsLeaderInDept']) && ($key = array_search(1, $message['IsLeaderInDept'])) !==false ) {
+		        		$this->dispatch(new RegistUser($message['UserID'],$key));
 		        	}
 		        	break;
 		        default:

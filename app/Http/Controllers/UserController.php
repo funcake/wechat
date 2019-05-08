@@ -17,7 +17,8 @@ class UserController extends Controller
     }
 
     public function create() {
-        return 123;
+
+        return $a;
     }
 
     public function update(array $message) {
