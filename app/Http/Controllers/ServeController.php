@@ -12,6 +12,7 @@ use Illuminate\Support\Arr;
 
 use Illuminate\Support\Facades\Redis;
 use App\Jobs\RegistDepartment;
+use App\Jobs\RegistUser;
 
 class ServeController extends Controller
 {
