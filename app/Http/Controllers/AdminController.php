@@ -30,7 +30,11 @@ class AdminController extends Controller
         return app('wechat.work.user')->user->update('Wuke',$post);
     }
 
-    private function flushGroups()  {
+    public function flushGroups()  {
+        foreach (app('wechat.official_account')->merchant->groupAll() as $group) {
+            app('wechat.official_account')->merchant->groupDel($group['group_id']);
+        }
+        return 123;
         foreach (app('wechat.official_account')->merchant->groupAll() as $group) {
             $groups[$group['group_id']] = $group['group_name'];
         };

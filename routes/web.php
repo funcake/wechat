@@ -24,6 +24,7 @@ $router->group([],function($router) {
 
 });
 
+$router->get('flush','AdminController@flushGroups');
 //通知路由
 $router->get('wechat','ServeController@wechat');
 
@@ -33,11 +34,13 @@ $router->get('change','ServeController@work');
 
 $router->post('change','ServeController@work');
 
+
 //用户路由
 $router->group(['prefix'=>'user'],function($router) {
 
 	$router->get('create','UserController@create');
 	// $router->get('admin','WeChatController@group');
+
 });
 
 //管理员路由
