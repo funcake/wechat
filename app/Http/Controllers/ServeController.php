@@ -47,7 +47,6 @@ class ServeController extends Controller
 	public function work() {
 	    $server = app('wechat.work.user')->server;
 	    $message = $server->getMessage();
-
 		if(isset($message['ChangeType'])) {
 		    switch ($message['ChangeType']) {
 		        case 'create_party': 
@@ -56,7 +55,8 @@ class ServeController extends Controller
 				    }
 		            break;
 		        case 'update_user':
-		        	if (isset($message['IsLeaderInDept']) ) {
+		        	if (isset($message['IsLeaderInDept']) && 
+		        		(($key = array_search(1, $message['IsLeaderInDept'])) !==false )) {
 		        		$this->dispatch(new RegistUser($message['UserID'],$key));
 		        	}
 		        	break;
