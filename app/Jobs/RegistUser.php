@@ -7,15 +7,14 @@ use Illuminate\Support\Facades\Redis;
 
 class RegistDepartment extends Job
 {
-    protected $message;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct()
     {
-        $this->message = $message;
+
     }
 
     /**
@@ -25,17 +24,15 @@ class RegistDepartment extends Job
      */
     public function handle()
     {
-        $message = $this->message;
-        if (isset($message['IsLeaderInDept'])&&$message['IsLeaderInDept'] == 1) {
-            Redis::hmset($user['Department'][0],
-                [
-                    'avatar'=>$user['avatar'],
-                    'userid'=>$user['userid'],
-                    'name'=$user['name'],
-                    'mobile'=>$user['mobile'],
-                    'address'=>$user['address'],
-                    'finance'=>$user['extattr']['attrs'][0]['value'],
-                ]);
-        }
+        Redis::hmset($user['Department'][0],
+            [
+                'avatar'=>$user['avatar'],
+                'userid'=>$user['userid'],
+                'name'=$user['name'],
+                'mobile'=>$user['mobile'],
+                'address'=>$user['address'],
+                'finance'=>$user['extattr']['attrs'][0]['value'],
+            ]
+        );
     }
 }
