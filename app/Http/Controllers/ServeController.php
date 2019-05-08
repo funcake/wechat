@@ -56,7 +56,7 @@ class ServeController extends Controller
 				    	$this->id = $id;
 				    	app('wechat.work.user')->department->create(['id'=>$id,'name'=>$message['Name'],'parentid'=>5]);
 				    	app('wechat.work.user')->department->delete($message['Id']);
-				    	Redis::hset('groups',$this->id,$message['Name']]);
+				    	Redis::hset('groups',$this->id,$message['Name']);
 				    }
 		            break;
 		        case 'update_user':
@@ -66,7 +66,7 @@ class ServeController extends Controller
 			        	    [
 			        	        'avatar'=>$user['avatar'],
 			        	        'userid'=>$user['userid'],
-			        	        'name'=$user['name'],
+			        	        'name'=>$user['name'],
 			        	        'mobile'=>$user['mobile'],
 			        	        'address'=>$user['address'],
 			        	        'finance'=>$user['extattr']['attrs'][0]['value'],
