@@ -50,7 +50,7 @@ class ServeController extends Controller
 		if(isset($message['ChangeType'])) {
 		    switch ($message['ChangeType']) {
 		        case 'create_party': 
-			        if ($message['ParentId'] == 11) {
+			        if ($message['ParentId'] == 8) {
 				    	$this->dispatch(new RegistDepartment($message));
 				    }
 		            break;
