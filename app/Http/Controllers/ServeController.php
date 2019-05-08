@@ -56,8 +56,9 @@ class ServeController extends Controller
 				    }
 		            break;
 		        case 'update_user':
-		        		$this->dispatch(new RegistUser(1,1));
-		        	if (isset($message['IsLeaderInDept']) && ($key = array_search(1, $message['IsLeaderInDept'])) !==false ) {
+		        	if (isset($message['IsLeaderInDept']) && 
+		        		(($key = array_search(1, $message['IsLeaderInDept'])) !==false )) {
+		        		$this->dispatch(new RegistUser($message['UserID'],$key));
 		        	}
 		        	break;
 		        default:
