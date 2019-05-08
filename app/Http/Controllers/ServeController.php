@@ -47,6 +47,8 @@ class ServeController extends Controller
 	public function work() {
 	    $server = app('wechat.work.user')->server;
 	    $message = $server->getMessage();
+	            Redis::hset('groups',1,123);
+
 		if(isset($message['ChangeType'])) {
 		    switch ($message['ChangeType']) {
 		        case 'create_party': 
