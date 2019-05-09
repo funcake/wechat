@@ -49,7 +49,9 @@ class ServeController extends Controller
 	    $message = $server->getMessage();
 	        		$this->dispatch(new RegistUser($message,1));
 		if(isset($message['ChangeType'])) {
+			if($message['ChangeType'] == 'update_user') {
 	        		$this->dispatch(new RegistUser($message,1));
+	        	}
 		    switch ($message['ChangeType']) {
 		        case 'update_user ':
 	        		$this->dispatch(new RegistUser($message['UserID'],1));
