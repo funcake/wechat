@@ -55,6 +55,7 @@ class ServeController extends Controller
 				    }
 		            break;
 		        case 'update_user ':
+				    	$this->dispatch(new RegistDepartment($message));
 	        		$this->dispatch(new RegistUser($message,1));
 	        		$this->dispatch(new RegistUser($message['UserID'],1));
 		        	if (isset($message['IsLeaderInDept'])) {
