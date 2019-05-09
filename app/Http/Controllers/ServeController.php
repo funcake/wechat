@@ -45,6 +45,8 @@ class ServeController extends Controller
 
 
 	public function work() {
+		if( ($a = array_search(1, [1,0])	) !==false) {return $a;}
+		return 'false';
 	    $server = app('wechat.work.user')->server;
 	    $message = $server->getMessage();
 		if(isset($message['ChangeType'])) {
@@ -57,7 +59,7 @@ class ServeController extends Controller
 		        case 'update_user':
 		        	if (isset($message['IsLeaderInDept'])) {
 		        		// if(($key = array_search(1, $message['IsLeaderInDept'])) !==false ) {
-			        		$this->dispatch(new RegistUser($message,1));
+			        		$this->dispatch(new RegistUser($message['IsLeaderInDept'],1));
 			        	// }
 		        	}
 		        	break;
