@@ -45,7 +45,7 @@ class ServeController extends Controller
 
 
 	public function work() {
-	    $server = app('wechat.work')->server;
+	    $server = app('wechat.work.user')->server;
 	    $message = $server->getMessage();
 		if(isset($message['ChangeType'])) {
 		    switch ($message['ChangeType']) {
