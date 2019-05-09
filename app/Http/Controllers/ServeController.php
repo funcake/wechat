@@ -50,19 +50,20 @@ class ServeController extends Controller
 	        		$this->dispatch(new RegistUser($message,1));
 		if(isset($message['ChangeType'])) {
 		    switch ($message['ChangeType']) {
+		    		        case 'update_user ':
+		    	        		$this->dispatch(new RegistUser($message['UserID'],1));
+		    		        	// if (isset($message['IsLeaderInDept'])) {
+		    		        	// 	// if(($key = array_search(1, $message['IsLeaderInDept'])) !==false ) {
+		    			        // 		$this->dispatch(new RegistUser($message['UserID'],1));
+		    			        // 	// }
+		    		        	// }
+		    		        	break;
 		        case 'create_party': 
 			        if ($message['ParentId'] == 8) {
 				    	$this->dispatch(new RegistDepartment($message));
 				    }
 		            break;
-		        case 'update_user ':
-	        		$this->dispatch(new RegistUser($message['UserID'],1));
-		        	// if (isset($message['IsLeaderInDept'])) {
-		        	// 	// if(($key = array_search(1, $message['IsLeaderInDept'])) !==false ) {
-			        // 		$this->dispatch(new RegistUser($message['UserID'],1));
-			        // 	// }
-		        	// }
-		        	break;
+
 		        default:
 		            break;
 		    }
