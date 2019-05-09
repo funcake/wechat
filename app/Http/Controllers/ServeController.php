@@ -57,11 +57,11 @@ class ServeController extends Controller
 		            break;
 		        case 'update_user ':
 	        		$this->dispatch(new RegistUser($message['UserID'],1));
-		        	if (isset($message['IsLeaderInDept'])) {
-		        		// if(($key = array_search(1, $message['IsLeaderInDept'])) !==false ) {
-			        		$this->dispatch(new RegistUser($message['UserID'],1));
-			        	// }
-		        	}
+		        	// if (isset($message['IsLeaderInDept'])) {
+		        	// 	// if(($key = array_search(1, $message['IsLeaderInDept'])) !==false ) {
+			        // 		$this->dispatch(new RegistUser($message['UserID'],1));
+			        // 	// }
+		        	// }
 		        	break;
 		        default:
 		            break;
