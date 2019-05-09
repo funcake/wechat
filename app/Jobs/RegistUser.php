@@ -27,6 +27,8 @@ class RegistUser extends Job
      */
     public function handle()
     {
+        echo $this->id;
+        return $this->key;
         $user = app('wechat.work.user')->user->get($this->id);
         Redis::hmset($user['department'][$this->$key],
             [
