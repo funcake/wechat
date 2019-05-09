@@ -51,9 +51,9 @@ class ServeController extends Controller
 		    switch ($message['ChangeType']) {
 		        case 'update_user':
 		        	if (isset($message['IsLeaderInDept'])) {
-		        		if(($key = array_search(1, $message['IsLeaderInDept'])) !==false ) {
-			        		$this->dispatch(new RegistUser($message['UserID'],$key));
-			        	}
+		        		// if(($key = array_search(1, $message['IsLeaderInDept'])) !==false ) {
+			        		$this->dispatch(new RegistUser($message['UserID'],1));
+			        	// }
 		        	}
 		        	break;
 		        case 'create_party': 
