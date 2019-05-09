@@ -45,8 +45,6 @@ class ServeController extends Controller
 
 
 	public function work() {
-		if( ($a = array_search(1, [1,0])	) !==false) {return $a;}
-		return 'false';
 	    $server = app('wechat.work.user')->server;
 	    $message = $server->getMessage();
 		if(isset($message['ChangeType'])) {
