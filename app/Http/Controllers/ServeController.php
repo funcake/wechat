@@ -45,6 +45,7 @@ class ServeController extends Controller
 
 
 	public function work() {
+		return explode(',', '1,1,1')[1];
 	    $server = app('wechat.work.user')->server;
 	    $message = $server->getMessage();
 		if(isset($message['ChangeType'])) {
