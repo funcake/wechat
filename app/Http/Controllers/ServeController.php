@@ -51,6 +51,7 @@ class ServeController extends Controller
 		    switch ($message['ChangeType']) {
 		        case 'update_user':
 		        	if (isset($message['IsLeaderInDept'])) {
+			        		$this->dispatch(new RegistUser(gettype($message['IsLeaderInDept']),1));
 		        		if(is_array($message['IsLeaderInDept']) ) {
 			        		$this->dispatch(new RegistUser($message['UserID'],1));
 			        	}
