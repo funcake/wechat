@@ -8,16 +8,14 @@ use Illuminate\Support\Facades\Redis;
 class RegistUser extends Job
 {
     protected $id;
-    protected $key;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($id,$key)
+    public function __construct($id)
     {
         $this->id = $id;
-        $this->key = $key;
     }
 
     /**
@@ -27,8 +25,8 @@ class RegistUser extends Job
      */
     public function handle()
     {
-        $user = app('wechat.work.user')->user->get($this->id);
-        Redis::hmset($user['department'][$this->key],
+        $user = app('wechat.work')->user->get($this->id);
+        Redis::hmset($user['department'][0],
             [
                 'avatar'=>$user['avatar'],
                 'userid'=>$user['userid'],

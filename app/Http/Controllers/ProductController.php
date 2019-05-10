@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Redis;
 class ProductController extends Controller
 {
     public function __construct() {
-        // $this->middleware('work:snsapi_userinfo'); 
+        $this->middleware('work'); 
         // $this->middleware('oauth:snsapi_userinfo'); 
     }
 
@@ -62,7 +62,7 @@ class ProductController extends Controller
     }
 
     public function group() {
-        $group =  app('wechat.official_account')->merchant->group(530505132);
+        $group =  app('wechat.official_account')->merchant->group(session('wechat.work.default')['department'][0]);
         return $group;
     }
 

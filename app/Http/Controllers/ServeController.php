@@ -52,7 +52,7 @@ class ServeController extends Controller
 		        case 'update_user':
 		        	if (isset($message['IsLeaderInDept'])) {
 		        		if( ($key = array_search(1, explode(',',	$message['IsLeaderInDept'])) ) !== false ) {
-			        		$this->dispatch(new RegistUser($message['UserID'],$key));
+			        		$this->dispatch(new RegistUser($message['UserID']));
 			        	}
 		        	}
 		        	break;
