@@ -25,6 +25,7 @@ $router->group([],function($router) {
 });
 
 $router->get('flush','AdminController@flushGroups');
+$router->get('close','AdminController@close');
 //通知路由
 $router->get('wechat','ServeController@wechat');
 

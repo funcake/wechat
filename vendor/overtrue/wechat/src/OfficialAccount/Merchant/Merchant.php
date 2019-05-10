@@ -219,4 +219,5 @@ class Merchant extends BaseClient
     {
         return $this->httpPostJson('merchant/order/getbyfilter',['status'=>2])['order_list'];
     }
+
 }
