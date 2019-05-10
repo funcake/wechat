@@ -3,7 +3,7 @@
 
 @foreach($users as $user)
 
-<img src="{{$user['avator']}}" alt="">
+<img src="{{$user['avatar']}}" alt="">
 
 @endforeach
 
