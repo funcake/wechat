@@ -32,21 +32,17 @@ class AdminController extends Controller
 
     public function flushGroups()  {
         foreach (app('wechat.official_account')->merchant->groupAll() as $group) {
-            app('wechat.official_account')->merchant->groupDel($group['group_id']);
-        }
-        return 123;
-        foreach (app('wechat.official_account')->merchant->groupAll() as $group) {
             $groups[$group['group_id']] = $group['group_name'];
         };
         Redis::hmset('groups',$groups);
     }
 
     public function order() {
-        // $merchant = app('wechat.official_account')->merchant;
+        $merchant = app('wechat.official_account')->merchant;
 
-        // $list = $merchant->orderList();
+        $list = $merchant->orderList();
         
-/*        Redis::pipeline(function($pipe) use ($merchant,$list) {
+        Redis::pipeline(function($pipe) use ($merchant,$list) {
             foreach ($list as $order) {
                 $product = $merchant->get($order['products'][0]['product_id']);
                 Redis::sadd($product['sku_list'][0]['product_code'],$order['order_id']);
@@ -55,13 +51,13 @@ class AdminController extends Controller
                 }
                 Redis::hmset($order['order_id'],$products);
             }
-        });*/
+        });
         $users = [];
         //获取部门id,名称列表,
         foreach (Redis::hgetall('groups') as $key => $group) {
             //根据部门id,获取订单列表
-            $user = Redis::hgetall($group); 
-            foreach (Redis::smembers($key) as $orderid) {
+            $user = Redis::hgetall($key); 
+            foreach (Redis::smembers($group) as $orderid) {
                 $user['order'] = Redis::hgetall($orderid);
             }
             $user['group'] = $group;
