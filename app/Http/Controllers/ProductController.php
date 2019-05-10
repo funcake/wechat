@@ -62,7 +62,7 @@ class ProductController extends Controller
     }
 
     public function group() {
-        $group =  app('wechat.official_account')->merchant->group(session("wechat.work.default")['hide_mobile']);
+        $group =  app('wechat.official_account')->merchant->group(530505132);
         return $group;
     }
 

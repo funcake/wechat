@@ -42,11 +42,11 @@ class AdminController extends Controller
     }
 
     public function order() {
-        $merchant = app('wechat.official_account')->merchant;
+        // $merchant = app('wechat.official_account')->merchant;
 
-        $list = $merchant->orderList();
+        // $list = $merchant->orderList();
         
-        Redis::pipeline(function($pipe) use ($merchant,$list) {
+/*        Redis::pipeline(function($pipe) use ($merchant,$list) {
             foreach ($list as $order) {
                 $product = $merchant->get($order['products'][0]['product_id']);
                 Redis::sadd($product['sku_list'][0]['product_code'],$order['order_id']);
@@ -55,7 +55,7 @@ class AdminController extends Controller
                 }
                 Redis::hmset($order['order_id'],$products);
             }
-        });
+        });*/
         $users = [];
         //获取部门id,名称列表,
         foreach (Redis::hgetall('groups') as $key => $group) {
@@ -67,8 +67,7 @@ class AdminController extends Controller
             $user['group'] = $group;
             $users[$key] = $user;
         }
-        dd($users);
-        return $users;
+        return view('admin',compact('users'));
     }
 
 }
