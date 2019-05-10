@@ -121,6 +121,7 @@ class Merchant extends BaseClient
             "img"=>[
               "http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0"
             ],
+            "property"=>[['id'=> "1075743465", 'vid'=> '1079783194']],
             "buy_limit"=>1
           ],
           "sku_list"=>[

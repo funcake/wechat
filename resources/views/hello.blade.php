@@ -30,7 +30,7 @@
 	</ul>
 	<div data-role="popup" id="popup2" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
 		<form>
-			<label for="name" class="">名 称:</label><input type="text" name="name" id="name" value="" data-clear-btn="true" placeholder="名" >
+			<label for="name" class="">名 称:</label><input type="text" name="name" id="name" value="" data-clear-btn="true" placeholder="名" required="required">
 			<label for="price2" class="">价 格:</label>
 			<select name="level" id = "level2" onchange="select2(this.value)">
 				<option value="1000" >千元档</option>
@@ -77,7 +77,7 @@
 <footer data-role="footer" data-position="fixed">
 	<div data-role="navbar">
 		<ul>
-			<li>	<a href="#status1" class="" data-icon="check">上架</a></li>
+			<li>	<a href="#status1" class="" data-icon="check">已上架</a></li>
 			<li>	<a href="#status2" class="" data-icon="carat-d">未上架</a></li>
 			<li>	<a href="#admin" class="" data-icon="bullets">管理</a></li>
 		</ul>
@@ -96,106 +96,6 @@ $(function(){
 
 	var data = [];
 
-//根据id设置popup中form默认值
-
-	//已上架商品
-	$('#submit1').on("click",function() {
-		var key = $(this).attr("key");
-		post = data.status1[key];
-		post.sku_list[0].price=$('#price1').val()*100;
-		console.log(post);
-		$("#status1 [key='"+key+"'] p").html('￥'+$('#price1').val());
-		$.post('',
-			post ,
-			function(data) {
-				console.log(data);
-			}
-		);
-	});
-	//未上架商品
-	$('#submit2').on("click",function() {
-		var key = $(this).attr("key");
-		post = data.status2[key];
-		post.product_base.name=$('#name').val();
-		post.sku_list[0].price=$('#price2').val()*100;
-		post.status = 1;
-		post.product_base.property = 
-		[
-			{
-				"id": '{{$material['id']}}',
-				"vid": $('#material').val(),
-			},
-			{
-				"id": '{{$style['id']}}',
-				"vid": $('#style').val(),
-			},
-			{
-				"id": '{{$usage['id']}}',
-				"vid": $('#usage').val(),
-			}
-		];		
-
-		$("#list2 [key='"+key+"']").remove();
-		data.status1.unshift(post);
-		init1()
-		$.post('',
-			post ,
-			function(data) {
-				console.log(data);
-			}
-		);
-	});
-	//删除商品
-	$('#delete').on("click",function() {
-		var key = $(this).attr("key");
-		post ={'product_id':data.status1[key].product_id};
-		$("#status1 li[key='"+key+"']").remove();
-		$.post('delete',
-				post,
-				function(data) {
-					console.log(data);
-				}
-			)
-	});
-
-	function select1(val) {
-		console.log(val);
-		switch (val) {
-			case '1000':
-				$('#price1').val(0);
-				$('#price1').attr({'step':20,'min':0,'max':1000});
-				break;
-			case '5000':
-					$('#price1').val(1000);
-					$('#price1').attr({'step':100,'min':1000,'max':5000});
-				break;
-			case '10000':
-				$('#price1').val(5000);
-				$('#price1').attr({'step':200,'min':5000,'max':10000});
-				break;
-			default:
-				break;
-		}
-	}
-
-	function select2(val) {
-		switch (val) {
-			case '1000':
-				$('#price2').val(0);
-				$('#price2').attr({'step':20,'min':0,'max':1000});
-				break;
-			case '5000':
-					$('#price2').val(1000);
-					$('#price2').attr({'step':100,'min':1000,'max':5000});
-				break;
-			case '10000':
-				$('#price2').val(5000);
-				$('#price2').attr({'step':200,'min':5000,'max':10000});
-				break;
-			default:
-				break;
-		}
-	}
 
 	function init1() {
 			var html1 = "";
@@ -294,6 +194,110 @@ $(function(){
 			init2();
 		}
 	);
+
+//根据id设置popup中form默认值
+
+	//已上架商品
+	$('#submit1').on("click",function() {
+		var key = $(this).attr("key");
+		post = data.status1[key];
+		post.sku_list[0].price=$('#price1').val()*100;
+		console.log(post);
+		$("#status1 [key='"+key+"'] p").html('￥'+$('#price1').val());
+		$.post('',
+			post ,
+			function(data) {
+				console.log(data);
+			}
+		);
+	});
+	//未上架商品提交
+	$('#submit2').on("click",function() {
+		var key = $(this).attr("key");
+		post = data.status2[key];
+		post.product_base.name=$('#name').val();
+		post.sku_list[0].price=$('#price2').val()*100;
+		post.status = 1;
+		post.product_base.property = 
+		[
+			{
+				"id": "{{$material['id']}}",
+				"vid": "1079783194",
+			},
+			{
+				"id": '{{$style['id']}}',
+				"vid": $('#style').val(),
+			},
+			{
+				"id": '{{$usage['id']}}',
+				"vid": $('#usage').val(),
+			}
+		];		
+
+		$("#list2 [key='"+key+"']").remove();
+		data.status1.unshift(post);
+		init1();
+		console.log(post);
+		$.post('',
+			post ,
+			function(data) {
+				console.log(data);
+			}
+		);
+	});
+	//删除商品
+	$('#delete').on("click",function() {
+		var key = $(this).attr("key");
+		post ={'product_id':data.status1[key].product_id};
+		$("#status1 li[key='"+key+"']").remove();
+		$.post('delete',
+				post,
+				function(data) {
+					console.log(data);
+				}
+			)
+	});
+
+	function select1(val) {
+		console.log(val);
+		switch (val) {
+			case '1000':
+				$('#price1').val(0);
+				$('#price1').attr({'step':20,'min':0,'max':1000});
+				break;
+			case '5000':
+					$('#price1').val(1000);
+					$('#price1').attr({'step':100,'min':1000,'max':5000});
+				break;
+			case '10000':
+				$('#price1').val(5000);
+				$('#price1').attr({'step':200,'min':5000,'max':10000});
+				break;
+			default:
+				break;
+		}
+	}
+
+	function select2(val) {
+		switch (val) {
+			case '1000':
+				$('#price2').val(0);
+				$('#price2').attr({'step':20,'min':0,'max':1000});
+				break;
+			case '5000':
+					$('#price2').val(1000);
+					$('#price2').attr({'step':100,'min':1000,'max':5000});
+				break;
+			case '10000':
+				$('#price2').val(5000);
+				$('#price2').attr({'step':200,'min':5000,'max':10000});
+				break;
+			default:
+				break;
+		}
+	}
+
+
 
 	</script>
 	@endsection

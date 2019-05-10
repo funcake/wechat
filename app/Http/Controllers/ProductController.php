@@ -17,13 +17,12 @@ use Illuminate\Support\Facades\Redis;
 class ProductController extends Controller
 {
     public function __construct() {
-        $this->middleware('work'); 
+        // $this->middleware('work'); 
         // $this->middleware('oauth:snsapi_userinfo'); 
     }
 
     public function home() {
        $property =  app('wechat.official_account')->merchant->getProperty();
-
        $material = $property[array_search('种地分类', array_column($property, 'name'))];
        $usage = $property[array_search('适用场景', array_column($property, 'name'))];
        $style = $property[array_search('款式', array_column($property, 'name'))];
@@ -62,7 +61,8 @@ class ProductController extends Controller
     }
 
     public function group() {
-        $group =  app('wechat.official_account')->merchant->group(session('wechat.work.default')['department'][0]);
+        $group =  app('wechat.official_account')->merchant->group(530505132);
+        // $group =  app('wechat.official_account')->merchant->group(session('wechat.work.default')['department']);
         return $group;
     }
 
