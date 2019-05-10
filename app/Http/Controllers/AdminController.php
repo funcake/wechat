@@ -63,6 +63,7 @@ class AdminController extends Controller
             $user['group'] = $group;
             $users[$key] = $user;
         }
+        dd($users);
         return view('admin',compact('users'));
     }
 
