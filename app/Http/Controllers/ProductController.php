@@ -24,7 +24,7 @@ class ProductController extends Controller
 
     public function home() {
        $user = session('wechat.work.default');
-       $order = Redis::hgetall($user['department'][0]);
+       $order = Redis::hgetall(Redis::hget('groups',$user['department'][0]));
 
        $property =  app('wechat.official_account')->merchant->getProperty();
        $material = $property[array_search('种地分类', array_column($property, 'name'))];
