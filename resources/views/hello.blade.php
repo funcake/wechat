@@ -80,8 +80,8 @@
 		<div class="ui-block-c"> <div class="ui-bar"> </div> </div> 
 		<!-- 抬头 -->
 		<div class="ui-block-a"> <div class="ui-bar ui-bar-b"> 总销售： </div> </div> 
-		<div class="ui-block-b"> <div class="ui-bar ui-bar-b"> 结算金额： </div> </div> 
-		<div class="ui-block-c"> <div class="ui-bar ui-bar-b"> 订单总额： </div> </div> 
+		<div class="ui-block-b"> <div class="ui-bar ui-bar-b"> 结算额： </div> </div> 
+		<div class="ui-block-c"> <div class="ui-bar ui-bar-b"> 总订单： </div> </div> 
 		<!-- number -->
 		<div class="ui-block-a"> <div class="ui-bar"> 123123 </div> </div>
 		<div class="ui-block-b"> <div class="ui-bar"> 123 </div> </div>
