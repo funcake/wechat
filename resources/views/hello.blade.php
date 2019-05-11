@@ -70,7 +70,57 @@
 </section><!-- /page -->
 
 <section id="admin" data-role="page">
-
+	<div data-role="header">
+		<h1>订单管理</h1>		
+	</div>
+	<div class="ui-grid-b">
+		<!-- 基本信息 -->
+		<div class="ui-block-a">
+			<div class="ui-bar">
+			<img src="{{$user['avatar']}}" alt="" height="50px">
+			</div>
+		</div>
+		<div class="ui-block-b">
+			<div class="ui-bar">
+				{{$user['name']}}
+			</div>
+		</div>
+		<div class="ui-block-c">
+			<div class="ui-bar">
+			</div>
+		</div>
+		<!-- 抬头 -->
+		<div class="ui-block-a">
+			<div class="ui-bar ui-bar-b">
+				总销售：
+			</div>
+		</div>
+		<div class="ui-block-b">
+			<div class="ui-bar ui-bar-b">
+				结算金额：
+			</div>
+		</div>
+		<div class="ui-block-c">
+			<div class="ui-bar ui-bar-b">
+				订单总额：
+			</div>
+		</div>
+		<div class="ui-block-a">
+			<div class="ui-bar">
+				123123
+			</div>
+		</div>
+		<div class="ui-block-b">
+			<div class="ui-bar">
+				123
+			</div>
+		</div>
+		<div class="ui-block-c">
+			<div class="ui-bar">
+			345
+			</div>
+		</div>
+	</div>
 </section>
 
 

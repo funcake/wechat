@@ -38,7 +38,7 @@ class ServiceProvider implements ServiceProviderInterface
             } else {
                 $socialite->setAgentId($app['config']['agent_id']);
             }
-            // dd(new AccessTokenDelegate($app));
+
             return $socialite->setAccessToken(new AccessTokenDelegate($app));
         };
     }
