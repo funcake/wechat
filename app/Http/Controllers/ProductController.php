@@ -17,13 +17,12 @@ use Illuminate\Support\Facades\Redis;
 class ProductController extends Controller
 {
     public function __construct() {
-        // session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
-        // $this->middleware('work'); 
+        session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
+        $this->middleware('work'); 
         // $this->middleware('oauth:snsapi_userinfo'); 
     }
 
     public function home() {
-        return sys_get_temp_dir();
        $user = session('wechat.work.default');
 
        $property =  app('wechat.official_account')->merchant->getProperty();
