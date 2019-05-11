@@ -75,51 +75,23 @@
 	</div>
 	<div class="ui-grid-b">
 		<!-- 基本信息 -->
-		<div class="ui-block-a">
-			<div class="ui-bar">
-			<img src="{{$user['avatar']}}" alt="" height="50px">
-			</div>
-		</div>
-		<div class="ui-block-b">
-			<div class="ui-bar">
-				{{$user['name']}}
-			</div>
-		</div>
-		<div class="ui-block-c">
-			<div class="ui-bar">
-			</div>
-		</div>
+		<div class="ui-block-a"> <div class="ui-bar"> <img src="{{$user['avatar']}}" alt="" height="80px"> </div> </div> 
+		<div class="ui-block-b"> <div class="ui-bar"> {{$user['name']}} </div> </div> 
+		<div class="ui-block-c"> <div class="ui-bar"> </div> </div> 
 		<!-- 抬头 -->
-		<div class="ui-block-a">
-			<div class="ui-bar ui-bar-b">
-				总销售：
-			</div>
-		</div>
-		<div class="ui-block-b">
-			<div class="ui-bar ui-bar-b">
-				结算金额：
-			</div>
-		</div>
-		<div class="ui-block-c">
-			<div class="ui-bar ui-bar-b">
-				订单总额：
-			</div>
-		</div>
-		<div class="ui-block-a">
-			<div class="ui-bar">
-				123123
-			</div>
-		</div>
-		<div class="ui-block-b">
-			<div class="ui-bar">
-				123
-			</div>
-		</div>
-		<div class="ui-block-c">
-			<div class="ui-bar">
-			345
-			</div>
-		</div>
+		<div class="ui-block-a"> <div class="ui-bar ui-bar-b"> 总销售： </div> </div> 
+		<div class="ui-block-b"> <div class="ui-bar ui-bar-b"> 结算金额： </div> </div> 
+		<div class="ui-block-c"> <div class="ui-bar ui-bar-b"> 订单总额： </div> </div> 
+		<!-- number -->
+		<div class="ui-block-a"> <div class="ui-bar"> 123123 </div> </div>
+		<div class="ui-block-b"> <div class="ui-bar"> 123 </div> </div>
+		<div class="ui-block-c"> <div class="ui-bar"> 345 </div> </div> 
+	</div>
+	<div data-role="listview" id="order">
+		@foreach($order as $products)
+			@foreach($products as $product)
+			@endforeach
+		@endforeach
 	</div>
 </section>
 
@@ -210,7 +182,6 @@ $(function(){
 				}
 			);
 			$('#list2').html(html2);
-			// 上架商品pop键
 			
 			// 未上架商品pop
 			$('.pop2').on('click',function() {
