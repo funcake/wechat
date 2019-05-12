@@ -95,7 +95,7 @@
 			@endforeach
 		@endforeach
 	</div>
-	<a href="https://open.weixin.qq.com/sns/getexpappinfo?appid=wxeb6a4ea50547d666&path=pages%2Fshelf%2Fshelf.html%3Fshelfid%3D7#wechat-redirect" title="">微信</a>
+	<a href="https://open.weixin.qq.com/sns/getexpappinfo?appid=wxeb6a4ea50547d666&path=pages/shelf/shelf.htm?shelfid=7#wechat-redirect" title="">微信</a>
 </section>
 
 
