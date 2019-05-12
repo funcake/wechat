@@ -1,5 +1,7 @@
 @extends("layout")
 @section("content")
+<body onbeforeunload="return close()">
+
 <section id="status1" data-role='page'>	
 	<div data-role="header" >
 		<h1>已上架管理</h1>
@@ -83,9 +85,9 @@
 		<div class="ui-block-b"> <div class="ui-bar ui-bar-b"> 结算额： </div> </div> 
 		<div class="ui-block-c"> <div class="ui-bar ui-bar-b"> 总订单： </div> </div> 
 		<!-- number -->
-		<div class="ui-block-a"> <div class="ui-bar"> 123123 </div> </div>
-		<div class="ui-block-b"> <div class="ui-bar"> 123 </div> </div>
-		<div class="ui-block-c"> <div class="ui-bar"> 345 </div> </div> 
+		<div class="ui-block-a"> <div class="ui-bar ui-bar-b"> 123123 </div> </div>
+		<div class="ui-block-b"> <div class="ui-bar ui-bar-b"> 123 </div> </div>
+		<div class="ui-block-c"> <div class="ui-bar ui-bar-b"> 345 </div> </div> 
 	</div>
 	<div data-role="listview" id="order">
 		@foreach($order as $products)
@@ -106,7 +108,7 @@
 	</div>
 </footer><!-- /footer -->
 
-
+</body>
 
 
 
@@ -115,6 +117,12 @@ $(function(){
 	$( "[data-role='header'], [data-role='footer']" ).toolbar();
 	$( "[data-role='header'], [data-role='footer']" ).toolbar({ theme: "b" });
 });
+
+	function close() {
+		return '123';
+	}
+
+	window.addEventListener('pagehide', function(){alert('123')});
 
 	var data = [];
 

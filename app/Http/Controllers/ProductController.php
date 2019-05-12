@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Redis;
 class ProductController extends Controller
 {
     public function __construct() {
-        // session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
+        session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
         $this->middleware('work'); 
         // $this->middleware('oauth:snsapi_userinfo'); 
     }
@@ -67,6 +67,7 @@ class ProductController extends Controller
     public function group() {
         // $group =  app('wechat.official_account')->merchant->group(530505229);
         $group =  app('wechat.official_account')->merchant->group(session('wechat.work.default')['department'][0]);
+        // $group = json_decode(Redis::hget('530505229','products'),true);
         return $group;
     }
 
