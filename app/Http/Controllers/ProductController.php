@@ -17,19 +17,21 @@ use Illuminate\Support\Facades\Redis;
 class ProductController extends Controller
 {
     public function __construct() {
-        session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
-        $this->middleware('work'); 
+        // session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
+        // $this->middleware('work'); 
         // $this->middleware('oauth:snsapi_userinfo'); 
     }
 
     public function home() {
-       $user = session('wechat.work.default');
-       $order = Redis::hgetall(Redis::hget('groups',$user['department'][0]));
-
+        
        $property =  app('wechat.official_account')->merchant->getProperty();
        $material = $property[array_search('种地分类', array_column($property, 'name'))];
        $usage = $property[array_search('适用场景', array_column($property, 'name'))];
        $style = $property[array_search('款式', array_column($property, 'name'))];
+
+       $user = session('wechat.work.default');
+       // $order = Redis::hgetall(Redis::hget('groups',$user['department'][0]));
+       $order = [];
 
         return view('hello',compact('material','usage','style','user','order'));
     }
@@ -65,10 +67,15 @@ class ProductController extends Controller
     }
 
     public function group() {
-        // $group =  app('wechat.official_account')->merchant->group(530505229);
-        $group =  app('wechat.official_account')->merchant->group(session('wechat.work.default')['department'][0]);
+        // $group =  app('wechat.official_account')->merchant->group(session('wechat.work.default')['department'][0]);
+        $group =  json_decode(Redis::get('512519882'),true);
         // $group = json_decode(Redis::hget('530505229','products'),true);
         return $group;
+    }
+
+    public function flushGroup()    
+    {
+        return  Redis::set(session('wechat.work.default')['department'][0]);
     }
 
 

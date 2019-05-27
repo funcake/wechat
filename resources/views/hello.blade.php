@@ -39,9 +39,9 @@
 				<option value="5000" >五千档</option>
 				<option value="10000" >万元档</option>
 			</select>
-		    <label for="price2" class="ui-hidden-accessible">价:</label><input type="range" name="price" id="price2" value="" min="0" max="100" step="" data-highlight="true" data-popup-enable="true" >
+		    <label for="price2" class="ui-hidden-accessible"></label><input type="range" name="price" id="price2" value="" min="0" max="100" step="" data-highlight="true" data-popup-enable="true" >
 			<label for="material" class="select" data-inline='true'>料:</label>
-			<select id="material" name="material" key="{{$material['id']}}" class='select' data-inline='true' >
+			<select id="material" name="material" key="{{$material['id']}}" class='select-choice-mini' data-inline='true' data-mini='true'>
 			@foreach($material['property_value'] as $p)
 				<option value="{{$p['id']}}">{{$p['name']}}</option>
 			@endforeach
@@ -49,18 +49,20 @@
 			<fieldset data-role = "controlgroup" data-type="horizontal" >
 				<legend >属 性:</legend>
 				<label for="usage" class="select" data-inline='true'>适用场景</label>
-				<select id="usage" name="usage" key="{{$usage['id']}}" class='select' data-inline='true' >
+				<select id="usage" name="usage" key="{{$usage['id']}}" class='select-choice-mini' data-inline='true' data-mini='true'>
 				@foreach($usage['property_value'] as $p)
 					<option value="{{$p['id']}}">{{$p['name']}}</option>
 				@endforeach
 				</select>
 				<label for="style" class="select" data-inline='true'>款式</label>
-				<select id="style" name="style" key="{{$style['id']}}"  class='select' data-inline='true' >
+				<select id="style" name="style" key="{{$style['id']}}"  class='select-choice-mini' data-inline='true' data-mini='true'>
 				@foreach($style['property_value'] as $p)
 					<option value="{{$p['id']}}">{{$p['name']}}</option>
 				@endforeach
 				</select>
 			</fieldset>
+			<label for="textarea">详情描述:</label>
+			<textarea cols="40" rows="8" name="textarea" id="detail" placeholder=" 宽高厚cm  1.1|1.1|1.1 &#13;&#10;&#13;&#10;【如月之恒，如日之升，如南山之寿】"></textarea>
 			<br>
 			<fieldset class="ui-grid-a">
 				<div class="ui-block-a"><a href="" data-rel="back" class="ui-shadow ui-btn  ui-btn-a ui-corner-all " style="outline:#b5193f solid;outline-offset: -3px"  key="" id="submit2">上架</a></div>
@@ -79,15 +81,24 @@
 		<!-- 基本信息 -->
 		<div class="ui-block-a"> <div class="ui-bar"> <img src="{{$user['avatar']}}" alt="" height="80px"> </div> </div> 
 		<div class="ui-block-b"> <div class="ui-bar"> {{$user['name']}} </div> </div> 
-		<div class="ui-block-c"> <div class="ui-bar"> </div> </div> 
+		<div class="ui-block-c"> <div class="ui-bar"><a href="#incoming" title="新至商品" type="button" data-rel="popup" data-position-to="window" data-transition="pop" style="outline:#b5193f solid;outline-offset: -3px">新至商品</a></div> </div> 
 		<!-- 抬头 -->
 		<div class="ui-block-a"> <div class="ui-bar ui-bar-b"> 总销售： </div> </div> 
 		<div class="ui-block-b"> <div class="ui-bar ui-bar-b"> 结算额： </div> </div> 
 		<div class="ui-block-c"> <div class="ui-bar ui-bar-b"> 总订单： </div> </div> 
 		<!-- number -->
-		<div class="ui-block-a"> <div class="ui-bar ui-bar-b"> 123123 </div> </div>
+		<div class="ui-block-a"> <div class="ui-bar ui-bar-b">￥{{$user['extattr']['attrs'][0]['value']}} </div> </div>
 		<div class="ui-block-b"> <div class="ui-bar ui-bar-b"> 123 </div> </div>
 		<div class="ui-block-c"> <div class="ui-bar ui-bar-b"> 345 </div> </div> 
+	</div>
+	<div data-role="popup" id="incoming" data-theme="a" data-overlay-theme="b" class="ui-content" style="width:280px; padding-bottom:2em;">
+		<form action="user/photo" method="post" accept-charset="utf-8">
+			<label for="amount" class="">新至商品数量</label><input type="range" name="price" id="amount" value="0" min="0" max="100" step="" data-highlight="true" data-popup-enable="true" >
+			<fieldset class="ui-grid-a">
+				<div class="ui-block-a"><a href="" data-rel="back" class="ui-shadow ui-btn ui-btn-b ui-corner-all "   key="" id="photo">通知</a></div>
+				<div class="ui-block-b"><a href="" data-rel="back" class="ui-shadow ui-btn ui-btn-a ui-corner-all ">取消</a></div>
+			</fieldset>
+		</form>
 	</div>
 	<div data-role="listview" id="order">
 		@foreach($order as $products)
@@ -95,7 +106,6 @@
 			@endforeach
 		@endforeach
 	</div>
-	<a href="https://open.weixin.qq.com/sns/getexpappinfo?appid=wxeb6a4ea50547d666&path=pages/shelf/shelf.htm?shelfid=7#wechat-redirect" title="">微信</a>
 </section>
 
 
@@ -114,19 +124,33 @@
 
 
 <script type="text/javascript" charset="utf-8" async defer>
-$(function(){
-	$( "[data-role='header'], [data-role='footer']" ).toolbar();
-	$( "[data-role='header'], [data-role='footer']" ).toolbar({ theme: "b" });
-});
 
-	function close() {
-		return '123';
-	}
 
-	window.addEventListener('pagehide', function(){alert('123')});
+
+	$.get(
+		'group',
+		function(d) {
+			data = d;
+			init1();
+			init2();
+		}
+	);
+
+	$(function(){
+		$( "[data-role='header'], [data-role='footer']" ).toolbar();
+		$( "[data-role='header'], [data-role='footer']" ).toolbar({ theme: "b" });
+	});
+
+	window.addEventListener('pagehide', function(){
+		$.post('flushGroup',
+			data,
+			function(data) {
+				console.log(data);
+			}
+		)
+	});
 
 	var data = [];
-
 
 	function init1() {
 			var html1 = "";
@@ -147,6 +171,7 @@ $(function(){
 				}
 			);
 			$('#list1').html(html1);
+			$("#status1").page();
 			$('#list1').listview("refresh");
 
 			$('.pop1').on('click',function() {
@@ -191,6 +216,8 @@ $(function(){
 				}
 			);
 			$('#list2').html(html2);
+			$("#status2").page();
+			$('#list2').listview('refresh');
 			
 			// 未上架商品pop
 			$('.pop2').on('click',function() {
@@ -216,14 +243,6 @@ $(function(){
 			});
 	}
 
-	$.get(
-		'group',
-		function(d) {
-			data = d;
-			init1();
-			init2();
-		}
-	);
 
 //根据id设置popup中form默认值
 
@@ -252,7 +271,7 @@ $(function(){
 		[
 			{
 				"id": "{{$material['id']}}",
-				"vid": "1079783194",
+				"vid": $('#material').val(),
 			},
 			{
 				"id": '{{$style['id']}}',
@@ -286,6 +305,19 @@ $(function(){
 					console.log(data);
 				}
 			)
+	});
+
+	$('#photo').on("click",function() {
+		post = {'group':5413467,'amount' : $('#amount').val()};
+		console.log(post);
+		$.post(
+			'user/photo',
+			post,
+				function(data) {
+					console.log(data);
+				}
+			);
+		alert('【已通知工作人员】');
 	});
 
 	function select1(val) {

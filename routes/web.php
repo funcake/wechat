@@ -24,7 +24,7 @@ $router->group([],function($router) {
 
 });
 
-$router->get('flush','AdminController@flushGroups');
+$router->get('flush','AdminController@flush');
 //通知路由
 $router->get('wechat','ServeController@wechat');
 
@@ -35,8 +35,13 @@ $router->get('change','ServeController@work');
 $router->post('change','ServeController@work');
 
 
+$router->post('order','ServeController@Message');
+
+
 //用户路由
 $router->group(['prefix'=>'user'],function($router) {
+
+	$router->post('photo','UserController@photoMessage');
 
 	$router->get('create','UserController@create');
 	// $router->get('admin','WeChatController@group');
@@ -48,6 +53,10 @@ $router->group(['prefix'=>'admin'],function($router) {
 
 	$router->get('order','AdminController@order');
 
+	$router->get('flushGroups','AdminController@flushGroups');
+
+	$router->post('setDelivery','AdminController@setDelivery');
+	// $router->get('mini','AdminController@create');
 	// $router->get('')
 
 });

@@ -47,6 +47,7 @@ class Application extends ServiceContainer
         CustomerService\ServiceProvider::class,
         UniformMessage\ServiceProvider::class,
         ActivityMessage\ServiceProvider::class,
+        Express\ServiceProvider::class,
         // Base services
         BasicService\Media\ServiceProvider::class,
         BasicService\ContentSecurity\ServiceProvider::class,

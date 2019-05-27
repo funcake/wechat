@@ -12,6 +12,8 @@
 namespace EasyWeChat\OfficialAccount\Merchant;
 
 use EasyWeChat\Kernel\BaseClient;
+use EasyWeChat\Kernel\Http\StreamResponse;
+
 
 /**
  * Class UserClient.
@@ -117,18 +119,26 @@ class Merchant extends BaseClient
               "536903132"
             ],
             "name"=>"",
-            "main_img"=>"http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0", 
+            "main_img"=>$img[0], 
             "img"=>[
-              "http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0"
+              array_pop($img),
+              array_pop($img),
+              array_pop($img),
+              array_pop($img),
             ],
-            "property"=>[['id'=> "1075743465", 'vid'=> '1079783194']],
+            "detail"=>[
+              ["text"=>"",
+                  "img"=> ""
+              ]
+            ],
             "buy_limit"=>1
           ],
+
           "sku_list"=>[
             [
               "sku_id"=>"",
               "price"=>1,
-              "icon_url"=>"http://mmbiz.qpic.cn/mmbiz/4whpV1VZl28bJj62XgfHPibY3ORKicN1oJ4CcoIr4BMbfA8LqyyjzOZzqrOGz3f5KWq1QGP3fo6TOTSYD3TBQjuw/0",
+              "icon_url"=>array_pop($img),
               "product_code"=>"512519882",
               "ori_price"=>'',
               "quantity"=>1
@@ -142,28 +152,10 @@ class Merchant extends BaseClient
               "address"=>"T.I.T创意园"
             ],
             "isPostFree"=>1,
-            "isHasReceipt"=>1,
+            "isHasReceipt"=>0,
             "isUnderGuaranty"=>0,
             "isSupportReplace"=>0
           ],
-          "delivery_info"=>[
-            "delivery_type"=>0,
-            "template_id"=>0, 
-            "express"=>[
-              [
-                "id"=>10000027, 
-                "price"=>100
-              ], 
-              [
-                "id"=>10000028, 
-                "price"=>100
-              ], 
-              [
-                "id"=>10000029, 
-                "price"=>100
-              ]
-            ]
-          ]
         ];
 
 
@@ -217,7 +209,20 @@ class Merchant extends BaseClient
 
     public function orderList(int $status = 2)
     {
-        return $this->httpPostJson('merchant/order/getbyfilter',['status'=>2])['order_list'];
+        return $this->httpPostJson('merchant/order/getbyfilter',['status'=>$status])['order_list'];
     }
+
+    public function setDelivery() {
+      $post = [
+        'order_id' => $_POST['order_id'],
+        'delivery_company' => '',
+        'delivery_track_on' => $_POST['delivery_track_on'],
+        'need_delivery' => 1,
+      ];
+
+        return $this->httpPostJson('merchant/order/setdelivery',$post);
+    }
+
+
 
 }

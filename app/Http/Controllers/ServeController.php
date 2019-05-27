@@ -49,18 +49,31 @@ class ServeController extends Controller
 	    $message = $server->getMessage();
 		if(isset($message['ChangeType'])) {
 		    switch ($message['ChangeType']) {
+		    	// 注册主管
 		        case 'update_user':
 		        	if (isset($message['IsLeaderInDept'])) {
 		        		if( ($key = array_search(1, explode(',',	$message['IsLeaderInDept'])) ) !== false ) {
-			        		$this->dispatch(new RegistUser($message['UserID']));
+			        		$user = app('wechat.work')->user->get($message['UserID']);
+			        		Redis::hmset($user['department'][0],
+			        		    [
+			        		        'avatar'=>$user['avatar'],
+			        		        'userid'=>$user['userid'],
+			        		        'name'=>$user['name'],
+			        		        'mobile'=>$user['mobile'],
+			        		        'address'=>$user['address'],
+			        		        'finance'=>$user['extattr']['attrs'][0]['value'],
+			        		    ]
+			        		);
+			        		return app('wechat.work')->messenger->message("新至商品")->toTag(1)->send();
 			        	}
 		        	}
 		        	break;
-		        case 'create_party': 
-			        if ($message['ParentId'] == 8) {
-				    	$this->dispatch(new RegistDepartment($message));
-				    }
-		            break;
+		        // 注册部门
+		      //   case 'create_party': 
+			     //    if ($message['ParentId'] == 8) {
+				    // 	$this->dispatch(new RegistDepartment($message));
+				    // }
+		      //       break;
 
 		        default:
 		            break;
@@ -68,5 +81,6 @@ class ServeController extends Controller
 		}
 		return $server->serve();
 	}
+
 
 }
