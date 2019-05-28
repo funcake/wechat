@@ -56,6 +56,8 @@ $router->group(['prefix'=>'admin'],function($router) {
 	$router->get('flushGroups','AdminController@flushGroups');
 
 	$router->post('setDelivery','AdminController@setDelivery');
+
+	$router->post('regist','AdminController@registDepartment');
 	// $router->get('mini','AdminController@create');
 	// $router->get('')
 

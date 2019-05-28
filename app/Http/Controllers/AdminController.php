@@ -19,8 +19,10 @@ class AdminController extends Controller
 
     }
 
-    public function create() {
-
+    public function registDepartment() {
+        $id = app('wechat.official_account')->merchant->groupAdd($_POST['name']);
+        app('wechat.work.user')->department->create(['id'=>$id,'name'=>$_POST['name'],'parentid'=>5]);
+        return Redis::hset('groups',$id,$_POST['name']);
     }
 
     public function update(array $message) {
@@ -59,7 +61,6 @@ class AdminController extends Controller
         foreach ($group as $key => $value) {
             Redis::hset('product',$key,json_encode($value));
         }
-
         return "OK";
     }
 
@@ -67,12 +68,14 @@ class AdminController extends Controller
         $merchant = app('wechat.official_account')->merchant;
 
         $list = $merchant->orderList();
-        // dd( $list);
+        // 获取订单列表，并按照group分组注册入redis
         Redis::pipeline(function($pipe) use ($merchant,$list) {
             foreach ($list as $order) {
                 $product = $merchant->get($order['product_id']);
-                Redis::hset($product['sku_list'][0]['product_code'].':order',[
-                    'order_id'=>$order['order_id'],
+                Redis::sadd($product['sku_list'][0]['product_code'].':order',$order['order_id']);
+                Redis::hmset($order['order_id'].":detail",
+                [
+                    'order_id' => $order['order_id'],
                     'address'=>$order['receiver_province'].$order['receiver_city'].$order['receiver_address'].' '.$order['receiver_name'].' '.$order['receiver_mobile'],
                     'mobile'=>$order['receiver_mobile'],
                     'price'=>$order['order_total_price']/100,
@@ -83,23 +86,25 @@ class AdminController extends Controller
                 foreach ($order['products'] as $value) {
                     $products[$value['product_img']] = $value['product_price']/100;
                 }
-                Redis::hmset($order['order_id'],$products);
+                Redis::hmset($order['order_id'].':products',$products);
             }
         });
         $users = [];
-        $orders = [];
-        //获取部门id,名称列表,
-        foreach (Redis::hgetall('groups') as $key => $group) {
+        $groupOrders = [];
+            //获取部门id,名称列表,
+        foreach (Redis::hgetall('groups') as $group => $name) {
             //根据部门id,获取订单列表
-            $user = Redis::hgetall($key); 
-            foreach (Redis::hgetall($key.':order') as $order) {
-                $orders[$key] = Redis::hgetall($order['order_id']);
+            $user = Redis::hgetall($group); 
+            foreach (Redis::smembers($group.':order') as $order_id) {
+                $orders = Redis::hgetall($order_id.":detail");
+                $orders['products'] = Redis::hgetall($order_id.":products");
+                $groupOrders[$group]['orders'][] =  $orders;
+                $groupOrders[$group]['total'] +=  Redis::hgetall($order_id.":detail")['price'];
             }
-            $user['group'] = $group;
-            $users[$key] = $user;
+            $user['name'] = $name;
+            $users[$group] = $user;
         }
-
-        return view('admin',compact('users'));
+        return view('admin',compact('groupOrders','users'));
     }
 
     public function setDelivery()
