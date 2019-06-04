@@ -25,4 +25,6 @@ $app = require __DIR__.'/../bootstrap/app.php';
 |
 */
 
+// echo phpinfo(); // /etc/httpd/conf/httpd.conf
+
 $app->run();
