@@ -13,7 +13,7 @@ namespace EasyWeChat\Kernel\Traits;
 
 use EasyWeChat\Kernel\ServiceContainer;
 use Psr\SimpleCache\CacheInterface;
-use Symfony\Component\Cache\Simple\RedisCache;
+use Symfony\Component\Cache\Simple\FilesystemCache;
 
 /**
  * Trait InteractsWithCache.
@@ -65,6 +65,6 @@ trait InteractsWithCache
      */
     protected function createDefaultCache()
     {
-        return new RedisCache();
+        return new FilesystemCache();
     }
 }

@@ -3,26 +3,22 @@
 namespace App\Http\Controllers;
 
 use EasyWeChat\Kernel\Messages\Message;
-
+use illuminate\http\Request;
 use Illuminate\Support\Facades\Redis;
+use Log;
 
 
 class AdminController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-
-    }
-
-    public function registDepartment() {
-        $id = app('wechat.official_account')->merchant->groupAdd($_POST['name']);
-        app('wechat.work.user')->department->create(['id'=>$id,'name'=>$_POST['name'],'parentid'=>5]);
-        return Redis::hset('groups',$id,$_POST['name']);
+    public function registDepartment(Request $request) {
+        $name = $request->name;
+        //创建微信小店的商品分组 返回分组id
+        $group_id = app('wechat.official_account')->merchant->groupAdd($name);
+        //同时创建企业微信部门
+        $dept = app('wechat.work.user')->department->create(['id'=> $group_id, 'name'=> $name, 'parentid'=>5]);
+        Log::info('registDepartment=> '.$name.' = ');
+        Log::info($group_id);
+        return Redis::hset('groups', $group_id, $name);
     }
 
     public function update(array $message) {
@@ -45,15 +41,15 @@ class AdminController extends Controller
         $group = [];
         foreach ($list as $product)  {
             if($product['status'] == 1){
-                if(isset($group[$product['sku_list'][0]['product_code']])) { 
+                if(isset($group[$product['sku_list'][0]['product_code']])) {
                     $group[$product['sku_list'][0]['product_code']]['status1'][] = $product;
-                } else { 
+                } else {
                     $group[$product['sku_list'][0]['product_code']] = ['status1'=>[$product],'status2'=>[]];
                 }
             } else {
-                if(isset($group[$product['sku_list'][0]['product_code']])) { 
+                if(isset($group[$product['sku_list'][0]['product_code']])) {
                     $group[$product['sku_list'][0]['product_code']]['status2'][] = $product;
-                } else { 
+                } else {
                     $group[$product['sku_list'][0]['product_code']] = ['status1'=>[],'status2'=>[$product]];
                 }
             }
@@ -94,7 +90,7 @@ class AdminController extends Controller
             //获取部门id,名称列表,
         foreach (Redis::hgetall('groups') as $group => $name) {
             //根据部门id,获取订单列表
-            $user = Redis::hgetall($group); 
+            $user = Redis::hgetall($group);
             foreach (Redis::smembers($group.':order') as $order_id) {
                 $orders = Redis::hgetall($order_id.":detail");
                 $orders['products'] = Redis::hgetall($order_id.":products");

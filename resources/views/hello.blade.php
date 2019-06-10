@@ -2,7 +2,7 @@
 @section("content")
 <body onbeforeunload="return close()">
 
-<section id="status1" data-role='page'>	
+<section id="status1" data-role='page'>
 	<div data-role="header" >
 		<h1>已上架管理</h1>
 	</div><!-- /header -->
@@ -75,21 +75,21 @@
 
 <section id="admin" data-role="page">
 	<div data-role="header">
-		<h1>订单管理</h1>		
+		<h1>订单管理</h1>
 	</div>
 	<div class="ui-grid-b">
 		<!-- 基本信息 -->
-		<div class="ui-block-a"> <div class="ui-bar"> <img src="{{$user['avatar']}}" alt="" height="80px"> </div> </div> 
-		<div class="ui-block-b"> <div class="ui-bar"> {{$user['name']}} </div> </div> 
-		<div class="ui-block-c"> <div class="ui-bar"><a href="#incoming" title="新至商品" type="button" data-rel="popup" data-position-to="window" data-transition="pop" style="outline:#b5193f solid;outline-offset: -3px">新至商品</a></div> </div> 
+		<div class="ui-block-a"> <div class="ui-bar"> <img src="{{$user['avatar']}}" alt="" height="80px"> </div> </div>
+		<div class="ui-block-b"> <div class="ui-bar"> {{$user['name']}} </div> </div>
+		<div class="ui-block-c"> <div class="ui-bar"><a href="#incoming" title="新至商品" type="button" data-rel="popup" data-position-to="window" data-transition="pop" style="outline:#b5193f solid;outline-offset: -3px">新至商品</a></div> </div>
 		<!-- 抬头 -->
-		<div class="ui-block-a"> <div class="ui-bar ui-bar-b"> 总销售： </div> </div> 
-		<div class="ui-block-b"> <div class="ui-bar ui-bar-b"> 结算额： </div> </div> 
-		<div class="ui-block-c"> <div class="ui-bar ui-bar-b"> 总订单： </div> </div> 
+		<div class="ui-block-a"> <div class="ui-bar ui-bar-b"> 总销售： </div> </div>
+		<div class="ui-block-b"> <div class="ui-bar ui-bar-b"> 结算额： </div> </div>
+		<div class="ui-block-c"> <div class="ui-bar ui-bar-b"> 总订单： </div> </div>
 		<!-- number -->
 		<div class="ui-block-a"> <div class="ui-bar ui-bar-b">￥{{$user['extattr']['attrs'][0]['value']}} </div> </div>
 		<div class="ui-block-b"> <div class="ui-bar ui-bar-b"> 123 </div> </div>
-		<div class="ui-block-c"> <div class="ui-bar ui-bar-b"> 345 </div> </div> 
+		<div class="ui-block-c"> <div class="ui-bar ui-bar-b"> 345 </div> </div>
 	</div>
 	<div data-role="popup" id="incoming" data-theme="a" data-overlay-theme="b" class="ui-content" style="width:280px; padding-bottom:2em;">
 		<form action="user/photo" method="post" accept-charset="utf-8">
@@ -155,7 +155,7 @@
 	function init1() {
 			var html1 = "";
 
-			data.status1.forEach( 
+			data.status1.forEach(
 				function(e, i) {
 					e['product_base']['main_img'] = e['product_base']['main_img'].replace(/https/,'http');
 					// e['product_base']['img'] = e['product_base']['img'].map(function(e){e.replace(/https/,'http')});
@@ -177,8 +177,8 @@
 			$('.pop1').on('click',function() {
 				var i = $(this).attr('key');
 				$price = data.status1[i].sku_list[0].price/100;
-				if ($price<1000) 
-				{	
+				if ($price<1000)
+				{
 					$('#level1').val('1000');
 					$('#price1').attr({'step':20,'min':0,'max':1000});
 					$('#level1').prev().html('千元档');
@@ -200,7 +200,7 @@
 	function init2() {
 			var html2 = "";
 
-			data.status2.forEach( 
+			data.status2.forEach(
 				function(e, i) {
 					e['product_base']['main_img'] = e['product_base']['main_img'].replace(/https/,'http');
 					// e['product_base']['img'] = e['product_base']['img'].map(function(e){e.replace(/https/,'http')});
@@ -218,14 +218,14 @@
 			$('#list2').html(html2);
 			$("#status2").page();
 			$('#list2').listview('refresh');
-			
+
 			// 未上架商品pop
 			$('.pop2').on('click',function() {
 				var i = $(this).attr('key');
 				$('#name').val(data.status2[i].product_base.name);
 				$price = data.status2[i].sku_list[0].price/100;
-				if ($price<1000) 
-				{	
+				if ($price<1000)
+				{
 					$('#level2').val('1000');
 					$('#price2').attr({'step':20,'min':0,'max':1000});
 					$('#level2').prev().html('千元档');
@@ -267,7 +267,7 @@
 		post.product_base.name=$('#name').val();
 		post.sku_list[0].price=$('#price2').val()*100;
 		post.status = 1;
-		post.product_base.property = 
+		post.product_base.property =
 		[
 			{
 				"id": "{{$material['id']}}",
@@ -281,7 +281,7 @@
 				"id": '{{$usage['id']}}',
 				"vid": $('#usage').val(),
 			}
-		];		
+		];
 
 		$("#list2 [key='"+key+"']").remove();
 		data.status1.unshift(post);
@@ -317,7 +317,7 @@
 					console.log(data);
 				}
 			);
-		alert('【已通知工作人员】');
+		alert('【已通知工作人员】'); // 有问题
 	});
 
 	function select1(val) {
