@@ -10,3 +10,4 @@
 ```
 service httpd restart
 ```
+2. `shared` 目录中的 `.env` 文件权限必须 `644`，不然不能读取。
