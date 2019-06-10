@@ -15,9 +15,6 @@ use Overtrue\Socialite\SocialiteManager;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
-
-
-
 class ServiceProvider implements ServiceProviderInterface
 {
     public function register(Container $app)
@@ -26,7 +23,7 @@ class ServiceProvider implements ServiceProviderInterface
             $socialite = (new SocialiteManager([
                 'wework' => [
                     'client_id' => $app['config']['corp_id'],
-                    'client_secret' => $app['config']['secret'],
+                    'client_secret' => null,
                     'redirect' => $this->prepareCallbackUrl($app),
                 ],
             ], $app['request']))->driver('wework');

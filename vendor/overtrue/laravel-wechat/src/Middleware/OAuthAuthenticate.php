@@ -33,7 +33,6 @@ class OAuthAuthenticate
     public function handle($request, Closure $next, $account = 'default', $scopes = null)
     {
         // $account 与 $scopes 写反的情况
-
         if (is_array($scopes) || (\is_string($account) && str_is('snsapi_*', $account))) {
             list($account, $scopes) = [$scopes, $account];
             $account || $account = 'default';
@@ -55,7 +54,9 @@ class OAuthAuthenticate
             if ($request->has('code')) {
                 session([$sessionKey => $officialAccount->oauth->user() ?? []]);
                 $isNewSession = true;
+
                 Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
+
                 return redirect()->to($this->getTargetUrl($request));
             }
 
