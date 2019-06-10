@@ -69,6 +69,7 @@ class Application extends ServiceContainer
         Store\ServiceProvider::class,
         Comment\ServiceProvider::class,
         Base\ServiceProvider::class,
+        Merchant\ServiceProvider::class,
         // Base services
         BasicService\QrCode\ServiceProvider::class,
         BasicService\Media\ServiceProvider::class,
