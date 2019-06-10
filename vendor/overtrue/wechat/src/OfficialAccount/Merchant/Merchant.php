@@ -103,8 +103,8 @@ class Merchant extends BaseClient
             ]
 
             ]
-            ],
-            "shelf_banner"=>"http://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7fCM4PaQ3tia6zU8bvgxT8q28YkDNPNwkj97M23s0IwZIcRYaPjdq2AWGDDqXTMd3IiaCUEzbsn6ojQ/0",
+            ], 
+            "shelf_banner"=>"http://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7fCM4PaQ3tia6zU8bvgxT8q28YkDNPNwkj97M23s0IwZIcRYaPjdq2AWGDDqXTMd3IiaCUEzbsn6ojQ/0", 
             "shelf_name"=>"货架"
             ];
 
@@ -112,25 +112,19 @@ class Merchant extends BaseClient
     }
 
     public function create() {
-      //调用这个创建商品接口的时候，需要提供两个参数：1，商品数量。  2，第一张图片的完整地址.通过001.jpg 去获取 002 003
-      //还可以再提供第三个参数：每个商品需要几个图片，暂时默认6张
-      //循环创建多个商品，图片按顺序递增获取
-        $folder = 'feng20190606'; //工作人员在接口地址加上文件夹参数，传入文件夹名称
-        $domain = 'https://fljy.oss-cn-hangzhou.aliyuncs.com/';
-        $post =
+        $post = 
         [
           "product_base"=>[
             "category_id"=>[
-              "536903132" // 固定的不用改 品类：翡翠
+              "536903132"
             ],
-            "name"=>"", //商品名称
-            //https://fljy.oss-cn-hangzhou.aliyuncs.com/002.jpg
-            "main_img"=> $domain . $folder . '/m.jpg', //商品主图
-            "img"=>[ // 商品图片列表
-              $domain . $folder . '/1.jpg',
-              $domain . $folder . '/2.jpg',
-              $domain . $folder . '/3.jpg',
-              $domain . $folder . '/4.jpg',
+            "name"=>"",
+            "main_img"=>$img[0], 
+            "img"=>[
+              array_pop($img),
+              array_pop($img),
+              array_pop($img),
+              array_pop($img),
             ],
             "detail"=>[
               ["text"=>"",
@@ -144,9 +138,8 @@ class Merchant extends BaseClient
             [
               "sku_id"=>"",
               "price"=>1,
-              "icon_url"=> $domain . $folder . '/i.jpg',
-              // 商户每次申请新产品上架 商户会在通知里留下自己的ID
-              "product_code"=>"512519882", // 商户ID就是企业微信部门id department_id
+              "icon_url"=>array_pop($img),
+              "product_code"=>"512519882",
               "ori_price"=>'',
               "quantity"=>1
             ],

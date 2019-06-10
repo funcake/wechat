@@ -19,7 +19,7 @@ use Overtrue\LaravelWeChat\Events\WeChatUserAuthorized;
 /**
  * Class OAuthAuthenticate.
  */
-class OAuthAuthenticate
+class OAuthAuthenticateWork
 {
     /**
      * Handle an incoming request.
@@ -40,9 +40,9 @@ class OAuthAuthenticate
         }
 
         $isNewSession = false;
-        $sessionKey = \sprintf('wechat.oauth_user.%s', $account);
-        $config = config(\sprintf('wechat.official_account.%s', $account), []);
-        $officialAccount = app(\sprintf('wechat.official_account.%s', $account));
+        $sessionKey = \sprintf('wechat.work.%s', $account);
+        $config = config(\sprintf('wechat.work.%s', $account), []);
+        $workAccount = app(\sprintf('wechat.work.%s', $account));
         $scopes = $scopes ?: array_get($config, 'oauth.scopes', ['snsapi_base']);
 
         if (is_string($scopes)) {
@@ -52,20 +52,21 @@ class OAuthAuthenticate
         $session = session($sessionKey, []);
 
         if (!$session) {
+
             if ($request->has('code')) {
-                session([$sessionKey => $officialAccount->oauth->user() ?? []]);
+
+                $user = $workAccount->oauth->detailed()->user()['original'];
+                session([$sessionKey => $user ?? []]);
                 $isNewSession = true;
-                Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
+
+                // Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
                 return redirect()->to($this->getTargetUrl($request));
             }
 
             session()->forget($sessionKey);
-
-            return $officialAccount->oauth->scopes($scopes)->redirect($request->fullUrl());
+            return $workAccount->oauth->scopes($scopes)->redirect($request->fullUrl());
         }
-
-        Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
-
+        // Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
         return $next($request);
     }
 

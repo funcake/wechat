@@ -12,6 +12,8 @@
 namespace Overtrue\Socialite\Providers;
 
 use Overtrue\Socialite\AccessTokenInterface;
+use Overtrue\Socialite\InvalidArgumentException;
+
 use Overtrue\Socialite\ProviderInterface;
 use Overtrue\Socialite\User;
 
@@ -32,6 +34,8 @@ class WeWorkProvider extends AbstractProvider implements ProviderInterface
      */
     protected $detailed = false;
 
+
+    protected $stateless = true;
     /**
      * Set agent id.
      *
@@ -39,6 +43,8 @@ class WeWorkProvider extends AbstractProvider implements ProviderInterface
      *
      * @return $this
      */
+
+
     public function setAgentId($agentId)
     {
         $this->agentId = $agentId;
@@ -138,8 +144,12 @@ class WeWorkProvider extends AbstractProvider implements ProviderInterface
     {
         $userInfo = $this->getUserInfo($token);
 
-        if ($this->detailed && isset($userInfo['user_ticket'])) {
-            return $this->getUserDetail($token, $userInfo['user_ticket']);
+        if ($userInfo['errcode']!= 0) {
+            throw new InvalidArgumentException($userInfo['errcode'].' '.$userInfo['errmsg'], 1);
+        }
+
+        if ($this->detailed && isset($userInfo['UserId'])) {
+            return $this->getUserDetail($token, $userInfo['UserId']);
         }
 
         $this->detailed = false;
@@ -176,12 +186,10 @@ class WeWorkProvider extends AbstractProvider implements ProviderInterface
      */
     protected function getUserDetail(AccessTokenInterface $token, $ticket)
     {
-        $response = $this->getHttpClient()->post('https://qyapi.weixin.qq.com/cgi-bin/user/getuserdetail', [
+        $response = $this->getHttpClient()->get('https://qyapi.weixin.qq.com/cgi-bin/user/get', [
             'query' => [
                 'access_token' => $token->getToken(),
-            ],
-            'json' => [
-                'user_ticket' => $ticket,
+                'userid' => $ticket,
             ],
         ]);
 
