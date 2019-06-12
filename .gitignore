@@ -4,5 +4,5 @@
 Homestead.json
 Homestead.yaml
 .env
-dump.db
+dump.rdb
 

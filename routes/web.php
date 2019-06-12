@@ -34,7 +34,6 @@ $router->get('change','ServeController@work');
 
 $router->post('change','ServeController@work');
 
-
 $router->post('order','ServeController@Message');
 
 
@@ -58,6 +57,8 @@ $router->group(['prefix'=>'admin'],function($router) {
 	$router->post('setDelivery','AdminController@setDelivery');
 
 	$router->post('regist','AdminController@registDepartment');
+
+	$router->get('uploadProduct','AdminController@uploadProduct');
 	// $router->get('mini','AdminController@create');
 	// $router->get('')
 

@@ -25,6 +25,12 @@ class AdminController extends Controller
         return Redis::hset('groups',$id,$_POST['name']);
     }
 
+    public function uploadProduct()    
+    {
+        $photo = app('wechat.official_account')->material->list('image',0,100);
+        dd($photo);
+    }
+
     public function update(array $message) {
 
         $post = ['name'=>$message['UserID']];
