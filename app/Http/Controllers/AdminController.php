@@ -21,12 +21,73 @@ class AdminController extends Controller
         return Redis::hset('groups', $group_id, $name);
     }
 
-    public function update(array $message) {
+    public function create() {
+        //调用这个创建商品接口的时候，需要提供两个参数：1，商品数量。  2，第一张图片的完整地址.通过001.jpg 去获取 002 003
+       $amount = $request->amount;
+       $group_id = $request->group_id;
+      //还可以再提供第三个参数：每个商品需要几个图片，暂时默认6张
+      //循环创建多个商品，图片按顺序递增获取
+        // $folder = 'feng20190606'; //工作人员在接口地址加上文件夹参数，传入文件夹名称
+        for ($i=0; $i < $amount ; $i++) { 
 
-        $post = ['name'=>$message['UserID']];
+            $domain = 'https://fljy.oss-cn-hangzhou.aliyuncs.com/';
+            $post =
+            [
+              "product_base"=>[
+                "category_id"=>[
+                  "536903132" // 固定的不用改 品类：翡翠
+                ],
+                "name"=>"", //商品名称
+                //https://fljy.oss-cn-hangzhou.aliyuncs.com/002.jpg
+                "main_img"=> 'https://hbimg-other.huabanimg.com/img/promotion/6ab082886258fc087068c8614e86799d1481b3ad687e3', //商品主图
+                "img"=>[ // 商品图片列表
+                  
+                ],
+                "detail"=>[
+                  ["text"=>"",
+                      "img"=> ""
+                  ]
+                ],
+                "buy_limit"=>1
+              ],
 
-        return app('wechat.work.user')->user->update('Wuke',$post);
+              "sku_list"=>[
+                [
+                  "sku_id"=>"",
+                  "price"=>1,
+                  "icon_url"=> 'https://hbimg-other.huabanimg.com/img/promotion/6ab082886258fc087068c8614e86799d1481b3ad687e3',
+                  // 商户每次申请新产品上架 商户会在通知里留下自己的ID
+                  "product_code"=>"512519882", // 商户ID就是企业微信部门id department_id
+                  "ori_price"=>'',
+                  "quantity"=>1
+                ],
+              ],
+              "attrext"=>[
+                "location"=>[
+                  "country"=>"中国",
+                  "province"=>"广东省",
+                  "city"=>"广州市",
+                  "address"=>"T.I.T创意园"
+                ],
+                "isPostFree"=>1,
+                "isHasReceipt"=>0,
+                "isUnderGuaranty"=>0,
+                "isSupportReplace"=>0
+              ],
+            ];
+            //创建产品获取id，并归入分组
+            $product_id = app('wechat.official_account')->merchant->create($post)['product_id'];
+            $list[] = ['product_id'=>$product_id,'mod_action'=>1];
+            Redis::sadd($group_id.":status2",$product_id);
+            Redis::hset( $product_id, json_encode($post) );
+
+         }
+         // 添加产品入分组
+         $mod = ['group_id'=>$group_id,'product'=>$list];
+         app('wechat.official_account')->merchant->groupMod($mod);
+
     }
+
 
     public function flushGroups()  {
         foreach (app('wechat.official_account')->merchant->groupAll() as $group) {

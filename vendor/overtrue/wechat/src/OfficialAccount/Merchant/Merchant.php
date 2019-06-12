@@ -22,16 +22,9 @@ use EasyWeChat\Kernel\Http\StreamResponse;
  */
 class Merchant extends BaseClient
 {
-    /**
-     * Fetch a user by open id.
-     *
-     * @param string $openid
-     * @param string $lang
-     *
-     * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
-     *
-     * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
-     */
+
+  // 产品管理
+
     public function get(string $productId, string $lang = 'zh_CN')
     {
         return $this->httpPostJson('merchant/get', ['product_id'=>$productId])['product_info'];
@@ -73,6 +66,7 @@ class Merchant extends BaseClient
         return $this->httpPostJson('merchant/modproductstatus',['product_id'=>$_POST['product_id'],'status'=>1]);
     }
 
+// 货架管理
     public function shelf() {
         $post = ['shelf_id'=>1,
         "shelf_data"=>[
@@ -111,74 +105,24 @@ class Merchant extends BaseClient
         return $this->httpPostJson('merchant/shelf/add',$post);
     }
 
-    public function create() {
-      //调用这个创建商品接口的时候，需要提供两个参数：1，商品数量。  2，第一张图片的完整地址.通过001.jpg 去获取 002 003
-      //还可以再提供第三个参数：每个商品需要几个图片，暂时默认6张
-      //循环创建多个商品，图片按顺序递增获取
-        $folder = 'feng20190606'; //工作人员在接口地址加上文件夹参数，传入文件夹名称
-        $domain = 'https://fljy.oss-cn-hangzhou.aliyuncs.com/';
-        $post =
-        [
-          "product_base"=>[
-            "category_id"=>[
-              "536903132" // 固定的不用改 品类：翡翠
-            ],
-            "name"=>"", //商品名称
-            //https://fljy.oss-cn-hangzhou.aliyuncs.com/002.jpg
-            "main_img"=> $domain . $folder . '/m.jpg', //商品主图
-            "img"=>[ // 商品图片列表
-              $domain . $folder . '/1.jpg',
-              $domain . $folder . '/2.jpg',
-              $domain . $folder . '/3.jpg',
-              $domain . $folder . '/4.jpg',
-            ],
-            "detail"=>[
-              ["text"=>"",
-                  "img"=> ""
-              ]
-            ],
-            "buy_limit"=>1
-          ],
-
-          "sku_list"=>[
-            [
-              "sku_id"=>"",
-              "price"=>1,
-              "icon_url"=> $domain . $folder . '/i.jpg',
-              // 商户每次申请新产品上架 商户会在通知里留下自己的ID
-              "product_code"=>"512519882", // 商户ID就是企业微信部门id department_id
-              "ori_price"=>'',
-              "quantity"=>1
-            ],
-          ],
-          "attrext"=>[
-            "location"=>[
-              "country"=>"中国",
-              "province"=>"广东省",
-              "city"=>"广州市",
-              "address"=>"T.I.T创意园"
-            ],
-            "isPostFree"=>1,
-            "isHasReceipt"=>0,
-            "isUnderGuaranty"=>0,
-            "isSupportReplace"=>0
-          ],
-        ];
-
+    public function create($post) {
 
         return $this->httpPostJson('merchant/create',$post);
+
     }
 
     public function delete() {
         return $this->httpPostJson('merchant/del',$_POST);
     }
 
+// 属性管理
     public function getProperty() {
         $post = ['cate_id' =>536903132];
         return $this->httpPostJson('merchant/category/getproperty',$post)['properties'];
     }
 
 
+// 分组管理
     public function group($group_id = 0) {
         $post = ['group_id' => $group_id];
         $group = $this->httpPostJson('merchant/group/getbyid',$post)['group_detail']['product_list'];
@@ -209,6 +153,11 @@ class Merchant extends BaseClient
         return $this->httpGet('merchant/group/getall')['groups_detail'];
     }
 
+    public function groupMod($mod)
+    {
+        return $this->httpPostJson('merchant/group/productmod',$mod);
+    }
+// 订单管理
     public function getOrder($id)
     {
         return $this->httpPostJson('merchant/order/getbyid',['order_id'=>$id])['order'];
