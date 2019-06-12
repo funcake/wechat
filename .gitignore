@@ -1,8 +1,13 @@
-/storage
-/vendor
+/storage/*.key
+#/vendor
 /.idea
 Homestead.json
 Homestead.yaml
 .env
 dump.rdb
 
+dump.db
+/bak
+/lib
+/log
+.DS_Store

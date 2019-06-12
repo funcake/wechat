@@ -18,12 +18,12 @@ class ProductController extends Controller
 {
     public function __construct() {
         // session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
-        // $this->middleware('work'); 
-        // $this->middleware('oauth:snsapi_userinfo'); 
+        // $this->middleware('work');
+        // $this->middleware('oauth:snsapi_userinfo');
     }
 
     public function home() {
-        
+
        $property =  app('wechat.official_account')->merchant->getProperty();
        $material = $property[array_search('种地分类', array_column($property, 'name'))];
        $usage = $property[array_search('适用场景', array_column($property, 'name'))];
@@ -42,7 +42,7 @@ class ProductController extends Controller
      * @return string
      */
     public function serve(int $status = 0)
-    {   
+    {
         $app = app('wechat.official_account');
 
         return $app->merchant->list($status);
@@ -73,7 +73,7 @@ class ProductController extends Controller
         return $group;
     }
 
-    public function flushGroup()    
+    public function flushGroup()
     {
         return  Redis::set(session('wechat.work.default')['department'][0]);
     }

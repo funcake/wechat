@@ -35,6 +35,7 @@ class ServiceProvider implements ServiceProviderInterface
                     'redirect' => $this->prepareCallbackUrl($app),
                 ],
             ], $app['request']))->driver('wechat');
+
             $scopes = (array) $app['config']->get('oauth.scopes', ['snsapi_userinfo']);
 
             if (!empty($scopes)) {

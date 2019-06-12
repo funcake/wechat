@@ -75,13 +75,6 @@ return [
             //     'callback' => env('WECHAT_OFFICIAL_ACCOUNT_OAUTH_CALLBACK', '/examples/oauth_callback.php'),
             // ],
         ],
-
-        'test' => [
-            'app_id' => 'wxe4bde54c8ed4bd35',
-            'secret' => '37b649e8a5b1c6731aa4c46b8404f385',
-            'token' => '',
-            'aes_key' => '',
-        ]
     ],
 
     /*
@@ -99,14 +92,14 @@ return [
     /*
      * 小程序
      */
-    'mini_program' => [
-        'default' => [
-            'app_id'  => env('WECHAT_MINI_PROGRAM_APPID', ''),
-            'secret'  => env('WECHAT_MINI_PROGRAM_SECRET', ''),
-            'token'   => env('WECHAT_MINI_PROGRAM_TOKEN', ''),
-            'aes_key' => env('WECHAT_MINI_PROGRAM_AES_KEY', ''),
-        ],
-    ],
+    // 'mini_program' => [
+    //     'default' => [
+    //         'app_id'  => env('WECHAT_MINI_PROGRAM_APPID', ''),
+    //         'secret'  => env('WECHAT_MINI_PROGRAM_SECRET', ''),
+    //         'token'   => env('WECHAT_MINI_PROGRAM_TOKEN', ''),
+    //         'aes_key' => env('WECHAT_MINI_PROGRAM_AES_KEY', ''),
+    //     ],
+    // ],
 
     /*
      * 微信支付
@@ -127,18 +120,12 @@ return [
     /*
      * 企业微信
      */
-    'work' => [
-        'default' => [
-            'corp_id' => 'ww830c183cf99b5d18',
-            'agent_id' => 1000010,
-            'secret'   => env('WECHAT_WORK_FLJY_SECRET', ''),
-             //...
-         ],
-         'user' => [
-            'corp_id' => 'ww830c183cf99b5d18',
-            'secret'   => env('WECHAT_WORK_USER_SECRET',''),
-            'token' => env('WECHAT_WORK_USER_TOKEN',''),
-            'aes_key' => env('WECHAT_WORK_USER_AES_KEY',''),
-         ]
-    ],
+    // 'work' => [
+    //     'default' => [
+    //         'corp_id' => 'xxxxxxxxxxxxxxxxx',
+    ///        'agent_id' => 100020,
+    //         'secret'   => env('WECHAT_WORK_AGENT_CONTACTS_SECRET', ''),
+    //          //...
+    //      ],
+    // ],
 ];

@@ -22,16 +22,9 @@ use EasyWeChat\Kernel\Http\StreamResponse;
  */
 class Merchant extends BaseClient
 {
-    /**
-     * Fetch a user by open id.
-     *
-     * @param string $openid
-     * @param string $lang
-     *
-     * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
-     *
-     * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
-     */
+
+  // 产品管理
+
     public function get(string $productId, string $lang = 'zh_CN')
     {
         return $this->httpPostJson('merchant/get', ['product_id'=>$productId])['product_info'];
@@ -73,6 +66,7 @@ class Merchant extends BaseClient
         return $this->httpPostJson('merchant/modproductstatus',['product_id'=>$_POST['product_id'],'status'=>1]);
     }
 
+// 货架管理
     public function shelf() {
         $post = ['shelf_id'=>1,
         "shelf_data"=>[
@@ -103,75 +97,32 @@ class Merchant extends BaseClient
             ]
 
             ]
-            ], 
-            "shelf_banner"=>"http://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7fCM4PaQ3tia6zU8bvgxT8q28YkDNPNwkj97M23s0IwZIcRYaPjdq2AWGDDqXTMd3IiaCUEzbsn6ojQ/0", 
+            ],
+            "shelf_banner"=>"http://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7fCM4PaQ3tia6zU8bvgxT8q28YkDNPNwkj97M23s0IwZIcRYaPjdq2AWGDDqXTMd3IiaCUEzbsn6ojQ/0",
             "shelf_name"=>"货架"
             ];
 
         return $this->httpPostJson('merchant/shelf/add',$post);
     }
 
-    public function create() {
-        $post = 
-        [
-          "product_base"=>[
-            "category_id"=>[
-              "536903132"
-            ],
-            "name"=>"",
-            "main_img"=>$img[0], 
-            "img"=>[
-              array_pop($img),
-              array_pop($img),
-              array_pop($img),
-              array_pop($img),
-            ],
-            "detail"=>[
-              ["text"=>"",
-                  "img"=> ""
-              ]
-            ],
-            "buy_limit"=>1
-          ],
-
-          "sku_list"=>[
-            [
-              "sku_id"=>"",
-              "price"=>1,
-              "icon_url"=>array_pop($img),
-              "product_code"=>"512519882",
-              "ori_price"=>'',
-              "quantity"=>1
-            ],
-          ],
-          "attrext"=>[
-            "location"=>[
-              "country"=>"中国",
-              "province"=>"广东省",
-              "city"=>"广州市",
-              "address"=>"T.I.T创意园"
-            ],
-            "isPostFree"=>1,
-            "isHasReceipt"=>0,
-            "isUnderGuaranty"=>0,
-            "isSupportReplace"=>0
-          ],
-        ];
-
+    public function create($post) {
 
         return $this->httpPostJson('merchant/create',$post);
+
     }
 
     public function delete() {
         return $this->httpPostJson('merchant/del',$_POST);
     }
 
+// 属性管理
     public function getProperty() {
         $post = ['cate_id' =>536903132];
         return $this->httpPostJson('merchant/category/getproperty',$post)['properties'];
     }
 
 
+// 分组管理
     public function group($group_id = 0) {
         $post = ['group_id' => $group_id];
         $group = $this->httpPostJson('merchant/group/getbyid',$post)['group_detail']['product_list'];
@@ -202,6 +153,11 @@ class Merchant extends BaseClient
         return $this->httpGet('merchant/group/getall')['groups_detail'];
     }
 
+    public function groupMod($mod)
+    {
+        return $this->httpPostJson('merchant/group/productmod',$mod);
+    }
+// 订单管理
     public function getOrder($id)
     {
         return $this->httpPostJson('merchant/order/getbyid',['order_id'=>$id])['order'];

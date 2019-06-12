@@ -10,7 +10,8 @@
         "vlucas/phpdotenv": "~2.2",
         "overtrue/laravel-wechat": "~4.0",
         "illuminate/redis": "^5.4",
-        "predis/predis": "^1.1"
+        "predis/predis": "^1.1",
+        "jacobcyl/ali-oss-storage": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

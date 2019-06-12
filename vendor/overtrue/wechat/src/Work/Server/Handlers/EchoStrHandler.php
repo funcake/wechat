@@ -42,7 +42,7 @@ class EchoStrHandler implements EventHandlerInterface
      *
      * @return FinallyResult|null
      */
-    public function handle($payload = null)  
+    public function handle($payload = null)
     {
         if ($decrypted = $this->app['request']->get('echostr')) {
             $str = $this->app['encryptor']->decrypt(
