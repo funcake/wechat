@@ -40,10 +40,11 @@
 @endforeach
 	</div>
 
-@foreach($users as $key => $user)
 	<form class="ui-filterable">
 		<input id="groups" data-type="search">
 	</form>
+	<div id="groups">
+@foreach($users as $key => $user)
 	<div data-role="collapsiblesest" data-filter="true" data-input="#groups">
 		<div data-role="collapsible">
 			<h3>{{$user['name']}}</h3>
@@ -51,6 +52,7 @@
 		</div>
 	</div>
 @endforeach
+	</div>
 </section>
 <script>
 	$('#regist').on("click",function() {
