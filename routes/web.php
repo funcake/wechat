@@ -59,10 +59,10 @@ $router->group(['prefix'=>'admin'],function($router) {
 	$router->post('regist','AdminController@registDepartment');
 
 	$router->get('uploadProduct','AdminController@uploadProduct');
-	// $router->get('mini','AdminController@create');
-	// $router->get('')
+    //创建商品
+	$router->post('createProduct','AdminController@createProduct');
+    $router->get('getProperty','AdminController@getProperty');
 
 });
 
 $router->post('express','ExpressController@order');
-
