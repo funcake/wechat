@@ -60,37 +60,20 @@ class AdminController extends Controller
                 "category_id"=>[
                   "536903132" // 微信小店的种类：翡翠，总之不要管这个
                 ],
-                "property"=>[
-                    [
-                        "id"=>"1075741879", //品牌
-                        "vid"=>"1079743380"  // 其他
-                    ]
-                ],
                 "name"=> "请输入商品名称", //商品名称
-                "sku_info"=>[
-                    [
 
-                        "id"=>"$123",
-
-                        "vid"=>[
-                            "$123"
-                        ]
-
-                    ]
-
-                ],
                 //https://fljy.oss-cn-hangzhou.aliyuncs.com/002.jpg
-                "main_img"=> 'https://hbimg-other.huabanimg.com/img/promotion/6ab082886258fc087068c8614e86799d1481b3ad687e3', //商品主图
+                "main_img"=> 'http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0', //商品主图
                 "img"=>[ // 商品图片列表
-                    'https://fljy.oss-cn-hangzhou.aliyuncs.com/002.jpg'
-                    //'https://hbimg-other.huabanimg.com/img/promotion/6ab082886258fc087068c8614e86799d1481b3ad687e3'
+                    'http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0'
+                    //'http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0'
                 ],
                 "detail"=>[
         			[
                         "text"=>"第一段详情描述"
                     ],
         			[
-                        "img"=>"https://hbimg-other.huabanimg.com/img/promotion/6ab082886258fc087068c8614e86799d1481b3ad687e3"
+                        "img"=>"http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0"
                     ],
         			[
                         "text"=>"第二段详情描述"
@@ -103,7 +86,7 @@ class AdminController extends Controller
                 [
                   "sku_id"=>"",
                   "price"=>1, // 1分 微信价必须比原价ori_price小，不然添加失败
-                  "icon_url"=> 'https://hbimg-other.huabanimg.com/img/promotion/6ab082886258fc087068c8614e86799d1481b3ad687e3',
+                  "icon_url"=> 'http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0',
                   // 部门人员每次申请新产品上架 会在通知里留下自己的部门ID
                   "product_code"=> $group_id."", //字符串 这个是产品分组id也就是部门id, department_id
                   "ori_price"=>100, //100分
@@ -122,24 +105,6 @@ class AdminController extends Controller
                 "isUnderGuaranty"=>0,
                 "isSupportReplace"=>0
               ],
-              "delivery_info"=>[
-                  "delivery_type"=> 0,
-                  "template_id"=>0,
-                  "express"=>[
-                      [
-                          "id"=>10000027,
-                          "price"=>100
-                      ],
-                      [
-                          "id"=>10000028,
-                          "price"=>100
-                      ],
-                      [
-                          "id"=>10000029,
-                          "price"=>100
-                      ]
-                  ]
-              ]
             ];
             //创建产品获取id，并归入分组
             $product_arr = app('wechat.official_account')->merchant->create($post);
