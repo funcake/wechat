@@ -11,3 +11,4 @@ dump.db
 /lib
 /log
 .DS_Store
+blog.sublime*

@@ -59,7 +59,7 @@ class ProductController extends Controller
     }
 
     public function create() {
-        return app('wechat.official_account')->merchant->create();
+        return app('wechat.official_account')->merchant->uploadImage('DSC_0095.jpg');
     }
 
     public function delete() {

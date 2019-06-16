@@ -13,6 +13,8 @@ namespace EasyWeChat\OfficialAccount\Merchant;
 
 use EasyWeChat\Kernel\BaseClient;
 use EasyWeChat\Kernel\Http\StreamResponse;
+use EasyWeChat\Kernel\Exceptions\InvalidArgumentException;
+
 
 
 /**
@@ -179,17 +181,31 @@ class Merchant extends BaseClient
         return $this->httpPostJson('merchant/order/setdelivery',$post);
     }
 
-    public function uploadImage(string $filename, string $path)
+    public function uploadImage( string $filename, array $form = [])
     {
-        return $this->upload('image', $filename, $path);
-    }
-    public function upload(string $type, string $filename, string $path, array $form = [])
-    {
+        $path = $_SERVER['DOCUMENT_ROOT'].'/blog/storage/app/public/'.$filename;
+
         if (!file_exists($path) || !is_readable($path)) {
             throw new InvalidArgumentException(sprintf('File does not exist, or the file is unreadable: "%s"', $path));
         }
 
-        $form['type'] = $type;
+        $url = "https://api.weixin.qq.com/merchant/common/upload_img?access_token=".app('wechat.official_account')->access_token->getToken()['access_token']."&filename=$filename";
+
+        $data = file_get_contents($path);
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true );
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // curl_getinfo($ch);
+        $return_data = curl_exec($ch);
+        curl_close($ch);
+        // if(is_string($return_data)){return 123;}
+        return  json_decode($return_data,true)['image_url'];
+
+        $form['tpye'] = 'image';
 
         return $this->httpUpload('merchant/common/upload_img', ['media' => $path], $form, ['filename'=> $filename]);
     }
