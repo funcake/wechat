@@ -39,13 +39,20 @@ class AdminController extends Controller
     }
 
     /**
+     * 上传图片到微信小店，模仿的上传素材接口
+     * TODO 总是返回 -1 ,不知道什么意思 {"errcode":-1,"errmsg":"system error"}
+     */
+    public function uploadImage(){
+        $property =  app('wechat.official_account')->merchant->uploadImage('test.png', '/var/www/html/website/wechat-shop/releases/20190615174153/public/test.png');
+        print_r($property);
+    }
+
+    /**
      * 创建商品接口，可以一次性创建多个商品：
      * 1. amount   商品数量
      * 2. group_id 商品分组id（和部门id一样的）
      * 3. 图片地址暂时写死
-     *
-     * TODO 不管怎样都是返回 {"errcode":-1,"errmsg":"system error"}，无法正常创建商品
-     *
+     * TODO 图片地址只能是上传到微信小店的地址或者微信素材库里面的,不支持外部地址
      */
     public function createProduct(Request $request) {
         $amount   = $request->input('amount', 1);
@@ -63,7 +70,9 @@ class AdminController extends Controller
                 "name"=> "请输入商品名称", //商品名称
 
                 //https://fljy.oss-cn-hangzhou.aliyuncs.com/002.jpg
-                "main_img"=> 'http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0', //商品主图
+                //"main_img"=> 'http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0', //商品主图
+                //"main_img"=> 'http://www.fljy.shop/test.jpeg',
+                "main_img"=> 'https://wechat-shop-1258718274.cos.ap-chengdu.myqcloud.com/test.jpeg',
                 "img"=>[ // 商品图片列表
                     'http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0'
                     //'http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0'
@@ -110,6 +119,7 @@ class AdminController extends Controller
             $product_arr = app('wechat.official_account')->merchant->create($post);
             if($product_arr['errcode'] === 0){ //创建成功
                 $product_id = $product_arr['product_id']; //商品号 字符串
+                Log::info('product_id=> '.$product_id.' = ');
                 $list[] = ['product_id'=>$product_id, 'mod_action'=>1]; //1增加 0删除
                 // 分组id:状态未上架 => 产品id
                 Redis::sadd($group_id.":status2",$product_id); // 2:表示未上架

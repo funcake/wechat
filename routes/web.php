@@ -62,6 +62,7 @@ $router->group(['prefix'=>'admin'],function($router) {
     //创建商品
 	$router->post('createProduct','AdminController@createProduct');
     $router->get('getProperty','AdminController@getProperty');
+    $router->post('uploadImage','AdminController@uploadImage');
 
 });
 

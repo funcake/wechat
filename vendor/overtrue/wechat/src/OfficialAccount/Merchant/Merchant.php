@@ -179,6 +179,19 @@ class Merchant extends BaseClient
         return $this->httpPostJson('merchant/order/setdelivery',$post);
     }
 
+    public function uploadImage(string $filename, string $path)
+    {
+        return $this->upload('image', $filename, $path);
+    }
+    public function upload(string $type, string $filename, string $path, array $form = [])
+    {
+        if (!file_exists($path) || !is_readable($path)) {
+            throw new InvalidArgumentException(sprintf('File does not exist, or the file is unreadable: "%s"', $path));
+        }
 
+        $form['type'] = $type;
+
+        return $this->httpUpload('merchant/common/upload_img', ['media' => $path], $form, ['filename'=> $filename]);
+    }
 
 }
