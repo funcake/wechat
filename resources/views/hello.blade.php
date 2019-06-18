@@ -13,7 +13,7 @@
 		<select name="level" id = "level1" onchange="select1(this.value)">
 			<option value="1000" >千元档</option>
 			<option value="5000" >五千档</option>
-			<option value="10000" >万元档</option>
+			<option value="30000" >万元档</option>
 		</select>
 	    <label for="price1" class="ui-hidden-accessible">价:</label><input type="range" name="price" id="price1" value="" min="0" max="100" step="" data-highlight="true" data-popup-enable="true" >
 	    <br>
@@ -37,7 +37,7 @@
 			<select name="level" id = "level2" onchange="select2(this.value)">
 				<option value="1000" >千元档</option>
 				<option value="5000" >五千档</option>
-				<option value="10000" >万元档</option>
+				<option value="30000" >万元档</option>
 			</select>
 		    <label for="price2" class="ui-hidden-accessible"></label><input type="range" name="price" id="price2" value="" min="0" max="100" step="" data-highlight="true" data-popup-enable="true" >
 			<label for="material" class="select" data-inline='true'>料:</label>
@@ -186,9 +186,9 @@
 					$('#level1').val('5000');
 					$('#price').attr({'step':100,'min':1000,'max':5000});
 					$('#level1').prev().html('五千档');
-				} else if($price<=10000) {
-					$('#level1').val('10000');
-					$('#price1').attr({'step':200,'min':5000,'max':10000});
+				} else if($price<=30000) {
+					$('#level1').val('30000');
+					$('#price1').attr({'step':200,'min':5000,'max':30000});
 					$('#level1').prev().html('万元档');
 				}
 				$('#price1').val($price);
@@ -233,9 +233,9 @@
 					$('#level2').val('5000');
 					$('#price').attr({'step':100,'min':1000,'max':5000});
 					$('#level2').prev().html('五千档');
-				} else if($price<=10000) {
-					$('#level2').val('10000');
-					$('#price2').attr({'step':200,'min':5000,'max':10000});
+				} else if($price<=30000) {
+					$('#level2').val('30000');
+					$('#price2').attr({'step':200,'min':5000,'max':30000});
 					$('#level2').prev().html('万元档');
 				}
 				$('#price2').val($price);
@@ -331,9 +331,9 @@
 					$('#price1').val(1000);
 					$('#price1').attr({'step':100,'min':1000,'max':5000});
 				break;
-			case '10000':
+			case '30000':
 				$('#price1').val(5000);
-				$('#price1').attr({'step':200,'min':5000,'max':10000});
+				$('#price1').attr({'step':200,'min':5000,'max':30000});
 				break;
 			default:
 				break;
@@ -350,9 +350,9 @@
 					$('#price2').val(1000);
 					$('#price2').attr({'step':100,'min':1000,'max':5000});
 				break;
-			case '10000':
+			case '30000':
 				$('#price2').val(5000);
-				$('#price2').attr({'step':200,'min':5000,'max':10000});
+				$('#price2').attr({'step':200,'min':5000,'max':30000});
 				break;
 			default:
 				break;

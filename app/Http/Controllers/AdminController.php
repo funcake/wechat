@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use EasyWeChat\Kernel\Messages\Message;
 use illuminate\http\Request;
 use Illuminate\Support\Facades\Redis;
+use App\Jobs\UploadProduct;
 use Log;
 
 
@@ -26,24 +27,9 @@ class AdminController extends Controller
         $post = ['name'=>$message['UserID']];
     }
 
-    public function uploadProduct()
-    {
-        $photo = app('wechat.official_account')->material->list('image',0,100);
-        dd($photo);
-    }
-
     //http://www.fljy.shop/admin/getProperty
     public function getProperty(){
         $property =  app('wechat.official_account')->merchant->getProperty();
-        print_r($property);
-    }
-
-    /**
-     * 上传图片到微信小店，模仿的上传素材接口
-     * TODO 总是返回 -1 ,不知道什么意思 {"errcode":-1,"errmsg":"system error"}
-     */
-    public function uploadImage(){
-        $property =  app('wechat.official_account')->merchant->uploadImage('test.png', '/var/www/html/website/wechat-shop/releases/20190615174153/public/test.png');
         print_r($property);
     }
 
@@ -55,94 +41,13 @@ class AdminController extends Controller
      * TODO 图片地址只能是上传到微信小店的地址或者微信素材库里面的,不支持外部地址
      */
     public function createProduct(Request $request) {
-        $amount   = $request->input('amount', 1);
-        $group_id = $request->input('group_id', 530528963); // 测试部门：530528963
-        //$domain = 'https://fljy.oss-cn-hangzhou.aliyuncs.com/';
-        //die('=='.$group_id);
-        $err = []; //第多少个商品创建失败
-        for ($i=0; $i < $amount ; $i++) {
-            $post =
-            [
-              "product_base"=>[
-                "category_id"=>[
-                  "536903132" // 微信小店的种类：翡翠，总之不要管这个
-                ],
-                "name"=> "请输入商品名称", //商品名称
-
-                //https://fljy.oss-cn-hangzhou.aliyuncs.com/002.jpg
-                //"main_img"=> 'http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0', //商品主图
-                //"main_img"=> 'http://www.fljy.shop/test.jpeg',
-                "main_img"=> 'https://wechat-shop-1258718274.cos.ap-chengdu.myqcloud.com/test.jpeg',
-                "img"=>[ // 商品图片列表
-                    'http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0'
-                    //'http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0'
-                ],
-                "detail"=>[
-        			[
-                        "text"=>"第一段详情描述"
-                    ],
-        			[
-                        "img"=>"http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0"
-                    ],
-        			[
-                        "text"=>"第二段详情描述"
-                    ]
-                ],
-                "buy_limit"=>1
-              ],
-
-              "sku_list"=>[ //商品型号
-                [
-                  "sku_id"=>"",
-                  "price"=>1, // 1分 微信价必须比原价ori_price小，不然添加失败
-                  "icon_url"=> 'http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0',
-                  // 部门人员每次申请新产品上架 会在通知里留下自己的部门ID
-                  "product_code"=> $group_id."", //字符串 这个是产品分组id也就是部门id, department_id
-                  "ori_price"=>100, //100分
-                  "quantity"=>1
-                ],
-              ],
-              "attrext"=>[
-                "location"=>[
-                  "country"=>"中国",
-                  "province"=>"广东省",
-                  "city"=>"广州市",
-                  "address"=>"T.I.T创意园"
-                ],
-                "isPostFree"=>1,
-                "isHasReceipt"=>0,
-                "isUnderGuaranty"=>0,
-                "isSupportReplace"=>0
-              ],
-            ];
-            //创建产品获取id，并归入分组
-            $product_arr = app('wechat.official_account')->merchant->create($post);
-            if($product_arr['errcode'] === 0){ //创建成功
-                $product_id = $product_arr['product_id']; //商品号 字符串
-                Log::info('product_id=> '.$product_id.' = ');
-                $list[] = ['product_id'=>$product_id, 'mod_action'=>1]; //1增加 0删除
-                // 分组id:状态未上架 => 产品id
-                Redis::sadd($group_id.":status2",$product_id); // 2:表示未上架
-                // 产品id => json内容
-                Redis::hset($product_id, json_encode($post) );
-            } else {
-                $err[] = $i + 1;
-            }
-         }
-         if(!empty($list)){
-             // 添加产品入分组
-             $mod = ['group_id'=>$group_id,'product'=>$list]; // group_id 整型
-             app('wechat.official_account')->merchant->groupMod($mod);
-         }
-
-         $msg = '';
-         if(!empty($err)){
-             $msg = '第 ' . implode(',',$err) . ' 个商品创建失败';
-         } else {
-             $msg = '商品创建成功';
-         }
-
-         return response($msg);
+        // $amount   = $request->input('amount', 1);
+        // $group_id = $request->input('group_id', 530528963); // 测试部门：530528963
+        $amount   =  '';
+        $group_id = '';
+          $this->dispatch(new UploadProduct($amount,$group_id));
+        return 'ok';
+       
     }
 
 

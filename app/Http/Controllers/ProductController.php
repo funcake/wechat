@@ -68,7 +68,8 @@ class ProductController extends Controller
 
     public function group() {
         // $group =  app('wechat.official_account')->merchant->group(session('wechat.work.default')['department'][0]);
-        $group =  json_decode(Redis::get('512519882'),true);
+        $group =  app('wechat.official_account')->merchant->group(530528963);
+        // $group =  json_decode(Redis::get('512519882'),true);
         // $group = json_decode(Redis::hget('530505229','products'),true);
         return $group;
     }
