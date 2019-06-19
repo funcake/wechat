@@ -23,7 +23,7 @@ class ProductController extends Controller
     }
 
     public function home() {
-
+return ;
        $property =  app('wechat.official_account')->merchant->getProperty();
        $material = $property[array_search('种地分类', array_column($property, 'name'))];
        $usage = $property[array_search('适用场景', array_column($property, 'name'))];
