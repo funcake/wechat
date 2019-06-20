@@ -44,9 +44,9 @@ class UploadProduct extends Job
                 "main_img"=> app('wechat.official_account')->merchant->uploadImage($i.'.jpg'),
                 "img"=>[ // 商品图片列表
                     app('wechat.official_account')->merchant->uploadImage(($i+1).'.jpg'),
-                    app('wechat.official_account')->merchant->uploadImage(($i*3).'.jpg'),
-                    app('wechat.official_account')->merchant->uploadImage(($i*4).'.jpg'),
-                    app('wechat.official_account')->merchant->uploadImage(($i*5).'.jpg'),
+                    app('wechat.official_account')->merchant->uploadImage(($i+2*/*$amount*/ 20).'.jpg'),
+                    app('wechat.official_account')->merchant->uploadImage(($i+3*/*$amount*/ 20).'.jpg'),
+                    app('wechat.official_account')->merchant->uploadImage(($i+4*/*$amount*/ 20).'.jpg'),
                 ],
                 "detail"=>[
                     [
@@ -93,9 +93,9 @@ class UploadProduct extends Job
                 Log::info('product_id=> '.$product_id.' = ');
                 $list[] = ['product_id'=>$product_id, 'mod_action'=>1]; //1增加 
                 // 分组id:状态未上架 => 产品id0删除
-                Redis::sadd($this->group_id.":status2",$product_id); // 2:表示未上架
+                // Redis::sadd($this->group_id.":status2",$product_id); // 2:表示未上架
                 // 产品id => json内容
-                Redis::hset($product_id, json_encode($post) );
+                // Redis::hset($product_id, json_encode($post) );
             } else {
                 $err[] = $i + 1;
             }
