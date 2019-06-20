@@ -30,7 +30,7 @@ class UploadProduct extends Job
     {
         // return app('wechat.official_account')->merchant->uploadImage(,$i.'.jpg');
          $this->group_id = 530528963; 
-         $this->amount = 1;
+         $this->amount = 20;
         $err = []; //第多少个商品创建失败
         for ($i=1; $i <= $this->amount ; $i++) {
             $post =
