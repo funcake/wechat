@@ -102,7 +102,7 @@ class UploadProduct extends Job
          }
          if(!empty($list)){
              // 添加产品入分组
-            $mod = ['group_id' => 530528963, $list];
+            $mod = ['group_id' => 530528963, 'product'=>$list];
              app('wechat.official_account')->merchant->groupMod($mod);
          }
 

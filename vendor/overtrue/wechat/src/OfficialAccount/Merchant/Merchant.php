@@ -159,6 +159,11 @@ class Merchant extends BaseClient
     {
         return $this->httpPostJson('merchant/group/productmod',$mod);
     }
+
+    public function groupById($id)
+    {
+        return $this->httpPostJson('merchant/group/getbyid',['group_id'=>$id]);
+    }
 // 订单管理
     public function getOrder($id)
     {
