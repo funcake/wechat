@@ -60,6 +60,7 @@ return [
             'driver' => 'redis',
             'connection' => env('QUEUE_REDIS_CONNECTION', 'default'),
             'queue' => 'default',
+            'expire' => 120,
             'retry_after' => 60,
         ],
 
