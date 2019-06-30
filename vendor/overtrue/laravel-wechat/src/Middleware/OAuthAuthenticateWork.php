@@ -55,7 +55,7 @@ class OAuthAuthenticateWork
 
             if ($request->has('code')) {
 
-                $user = $workAccount->oauth->detailed()->user()['original'];
+                // $user = $workAccount->oauth->detailed()->user()['original'];
                 $user = $workAccount->oauth->detailed()->user();
                 session([$sessionKey => $user ?? []]);
                 $isNewSession = true;
