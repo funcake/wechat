@@ -44,15 +44,16 @@
 		<input id="groups" data-type="search">
 	</form>
 	<div id="groups">
-@foreach($users as $key => $user)
 	<div data-role="collapsiblesest" data-filter="true" data-input="#groups">
-		<div data-role="collapsible">
+@foreach($users as $key => $user)
+		<div data-role="collapsible" class="copy">
 			<h3>{{$user['name']}}</h3>
 			<p>{{$key}}</p>
 		</div>
-	</div>
 @endforeach
 	</div>
+	</div>
+	<input class="copy" value="123 sdfdfg sdfgsdf ">
 </section>
 <script>
 	$('#regist').on("click",function() {
@@ -65,6 +66,11 @@
 				}
 			);
 
+	});
+	$('.copy').on('click',function() {
+		$(this).select();
+		document.execCommand('copy');
+		alert('已经复制');
 	});
 </script>
 @endsection

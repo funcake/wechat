@@ -16,7 +16,7 @@ $router->group([],function($router) {
 
 	$router->get('group','ProductController@group');
 
-	$router->post('','ProductController@update');
+	$router->post('update','ProductController@update');
 
 	$router->post('delete','ProductController@delete');
 
@@ -53,6 +53,8 @@ $router->group(['prefix'=>'admin'],function($router) {
 	$router->get('order','AdminController@order');
 
 	$router->get('flushGroups','AdminController@flushGroups');
+	
+	$router->get('flush','AdminController@flush');
 
 	$router->post('setDelivery','AdminController@setDelivery');
 
@@ -61,7 +63,9 @@ $router->group(['prefix'=>'admin'],function($router) {
 	$router->get('uploadProduct','AdminController@uploadProduct');
     //创建商品
 	$router->get('createProduct','AdminController@createProduct');
+
     $router->get('getProperty','AdminController@getProperty');
+
     $router->post('uploadImage','AdminController@uploadImage');
 
 });

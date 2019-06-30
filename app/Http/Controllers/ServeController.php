@@ -54,7 +54,7 @@ class ServeController extends Controller
 		        	if (isset($message['IsLeaderInDept'])) {
 		        		if( ($key = array_search(1, explode(',',	$message['IsLeaderInDept'])) ) !== false ) {
 			        		$user = app('wechat.work')->user->get($message['UserID']);
-			        		Redis::hmset($user['department'][0],
+			        		Redis::hmset($user['department'][0].':detail',
 			        		    [
 			        		        'avatar'=>$user['avatar'],
 			        		        'userid'=>$user['userid'],
@@ -64,7 +64,7 @@ class ServeController extends Controller
 			        		        'finance'=>$user['extattr']['attrs'][0]['value'],
 			        		    ]
 			        		);
-			        		return app('wechat.work')->messenger->message("新至商品")->toTag(1)->send();
+			        		// return app('wechat.work')->messenger->message("新至商品")->toTag(1)->send();
 			        	}
 		        	}
 		        	break;

@@ -41,7 +41,7 @@
 			</select>
 		    <label for="price2" class="ui-hidden-accessible"></label><input type="range" name="price" id="price2" value="" min="0" max="100" step="" data-highlight="true" data-popup-enable="true" >
 			<label for="material" class="select" data-inline='true'>料:</label>
-			<select id="material" name="material" key="{{$material['id']}}" class='select-choice-mini' data-inline='true' data-mini='true'>
+			<select id="material" name="material"  class='select-choice-mini' data-inline='true' data-mini='true'>
 			@foreach($material['property_value'] as $p)
 				<option value="{{$p['id']}}">{{$p['name']}}</option>
 			@endforeach
@@ -49,13 +49,13 @@
 			<fieldset data-role = "controlgroup" data-type="horizontal" >
 				<legend >属 性:</legend>
 				<label for="usage" class="select" data-inline='true'>适用场景</label>
-				<select id="usage" name="usage" key="{{$usage['id']}}" class='select-choice-mini' data-inline='true' data-mini='true'>
+				<select id="usage" name="usage"  class='select-choice-mini' data-inline='true' data-mini='true'>
 				@foreach($usage['property_value'] as $p)
 					<option value="{{$p['id']}}">{{$p['name']}}</option>
 				@endforeach
 				</select>
 				<label for="style" class="select" data-inline='true'>款式</label>
-				<select id="style" name="style" key="{{$style['id']}}"  class='select-choice-mini' data-inline='true' data-mini='true'>
+				<select id="style" name="style"   class='select-choice-mini' data-inline='true' data-mini='true'>
 				@foreach($style['property_value'] as $p)
 					<option value="{{$p['id']}}">{{$p['name']}}</option>
 				@endforeach
@@ -88,8 +88,8 @@
 		<div class="ui-block-c"> <div class="ui-bar ui-bar-b"> 总订单： </div> </div>
 		<!-- number -->
 		<div class="ui-block-a"> <div class="ui-bar ui-bar-b">￥{{$user['extattr']['attrs'][0]['value']}} </div> </div>
-		<div class="ui-block-b"> <div class="ui-bar ui-bar-b"> 123 </div> </div>
-		<div class="ui-block-c"> <div class="ui-bar ui-bar-b"> 345 </div> </div>
+		<div class="ui-block-b"> <div class="ui-bar ui-bar-b"> </div> </div>
+		<div class="ui-block-c"> <div class="ui-bar ui-bar-b"> </div> </div>
 	</div>
 	<div data-role="popup" id="incoming" data-theme="a" data-overlay-theme="b" class="ui-content" style="width:280px; padding-bottom:2em;">
 		<form action="user/photo" method="post" accept-charset="utf-8">
@@ -125,8 +125,9 @@
 
 <script type="text/javascript" charset="utf-8" async defer>
 
-
-
+//global 产品数据
+	var data = [];
+//获得产品数据data
 	$.get(
 		'group',
 		function(d) {
@@ -135,23 +136,14 @@
 			init2();
 		}
 	);
-
+//navbar刷新
 	$(function(){
 		$( "[data-role='header'], [data-role='footer']" ).toolbar();
 		$( "[data-role='header'], [data-role='footer']" ).toolbar({ theme: "b" });
 	});
 
-	window.addEventListener('pagehide', function(){
-		$.post('flushGroup',
-			data,
-			function(data) {
-				console.log(data);
-			}
-		)
-	});
 
-	var data = [];
-
+	//init statu1 products
 	function init1() {
 			var html1 = "";
 
@@ -197,6 +189,7 @@
 			});
 	}
 
+	//init status2 products
 	function init2() {
 			var html2 = "";
 
@@ -253,7 +246,7 @@
 		post.sku_list[0].price=$('#price1').val()*100;
 		console.log(post);
 		$("#status1 [key='"+key+"'] p").html('￥'+$('#price1').val());
-		$.post('',
+		$.post('update',
 			post ,
 			function(data) {
 				console.log(data);
@@ -267,27 +260,27 @@
 		post.product_base.name=$('#name').val();
 		post.sku_list[0].price=$('#price2').val()*100;
 		post.status = 1;
-		post.product_base.property =
+		post.product_base.property.concat(
 		[
 			{
 				"id": "{{$material['id']}}",
 				"vid": $('#material').val(),
 			},
 			{
-				"id": '{{$style['id']}}',
+				"id": "{{$style['id']}}",
 				"vid": $('#style').val(),
 			},
 			{
-				"id": '{{$usage['id']}}',
+				"id": "{{$usage['id']}}",
 				"vid": $('#usage').val(),
 			}
-		];
+		] );
 
 		$("#list2 [key='"+key+"']").remove();
 		data.status1.unshift(post);
 		init1();
 		console.log(post);
-		$.post('',
+		$.post('update',
 			post ,
 			function(data) {
 				console.log(data);
@@ -297,7 +290,7 @@
 	//删除商品
 	$('#delete').on("click",function() {
 		var key = $(this).attr("key");
-		post ={'product_id':data.status1[key].product_id};
+		post ={'product_id':data.status1[key].product_id,'group':data.status1[key].sku_list[0].product_code};
 		$("#status1 li[key='"+key+"']").remove();
 		$.post('delete',
 				post,
@@ -307,6 +300,7 @@
 			)
 	});
 
+// 通知产品拍摄
 	$('#photo').on("click",function() {
 		post = {'group':5413467,'amount' : $('#amount').val()};
 		console.log(post);
@@ -321,7 +315,6 @@
 	});
 
 	function select1(val) {
-		console.log(val);
 		switch (val) {
 			case '1000':
 				$('#price1').val(0);

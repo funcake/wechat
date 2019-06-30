@@ -11,10 +11,12 @@
 
 namespace EasyWeChat\OfficialAccount\Merchant;
 
+use illuminate\http\Request;
 use EasyWeChat\Kernel\BaseClient;
 use EasyWeChat\Kernel\Http\StreamResponse;
 use EasyWeChat\Kernel\Exceptions\InvalidArgumentException;
 use Log;
+
 
 
 /**
@@ -59,13 +61,13 @@ class Merchant extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function update(string $lang = 'zh_CN')
+    public function update($post)
     {
-        $_POST['sku_list'][0]['icon_url'] = "http://mmbiz.qpic.cn/mmbiz/4whpV1VZl28bJj62XgfHPibY3ORKicN1oJ4CcoIr4BMbfA8LqyyjzOZzqrOGz3f5KWq1QGP3fo6TOTSYD3TBQjuw/0";
         //编辑商品
-        $this->httpPostJson('merchant/update', $_POST);
+       return  $this->httpPostJson('merchant/update', $post);
+       return  $this->httpPostJson('merchant/update', $_POST);
         //上架商品
-        return $this->httpPostJson('merchant/modproductstatus',['product_id'=>$_POST['product_id'],'status'=>1]);
+        // return $this->httpPostJson('merchant/modproductstatus',['product_id'=>$_POST['product_id'],'status'=>1]);
     }
 
 // 货架管理

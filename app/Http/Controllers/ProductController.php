@@ -18,22 +18,28 @@ class ProductController extends Controller
 {
     public function __construct() {
         // session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
-        // $this->middleware('work');
+        $this->middleware('work');
         // $this->middleware('oauth:snsapi_userinfo');
     }
 
     public function home() {
-       $property =  app('wechat.official_account')->merchant->getProperty();
-       $material = $property[array_search('种地分类', array_column($property, 'name'))];
-       $usage = $property[array_search('适用场景', array_column($property, 'name'))];
-       $style = $property[array_search('款式', array_column($property, 'name'))];
+        $property = [];
+        if(Redis::exists('property')) {
+            $property = json_decode(Redis::get('property') ,true);
+        } else {
+         $property =  app('wechat.official_account')->merchant->getProperty();
+         Redis::set('property',json_encode($property));
+     }
+     $material = $property[array_search('种地分类', array_column($property, 'name'))];
+     $usage = $property[array_search('适用场景', array_column($property, 'name'))];
+     $style = $property[array_search('款式', array_column($property, 'name'))];
 
-       $user = session('wechat.work.default');
+     $user = session('wechat.work.default');
        // $order = Redis::hgetall(Redis::hget('groups',$user['department'][0]));
-       $order = [];
+     $order = [];
 
-        return view('hello',compact('material','usage','style','user','order'));
-    }
+     return view('hello',compact('material','usage','style','user','order'));
+ }
 
     /**
      * 处理微信的请求消息
@@ -42,34 +48,40 @@ class ProductController extends Controller
      */
     public function serve(int $status = 0)
     {
-        $app = app('wechat.official_account');
-
-        return $app->merchant->list($status);
-        return view('hello',compact('list','material'));
+        return app('wechat.official_account')->merchant->list($status);
     }
 
 
 
-    public function update() {
-        $app = app('wechat.official_account');
-
-        return $app->merchant->update();
-
+    public function update(Request $request) {
+        Redis::set($request->product_id,json_encode($_POST));
+        Redis::srem($request->sku_list[0]['product_code'].':status2',$request->product_id);
+        return app('wechat.official_account')->merchant->update();
     }
 
     public function create() {
         return app('wechat.official_account')->merchant->uploadImage('DSC_0095.jpg');
     }
 
-    public function delete() {
+    public function delete(Request $request) {
+        Redis::del($request->product_id);
+        Redis::srem($request->group.':status1',$request->product_id);
         return app('wechat.official_account')->merchant->delete();
     }
 
+// @return json [status1=>[],status2=>[]]
     public function group() {
-        // $group =  app('wechat.official_account')->merchant->group(session('wechat.work.default')['department'][0]);
-        $group =  app('wechat.official_account')->merchant->group(530528963);
-        // $group =  json_decode(Redis::get('512519882'),true);
-        // $group = json_decode(Redis::hget('530505229','products'),true);
+        $group = ['status1'=>[],'status2'=>[]];
+        if($status1= Redis::smembers(session('wechat.work.default')['department'][0].':status1')) {
+            foreach ( Redis::mget($status1)  as $value) {
+                $group['status1'][] = json_decode($value,true);
+            }
+        }
+        if($status2= Redis::smembers(session('wechat.work.default')['department'][0].':status2')) {
+        foreach (Redis::mget($status2) as $value) {
+            $group['status2'][] = json_decode($value, true);
+        }
+    }
         return $group;
     }
 

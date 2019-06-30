@@ -59,7 +59,13 @@ class UploadProduct extends Job
                         "text"=>"第二段详情描述"
                     ]
                 ],
-                "buy_limit"=>1
+                "buy_limit"=>1,
+                'property' => [
+                    [
+                        'id' => 1075743464,
+                        'vid'  => 1079783185,
+                    ]
+                ]
               ],
 
               "sku_list"=>[ //商品型号
@@ -77,8 +83,8 @@ class UploadProduct extends Job
                 "location"=>[
                   "country"=>"中国",
                   "province"=>"广东省",
-                  "city"=>"广州市",
-                  "address"=>"T.I.T创意园"
+                  "city"=>"肇庆市四会市",
+                  "address"=>"中国玉器博览城"
                 ],
                 "isPostFree"=>1,
                 "isHasReceipt"=>0,
@@ -93,16 +99,16 @@ class UploadProduct extends Job
                 Log::info('product_id=> '.$product_id.' = ');
                 $list[] = ['product_id'=>$product_id, 'mod_action'=>1]; //1增加 
                 // 分组id:状态未上架 => 产品id0删除
-                // Redis::sadd($this->group_id.":status2",$product_id); // 2:表示未上架
+                Redis::sadd($this->group_id.":status2",$product_id); // 2:表示未上架
                 // 产品id => json内容
-                // Redis::hset($product_id, json_encode($post) );
+                Redis::set($product_id, json_encode($post) );
             } else {
                 $err[] = $i + 1;
             }
          }
          if(!empty($list)){
              // 添加产品入分组
-            $mod = ['group_id' => 530528963, 'product'=>$list];
+            $mod = ['group_id' => $this->group_id, 'product'=>$list];
              app('wechat.official_account')->merchant->groupMod($mod);
          }
 

@@ -135,10 +135,17 @@ return [
              //...
          ],
          'user' => [
-            'corp_id' => 'ww830c183cf99b5d18',
+            'corp_id' => 'ww830c183cf99b5d18', 
             'secret'   => env('WECHAT_WORK_USER_SECRET',''),
             'token' => env('WECHAT_WORK_USER_TOKEN',''),
             'aes_key' => env('WECHAT_WORK_USER_AES_KEY',''),
          ]
     ],
+
+
+    // 微盟
+    'weimob'  =>  [
+        'app_id' => '90DD9F81A7752AD7756A66FA226CEAC3',
+        'sercet' => 'DAC8598BC8756F7AD2954946530FFFD1',
+    ]
 ];
