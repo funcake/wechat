@@ -53,8 +53,8 @@ class AdminController extends Controller
 
     public function flushGroups()  {
         foreach (app('wechat.work')->department->list(5)['department'] as $group) {
-            Redis::hset('groups',$group['group_id'],$group['group_name']);
-            Redis::hset($group['group_id'].':detail','name',$group['group_name']);
+            Redis::hset('groups',$group['id'],$group['name']);
+            Redis::hset($group['id'].':detail','name',$group['name']);
         };
         return 'ok';
     }
