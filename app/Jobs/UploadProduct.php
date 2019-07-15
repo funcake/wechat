@@ -50,13 +50,13 @@ class UploadProduct extends Job
                 ],
                 "detail"=>[
                     [
-                        "text"=>"第一段详情描述"
+                        "text"=>""
                     ],
                     [
-                        "img"=>"http://mmbiz.qpic.cn/mmbiz/4whpV1VZl2iccsvYbHvnphkyGtnvjD3ulEKogfsiaua49pvLfUS8Ym0GSYjViaLic0FD3vN0V8PILcibEGb2fPfEOmw/0"
+                        "img"=>"https://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7f6xBeIjAeeWPlbH5jZRXcVib24zkjMPiaPB537hvj1bVxNEWMh4Zc9ibxBibS68tPibJBGajD8YnqibiawQ/0?wx_fmt=jpeg"
                     ],
                     [
-                        "text"=>"第二段详情描述"
+                        "img"=>"https://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7djyj1nkyDJXzrno3g92gKicwMcQWGp7eu3ftmBRSNJQl0CAGt5UFpwr4jkhWacEyKKcVRvxicbjQQg/0?wx_fmt=jpeg"
                     ]
                 ],
                 "buy_limit"=>1,

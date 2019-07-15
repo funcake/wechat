@@ -153,7 +153,7 @@
 					// e['product_base']['img'] = e['product_base']['img'].map(function(e){e.replace(/https/,'http')});
 					html1 +=
 					`
-					<li key="${i}"><a href="#">
+					<li key="${i}" class="ui-li"><a href="#">
 					<img src="${e['product_base']['main_img']}" alt="">
 					<h2>${e['product_base']['name']}</h2>
 					<p>￥${e['sku_list'][0]['price']/100}</p>
@@ -199,8 +199,8 @@
 					// e['product_base']['img'] = e['product_base']['img'].map(function(e){e.replace(/https/,'http')});
 					html2 +=
 					`
-					<li key="${i}"><a href="#">
-					<img src="${e['product_base']['main_img']}" alt="">
+					<li key="${i}" class="ui-li"><a href="#">
+					<img src="${e['product_base']['main_img']}" alt="" class="ui-li">
 					<h2>${e['product_base']['name']}</h2>
 					<p>￥${e['sku_list'][0]['price']/100}</p>
 					<a href="#popup2" class="pop2" key='${i}' data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>

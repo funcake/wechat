@@ -50,7 +50,7 @@ $router->group(['prefix'=>'user'],function($router) {
 //管理员路由
 $router->group(['prefix'=>'admin'],function($router) {
 
-	$router->get('order','AdminController@order');
+	$router->get('home','AdminController@home');
 
 	$router->get('flushGroups','AdminController@flushGroups');
 	

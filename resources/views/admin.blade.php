@@ -53,7 +53,7 @@
 @endforeach
 	</div>
 	</div>
-	<input class="copy" value="123 sdfdfg sdfgsdf ">
+	<!-- <input class="copy" value="123 sdfdfg sdfgsdf "> -->
 </section>
 <script>
 	$('#regist').on("click",function() {

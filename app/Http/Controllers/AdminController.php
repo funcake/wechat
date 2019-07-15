@@ -29,7 +29,7 @@ class AdminController extends Controller
 
     //http://www.fljy.shop/admin/getProperty
     public function getProperty(){
-        $property =  app('wechat.official_account')->merchant->getProperty();
+        return $property =  app('wechat.official_account')->merchant->getProperty();
         print_r($property);
     }
 
@@ -53,6 +53,7 @@ class AdminController extends Controller
 
     public function flushGroups()  {
         foreach (app('wechat.official_account')->merchant->groupAll() as $group) {
+            Redis::hset('groups',$group['group_id'],$group['group_name']);
             Redis::hset($group['group_id'].':detail','name',$group['group_name']);
         };
         return 'ok';
@@ -60,6 +61,11 @@ class AdminController extends Controller
 
     public function flush($a='')
     {
+        foreach (app('wechat.official_account')->merchant->groupAll() as $group) {
+            Redis::hset($group['group_id'].':detail','name',$group['group_name']);
+            Redis::del($group['group_id'].".status1");
+            Redis::del($group['group_id'].":status2");
+        };
         $products = app('wechat.official_account')->merchant->list(0);
         Redis::pipeline(function ($pipe) use ($products) {
             foreach ($products as $product)  {
@@ -70,14 +76,15 @@ class AdminController extends Controller
         return 'OK';
     }
 
-    public function order() {
+    public function home() {
         $merchant = app('wechat.official_account')->merchant;
 
         $list = $merchant->orderList();
         // 获取订单列表，并按照group分组注册入redis
-        Redis::pipeline(function($pipe) use ($merchant,$list) {
+        Redis::pipeline(function($pipe) use ($list) {
             foreach ($list as $order) {
-                Redis::sadd(Redis::get($order['product_id']).':order',$order['order_id']);
+            // 根据订单产品 获取订单分组，
+                Redis::sadd(json_encode(Redis::get($order['product_id']),true)['order_id'].':order',$order['order_id']);
                 Redis::hmset($order['order_id'].":detail",
                 [
                     'order_id' => $order['order_id'],
@@ -95,7 +102,10 @@ class AdminController extends Controller
                 Redis::hmset($order['order_id'],$products);
             }
         });
+
+        // 部门上级信息
         $users = [];
+        // 部门订单
         $groupOrders = [];
             //获取部门id,名称列表,
         foreach (Redis::hgetall('groups') as $group => $name) {
@@ -108,7 +118,8 @@ class AdminController extends Controller
                 $groupOrders[$group]['total'] +=  Redis::hgetall($order_id.":detail")['price'];
             }
             $user['name'] = $name;
-            $users[$group] = $user;
+            // $users[$group] = $user;
+            $users[] = $user;
         }
         return view('admin',compact('groupOrders','users'));
     }

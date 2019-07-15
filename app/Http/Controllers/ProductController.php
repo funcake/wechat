@@ -18,7 +18,7 @@ class ProductController extends Controller
 {
     public function __construct() {
         // session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
-        $this->middleware('work');
+        // $this->middleware('work');
         // $this->middleware('oauth:snsapi_userinfo');
     }
 
@@ -54,9 +54,9 @@ class ProductController extends Controller
 
 
     public function update(Request $request) {
-        Redis::set($request->product_id,json_encode($_POST));
+        Redis::set($request->product_id, json_encode($_POST));
         Redis::srem($request->sku_list[0]['product_code'].':status2',$request->product_id);
-        return app('wechat.official_account')->merchant->update();
+        return app('wechat.official_account')->merchant->update($_POST);
     }
 
     public function create() {
@@ -89,6 +89,4 @@ class ProductController extends Controller
     {
         return  Redis::set(session('wechat.work.default')['department'][0]);
     }
-
-
 }

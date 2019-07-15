@@ -61,13 +61,13 @@ class Merchant extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function update($post)
+    public function update($product)
     {
         //编辑商品
-       return  $this->httpPostJson('merchant/update', $post);
-       return  $this->httpPostJson('merchant/update', $_POST);
+       $this->httpPostJson('merchant/update', $product);
+       // return  $this->httpPostJson('merchant/update', $_POST);
         //上架商品
-        // return $this->httpPostJson('merchant/modproductstatus',['product_id'=>$_POST['product_id'],'status'=>1]);
+        return $this->httpPostJson('merchant/modproductstatus',['product_id'=>$product['product_id'],'status'=>1]);
     }
 
 // 货架管理
