@@ -52,7 +52,9 @@ class AdminController extends Controller
 
 
     public function flushGroups()  {
-        foreach (app('wechat.work')->department->list(5)['department'] as $group) {
+        $groups = app('wechat.work')->department->list(5)['department'];
+        array_shift($groups);
+        foreach ($groups as $group) {
             Redis::hset('groups',$group['id'],$group['name']);
             Redis::hset($group['id'].':detail','name',$group['name']);
         };
@@ -84,7 +86,7 @@ class AdminController extends Controller
         Redis::pipeline(function($pipe) use ($list) {
             foreach ($list as $order) {
             // 根据订单产品 获取订单分组，
-                Redis::sadd(json_encode(Redis::get($order['product_id']),true)['order_id'].':order',$order['order_id']);
+                Redis::sadd(json_encode(Redis::get($order['product_id']),true)['product_code'].':orders',$order['order_id']);
                 Redis::hmset($order['order_id'].":detail",
                 [
                     'order_id' => $order['order_id'],

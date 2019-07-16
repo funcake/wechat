@@ -11,7 +11,9 @@
 	<script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
 	<script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
 	<style type="text/css">
-
+		wx.config({
+		    <?php echo $config ?>
+		});
 	</style>
 	@yield('content')
 

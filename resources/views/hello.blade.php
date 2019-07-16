@@ -153,7 +153,7 @@
 					// e['product_base']['img'] = e['product_base']['img'].map(function(e){e.replace(/https/,'http')});
 					html1 +=
 					`
-					<li key="${i}" class="ui-li"><a href="#">
+					<li key="${i}" class="ui-li"><a href="#" onclick = "product('${e['product_id']}')">
 					<img src="${e['product_base']['main_img']}" alt="">
 					<h2>${e['product_base']['name']}</h2>
 					<p>￥${e['sku_list'][0]['price']/100}</p>
@@ -352,6 +352,17 @@
 		}
 	}
 
+	wx.config(
+	    <?php echo $config ?>
+	);
+
+	function product(id) {
+		console.log(id);
+		wx.openProductSpecificView({
+		productId: id, // 商品id
+		viewType: 0 // 0.默认值，普通商品详情页1.扫一扫商品详情页2.小店商品详情页
+		});
+	}
 
 
 	</script>

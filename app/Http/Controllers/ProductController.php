@@ -17,12 +17,14 @@ use Illuminate\Support\Facades\Redis;
 class ProductController extends Controller
 {
     public function __construct() {
-        // session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
+        session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
         // $this->middleware('work');
         // $this->middleware('oauth:snsapi_userinfo');
     }
 
     public function home() {
+        $APIs = ['openProductSpecificView'];
+        $config = app('wechat.official_account')->jssdk->buildConfig($APIs, $debug = false, $beta = false, $json = true);
         $property = [];
         if(Redis::exists('property')) {
             $property = json_decode(Redis::get('property') ,true);
@@ -38,7 +40,7 @@ class ProductController extends Controller
        // $order = Redis::hgetall(Redis::hget('groups',$user['department'][0]));
      $order = [];
 
-     return view('hello',compact('material','usage','style','user','order'));
+     return view('hello',compact('material','usage','style','user','order','config'));
  }
 
     /**
