@@ -23,8 +23,6 @@ class ProductController extends Controller
     }
 
     public function home() {
-        $APIs = ['openProductSpecificView'];
-        $config = app('wechat.official_account')->jssdk->buildConfig($APIs, $debug = false, $beta = false, $json = true);
         $property = [];
         if(Redis::exists('property')) {
             $property = json_decode(Redis::get('property') ,true);
@@ -40,7 +38,23 @@ class ProductController extends Controller
        // $order = Redis::hgetall(Redis::hget('groups',$user['department'][0]));
      $order = [];
 
-     return view('hello',compact('material','usage','style','user','order','config'));
+     $group = ['status1'=>[],'status2'=>[]];
+     if($status1= Redis::smembers(session('wechat.work.default')['department'][0].':status1')) {
+         foreach ( Redis::mget($status1)  as $value) {
+             $group['status1'][] = json_decode($value,true);
+         }
+     }
+     if($status2= Redis::smembers(session('wechat.work.default')['department'][0].':status2')) {
+         foreach (Redis::mget($status2) as $value) {
+             $group['status2'][] = json_decode($value, true);
+         }
+     }
+
+     $group = json_encode($group);
+
+     $config = app('wechat.official_account')->jssdk->buildConfig(['openProductSpecificView'], $debug = false, $beta = false, $json = true);
+
+     return view('hello',compact('material','usage','style','user','order','config','group'));
  }
 
     /**

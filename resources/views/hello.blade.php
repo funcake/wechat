@@ -126,16 +126,19 @@
 <script type="text/javascript" charset="utf-8" async defer>
 
 //global 产品数据
-	var data = [];
+	var data = <?php echo $group ?>;
+
+	init1();
+	init2();
 //获得产品数据data
-	$.get(
+/*	$.get(
 		'group',
 		function(d) {
 			data = d;
 			init1();
 			init2();
 		}
-	);
+	);*/
 //navbar刷新
 	$(function(){
 		$( "[data-role='header'], [data-role='footer']" ).toolbar();
@@ -357,10 +360,9 @@
 	);
 
 	function product(id) {
-		console.log(id);
 		wx.openProductSpecificView({
 		productId: id, // 商品id
-		viewType: 0 // 0.默认值，普通商品详情页1.扫一扫商品详情页2.小店商品详情页
+		viewType: 2 // 0.默认值，普通商品详情页1.扫一扫商品详情页2.小店商品详情页
 		});
 	}
 
