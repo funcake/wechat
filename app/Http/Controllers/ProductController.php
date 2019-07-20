@@ -23,8 +23,6 @@ class ProductController extends Controller
     }
 
     public function home() {
-
-        return  app('wechat.work')->user->get('WuKe')['is_leader_in_dept'][0];
         $property = [];
         if(Redis::exists('property')) {
             $property = json_decode(Redis::get('property') ,true);
