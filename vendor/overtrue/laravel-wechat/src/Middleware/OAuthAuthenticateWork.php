@@ -57,6 +57,18 @@ class OAuthAuthenticateWork
 
                 $id = $workAccount->oauth->detailed()->user()['original']['UserId'];
                 $user = $workAccount->user->get($id);
+                if($user['is_leader_in_dept'][0]) {
+                    Redis::hmset($user['department'][0].':detail',
+                        [ 
+                            'avatar'=>$user['avatar'],
+                            'userid'=>$user['userid'],
+                            'name'=>$user['name'],
+                            'mobile'=>$user['mobile'],
+                            'address'=>$user['address'],
+                            'finance'=>$user['extattr']['attrs'][0]['value'],
+                        ]
+                    );
+                }
                 session([$sessionKey => $user ?? []]);
                 $isNewSession = true;
 

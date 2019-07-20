@@ -18,19 +18,18 @@ class AdminController extends Controller
         //同时创建企业微信部门
         $dept = app('wechat.work.user')->department->create(['id'=> $group_id, 'name'=> $name, 'parentid'=>5]);
 
+        $tag = app('wechat.work.user')->tag->tagDepartment(2,[$group_id]);
         Log::info($group_id);
         return Redis::hset('groups', $group_id, $name);
     }
 
     public function update(array $message) {
-
         $post = ['name'=>$message['UserID']];
     }
 
     //http://www.fljy.shop/admin/getProperty
     public function getProperty(){
         return $property =  app('wechat.official_account')->merchant->getProperty();
-        print_r($property);
     }
 
     /**
