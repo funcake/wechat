@@ -33,7 +33,8 @@ class UserController extends Controller
     {
         // return app('wechat.work')->messenger->message("新至商品")->toTag(1)->send();
         // Redis::hset('photo',$_POST['group'],$_POST['amount']);
-                Redis::hset('photo','test','test');
+                // Redis::hset('photo','test','test');
+                Redis::hset('hash1','key1',123);
 
         return app('wechat.work')->messenger->message($_POST['group']."新至商品".$_POST['amount'].'件')->toTag(1)->send();
         // return app('wechat.work')->messenger->message(Redis::hget('group',$_POST['group'])."新至商品".$_POST['amount'].'件')->toTag(1)->send();
