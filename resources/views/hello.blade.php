@@ -359,10 +359,12 @@
 	    <?php echo $config ?>
 	);
 
+	wx.hideAllNonBaseMenuItem();
+
 	function product(id) {
 		wx.openProductSpecificView({
 		productId: id, // 商品id
-		viewType: 1 // 0.默认值，普通商品详情页1.扫一扫商品详情页2.小店商品详情页
+		viewType: 0 // 0.默认值，普通商品详情页1.扫一扫商品详情页2.小店商品详情页
 		});
 	}
 
