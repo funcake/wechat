@@ -122,7 +122,9 @@ class AdminController extends Controller
             // $users[$group] = $user;
             $users[] = $user;
         }
-        return view('admin',compact('groupOrders','users'));
+        $config = app('wechat.official_account')->jssdk->buildConfig(['openProductSpecificView'], $debug = false, $beta = false, $json = true);
+
+        return view('admin',compact('groupOrders','users','config'));
     }
 
     public function setDelivery()
