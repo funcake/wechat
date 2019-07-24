@@ -42,8 +42,8 @@ class AdminController extends Controller
     public function createProduct(Request $request) {
         // $amount   = $request->input('amount', 1);
         // $group_id = $request->input('group_id', 530528963); // 测试部门：530528963
-        $amount  =  '';
-        $group_id = '';
+        $amount  =  $request['amount'];
+        $group_id = $request['group_id'];
         $this->dispatch(new UploadProduct($amount,$group_id));
         return 'ok';
        
@@ -122,7 +122,11 @@ class AdminController extends Controller
             // $users[$group] = $user;
             $users[] = $user;
         }
-        return view('admin',compact('groupOrders','users'));
+        $config = app('wechat.official_account')->jssdk->buildConfig(['openProductSpecificView'], $debug = false, $beta = false, $json = true);
+
+        $photo = Redis::hgetall('photo');       
+
+        return view('admin',compact('groupOrders','users','config','photo'));
     }
 
     public function setDelivery()

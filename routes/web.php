@@ -62,7 +62,7 @@ $router->group(['prefix'=>'admin'],function($router) {
 
 	$router->get('uploadProduct','AdminController@uploadProduct');
     //创建商品
-	$router->get('createProduct','AdminController@createProduct');
+	$router->post('createProduct','AdminController@createProduct');
 
     $router->get('getProperty','AdminController@getProperty');
 

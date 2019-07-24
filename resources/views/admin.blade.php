@@ -1,7 +1,7 @@
 @extends("layout")
 
 @section("content")
-
+<body>
 <section id="admin" data-role="page">
 	<div data-role="header">
 		<h1>商户管理</h1>
@@ -16,6 +16,17 @@
 				<div class="ui-block-b"><a href="" data-rel="back" class="ui-shadow ui-btn ui-btn-a ui-corner-all ">取消</a></div>
 			</fieldset>
 	</div>
+
+
+	<form class="ui-filterable">
+		<input id="orders" data-type="search">
+	</form>
+	<div data-role="collapsiblesest" data-filter="true" data-input="#orders">
+@foreach($photo as $group_id => $amount)
+	<div>{{$group_id}} <form method="post" action="/admin/createProduct"><input type="hidden" name="group_id" value="{{$group_id}}" ><input type="hidden" name="amount" value="{{$amount}}"><input type="submit" name=""></form></div>
+@endforeach
+	</div>
+
 	<form class="ui-filterable">
 		<input id="orders" data-type="search">
 	</form>
@@ -55,6 +66,7 @@
 	</div>
 	<!-- <input class="copy" value="123 sdfdfg sdfgsdf "> -->
 </section>
+</body>
 <script>
 	$('#regist').on("click",function() {
 		post = {'name':$('#name').val()};
