@@ -1,7 +1,7 @@
 @extends("layout")
 
 @section("content")
-
+<body>
 <section id="admin" data-role="page">
 	<div data-role="header">
 		<h1>商户管理</h1>
@@ -66,6 +66,7 @@
 	</div>
 	<!-- <input class="copy" value="123 sdfdfg sdfgsdf "> -->
 </section>
+</body>
 <script>
 	$('#regist').on("click",function() {
 		post = {'name':$('#name').val()};
