@@ -146,7 +146,7 @@
 	});
 
 
-	//init statu1 products
+	//init status1 products
 	function init1() {
 			var html1 = "";
 
