@@ -20,6 +20,14 @@
 		<input id="orders" data-type="search">
 	</form>
 	<div data-role="collapsiblesest" data-filter="true" data-input="#orders">
+@foreach($photo as $group => $amount)
+	<div>{{$group}} <button>$amount</button></div>
+	</div>
+
+	<form class="ui-filterable">
+		<input id="orders" data-type="search">
+	</form>
+	<div data-role="collapsiblesest" data-filter="true" data-input="#orders">
 @foreach($groupOrders as $group => $orders)
 	<div data-role="collapsible">
 		<h3>{{$users[$group]['name']}}</h3>

@@ -32,7 +32,7 @@ class UploadProduct extends Job
          $this->group_id = 530528963; 
          $this->amount = 20;
         $err = []; //第多少个商品创建失败
-        for ($i=1; $i <= $this->amount ; $i++) {
+        for ($i=0; $i <= $this->amount ; $i++) {
             $post =
             [
               "product_base"=>[
@@ -41,12 +41,13 @@ class UploadProduct extends Job
                 ],
                 "name"=> "", //商品名称
 
-                "main_img"=> app('wechat.official_account')->merchant->uploadImage(($i*2-1).'.jpg'),
+                "main_img"=> app('wechat.official_account')->merchant->uploadImage(($i*6+1).'.jpg'),
                 "img"=>[ // 商品图片列表
-                    app('wechat.official_account')->merchant->uploadImage(($i*2).'.jpg'),
-                    app('wechat.official_account')->merchant->uploadImage(($i+2*/*$amount*/ 20).'.jpg'),
-                    app('wechat.official_account')->merchant->uploadImage(($i+3*/*$amount*/ 20).'.jpg'),
-                    app('wechat.official_account')->merchant->uploadImage(($i+4*/*$amount*/ 20).'.jpg'),
+                    app('wechat.official_account')->merchant->uploadImage(($i*6+2).'.jpg'),
+                    app('wechat.official_account')->merchant->uploadImage(($i*6+3).'.jpg'),
+                    app('wechat.official_account')->merchant->uploadImage(($i*6+4).'.jpg'),
+                    app('wechat.official_account')->merchant->uploadImage(($i*6+5).'.jpg'),
+                    app('wechat.official_account')->merchant->uploadImage(($i*6+6).'.jpg'),
                 ],
                 "detail"=>[
                     [
@@ -54,6 +55,9 @@ class UploadProduct extends Job
                     ],
                     [
                         "img"=>"https://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7f6xBeIjAeeWPlbH5jZRXcVib24zkjMPiaPB537hvj1bVxNEWMh4Zc9ibxBibS68tPibJBGajD8YnqibiawQ/0?wx_fmt=jpeg"
+                    ],
+                    [
+                        "img"=>app('wechat.official_account')->merchant->uploadImage(($i+1).'z.jpg'),
                     ],
                     [
                         "img"=>"https://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7djyj1nkyDJXzrno3g92gKicwMcQWGp7eu3ftmBRSNJQl0CAGt5UFpwr4jkhWacEyKKcVRvxicbjQQg/0?wx_fmt=jpeg"
