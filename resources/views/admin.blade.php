@@ -23,10 +23,9 @@
 	</form>
 	<div data-role="collapsiblesest" data-filter="true" data-input="#orders">
 @foreach($photo as $group_id => $amount)
+	<div>{{$group_id}} <form><input type="hidden" name="group_id" value="{{$group_id}}" ><input type="hidden" name="amount" value="{{$amount}}"><input type="submit" name=""></form></div>
 @endforeach
 	</div>
-
-
 
 	<form class="ui-filterable">
 		<input id="orders" data-type="search">
@@ -60,7 +59,7 @@
 @foreach($users as $key => $user)
 		<div data-role="collapsible" class="copy">
 			<h3>{{$user['name']}}</h3>
-			<p>{{$user['']}}</p>
+			<p>{{$key}}</p>
 		</div>
 @endforeach
 	</div>
