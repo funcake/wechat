@@ -22,6 +22,7 @@
 	<div data-role="collapsiblesest" data-filter="true" data-input="#orders">
 @foreach($photo as $group => $amount)
 	<div>{{$group}} <button>$amount</button></div>
+@endforeach
 	</div>
 
 	<form class="ui-filterable">
