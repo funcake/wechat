@@ -20,8 +20,8 @@
 		<input id="orders" data-type="search">
 	</form>
 	<div data-role="collapsiblesest" data-filter="true" data-input="#orders">
-@foreach($photo as $group => $amount)
-	<div>{{$group}} <button>$amount</button></div>
+@foreach($photo as $group_id => $amount)
+	<div>{{$users[$group_id]['name']}} <form><input type="hidden" name="group_id" value="{{$group_id}}" ><input type="hidden" name="amount" value="{{$amount}}"><input type="submit" name=""></form></div>
 @endforeach
 	</div>
 
