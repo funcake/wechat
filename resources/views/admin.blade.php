@@ -23,7 +23,6 @@
 	</form>
 	<div data-role="collapsiblesest" data-filter="true" data-input="#orders">
 @foreach($photo as $group_id => $amount)
-	<div>{{$group_id}} <form><input type="hidden" name="group_id" value="{{$group_id}}" ><input type="hidden" name="amount" value="{{$amount}}"><input type="submit" name=""></form></div>
 @endforeach
 	</div>
 
