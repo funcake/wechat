@@ -261,6 +261,7 @@
 		var key = $(this).attr("key");
 		post = data.status2[key];
 		post.product_base.name=$('#name').val();
+		post.product_base.detail[0].text=$('#detail').val();
 		post.sku_list[0].price=$('#price2').val()*100;
 		post.status = 1;
 		post.product_base.property.concat(
