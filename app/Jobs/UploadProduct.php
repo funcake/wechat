@@ -56,7 +56,7 @@ class UploadProduct extends Job
                         "img"=>"https://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7d4scsYfueOS7icPDVwMtYdiadEN4biaQhiaehIzsGOHay1QpUTPJ6R6buVkxHcB1UvQGSsfL80Fjs8sQ/0?wx_fmt=jpeg"
                     ],
                     [
-                        "img"=>app('wechat.official_account')->merchant->uploadImage(($i+1).'z.jpg'),
+                        "img"=>app('wechat.official_account')->merchant->uploadImage(($i+1).'.jpg'),
                     ],
                     [
                         "img"=>"https://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7djyj1nkyDJXzrno3g92gKicwMcQWGp7eu3ftmBRSNJQl0CAGt5UFpwr4jkhWacEyKKcVRvxicbjQQg/0?wx_fmt=jpeg"
@@ -95,7 +95,6 @@ class UploadProduct extends Job
                 "isSupportReplace"=>0
               ],
             ];
-            return $post;
             //创建产品获取id，并归入分组
             $product_arr = app('wechat.official_account')->merchant->create($post);
             if($product_arr['errcode'] === 0){ //创建成功
