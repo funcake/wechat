@@ -67,7 +67,7 @@ class Merchant extends BaseClient
        $this->httpPostJson('merchant/update', $product);
        // return  $this->httpPostJson('merchant/update', $_POST);
         //上架商品
-        return $this->httpPostJson('merchant/modproductstatus',['product_id'=>$product['product_id'],'status'=>1]);
+        // return $this->httpPostJson('merchant/modproductstatus',['product_id'=>$product['product_id'],'status'=>1]);
     }
 
 // 货架管理
@@ -76,7 +76,7 @@ class Merchant extends BaseClient
         "shelf_data"=>[
           "module_infos"=>[
             [
-              "group_infos"=>[
+            "group_infos"=>[
                 "groups"=>[
 
                   [
