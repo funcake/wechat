@@ -29,8 +29,6 @@ class UploadProduct extends Job
     public function handle()
     {
         // return app('wechat.official_account')->merchant->uploadImage(,$i.'.jpg');
-         $this->group_id = 530528963; 
-         $this->amount = 20;
         $err = []; //第多少个商品创建失败
         for ($i=0; $i <= $this->amount ; $i++) {
             $post =
@@ -110,11 +108,11 @@ class UploadProduct extends Job
                 $err[] = $i + 1;
             }
          }
-         // if(!empty($list)){
-         //     // 添加产品入分组
-         //    $mod = ['group_id' => $this->group_id, 'product'=>$list];
-         //     app('wechat.official_account')->merchant->groupMod($mod);
-         // }
+         if(!empty($list)){
+             // 添加产品入分组
+            $mod = ['group_id' => $this->group_id, 'product'=>$list];
+             app('wechat.official_account')->merchant->groupMod($mod);
+         }
 
          $msg = '';
          if(!empty($err)){
