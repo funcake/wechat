@@ -355,10 +355,6 @@
 		}
 	}
 
-	wx.config(
-	    <?php echo $config ?>
-	);
-
 	wx.hideAllNonBaseMenuItem();
 
 	function product(id) {
