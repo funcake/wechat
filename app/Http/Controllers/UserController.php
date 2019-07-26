@@ -51,6 +51,8 @@ class UserController extends Controller
 
         app('wechat.work.user')->user->update($request->id,['department'=>$group_id]]);
 
-        return Redis::hset('groups', $group_id, $name);
+        Redis::hset('groups', $group_id, $name);
+
+        return redirect('/');
     }
 }
