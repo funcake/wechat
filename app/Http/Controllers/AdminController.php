@@ -42,6 +42,7 @@ class AdminController extends Controller
     public function createProduct(Request $request) {
         // $amount   = $request->input('amount', 1);
         // $group_id = $request->input('group_id', 530528963); // 测试部门：530528963
+        return 123;
         $post =
         [
           "product_base"=>[
