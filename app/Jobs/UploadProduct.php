@@ -110,11 +110,11 @@ class UploadProduct extends Job
                 $err[] = $i + 1;
             }
          }
-         if(!empty($list)){
-             // 添加产品入分组
-            $mod = ['group_id' => $this->group_id, 'product'=>$list];
-             app('wechat.official_account')->merchant->groupMod($mod);
-         }
+         // if(!empty($list)){
+         //     // 添加产品入分组
+         //    $mod = ['group_id' => $this->group_id, 'product'=>$list];
+         //     app('wechat.official_account')->merchant->groupMod($mod);
+         // }
 
          $msg = '';
          if(!empty($err)){
