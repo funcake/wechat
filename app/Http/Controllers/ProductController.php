@@ -23,7 +23,6 @@ class ProductController extends Controller
 	}
 
 	public function home() {
-    return redirect('/admin/home');
 		$user = session('wechat.work.default');
     if ($user['department'][0] == 530528964) {
       $id=$user['userid'];
