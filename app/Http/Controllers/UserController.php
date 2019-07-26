@@ -41,12 +41,11 @@ class UserController extends Controller
     }
 
     public function registDepartment(Request $request) {
-        return $request->id;
         $name = $request->name;
         //创建微信小店的商品分组 返回分组id 整型
         $group_id = app('wechat.official_account')->merchant->groupAdd($name);
         //同时创建企业微信部门
-        $dept = app('wechat.work.user')->department->create(['id'=> $group_id, 'name'=> $name, 'parentid'=>5]);
+        return $dept = app('wechat.work.user')->department->create(['id'=> $group_id, 'name'=> $name, 'parentid'=>5]);
 
         $tag = app('wechat.work.user')->tag->tagDepartment(2,[$group_id]);
 
