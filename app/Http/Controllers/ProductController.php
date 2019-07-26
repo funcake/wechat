@@ -26,7 +26,7 @@ class ProductController extends Controller
 		$user = session('wechat.work.default');
     if ($user['department'][0] == 530528964) {
       $id=$user['userid'];
-      return view('regist',compact($id));
+      return view('regist',compact('id'));
     }
 		$property = [];
 		if(Redis::exists('property')) {
