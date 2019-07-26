@@ -30,7 +30,7 @@ class UploadProduct extends Job
     {
         // return app('wechat.official_account')->merchant->uploadImage(,$i.'.jpg');
         $err = []; //第多少个商品创建失败
-        for ($i=0; $i <= $this->amount ; $i++) {
+        for ($i=0; $i < $this->amount ; $i++) {
             $post =
             [
               "product_base"=>[
