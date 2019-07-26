@@ -119,7 +119,7 @@ class AdminController extends Controller
               "price"=>100, // 1分 微信价必须比原价ori_price小，不然添加失败
               "icon_url"=> 'https://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7d4scsYfueOS7icPDVwMtYdiadEN4biaQhiaehIzsGOHay1QpUTPJ6R6buVkxHcB1UvQGSsfL80Fjs8sQ/0?wx_fmt=jpeg',
               // 部门人员每次申请新产品上架 会在通知里留下自己的部门ID
-              "product_code"=> $this->group_id."", //字符串 这个是产品分组id也就是部门id, department_id
+              "product_code"=> "", //字符串 这个是产品分组id也就是部门id, department_id
               "ori_price"=>'', //100分
               "quantity"=>1
             ],
