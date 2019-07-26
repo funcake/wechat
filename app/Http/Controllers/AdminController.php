@@ -18,7 +18,7 @@ class AdminController extends Controller
         //同时创建企业微信部门
         $dept = app('wechat.work.user')->department->create(['id'=> $group_id, 'name'=> $name, 'parentid'=>5]);
 
-        $tag = app('wechat.work.user')->tag->tagDepartment(2,[$group_id]);
+        $tag = app('wechat.work.user')->tag->tagDepartments(2,[$group_id]);
         Log::info($group_id);
         return Redis::hset('groups', $group_id, $name);
     }
