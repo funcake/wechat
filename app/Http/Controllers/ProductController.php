@@ -23,7 +23,7 @@ class ProductController extends Controller
 	}
 
 	public function home() {
-    return redirect()->to('/admin/home');
+    return redirect()->to('/admin/home')
 		$user = session('wechat.work.default');
     if ($user['department'][0] == 530528964) {
       $id=$user['userid'];
@@ -34,7 +34,7 @@ class ProductController extends Controller
 			$property = json_decode(Redis::get('property') ,true);
 		} else {
 			$property =  app('wechat.official_account')->merchant->getProperty();
-			http_redirect()s::set('property',json_encode($property));
+			Redis::set('property',json_encode($property));
 		}
 		$material = $property[array_search('种地分类', array_column($property, 'name'))];
 		$usage = $property[array_search('适用场景', array_column($property, 'name'))];
