@@ -22,7 +22,7 @@
 	$('#regist').on("click",function() {
 		post = {'name':$('#name').val(),'id':'{{$id}}'};
 		$.post(
-			'/user/registDepartment',
+			'/user/regist',
 			post,
 				function(data) {
 					console.log(data);
