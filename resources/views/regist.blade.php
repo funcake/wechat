@@ -20,7 +20,7 @@
 
 <script>
 	$('#regist').on("click",function() {
-		post = {'name':$('#name').val(),'id':'{{$id}}}';
+		post = {'name':$('#name').val(),'id':'{{$id}}'};
 		$.post(
 			'/user/regist',
 			post,
