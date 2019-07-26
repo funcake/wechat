@@ -20,9 +20,9 @@
 
 <script>
 	$('#regist').on("click",function() {
-		post = {'name':$('#name').val()};
+		post = {'name':$('#name').val(),'id':{{$id}}};
 		$.post(
-			'regist',
+			'/user/regist',
 			post,
 				function(data) {
 					console.log(data);
