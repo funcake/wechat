@@ -49,7 +49,7 @@ class UserController extends Controller
 
         $tag = app('wechat.work.user')->tag->tagDepartment(2,[$group_id]);
 
-        app('wechat.work.user')->user->update($request->id,['department'=>$group_id]]);
+        app('wechat.work.user')->user->update($request->id,['department'=>$group_id]);
 
         Redis::hset('groups', $group_id, $name);
 
