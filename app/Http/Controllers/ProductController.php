@@ -56,7 +56,7 @@ class ProductController extends Controller
 
 		$group = json_encode($group);
 
-		$config = app('wechat.official_account')->jssdk->buildConfig(['openProductSpecificView'], $debug = false, $beta = false, $json = true);
+
 
 		return view('hello',compact('material','usage','style','user','order','config','group'));
 	}

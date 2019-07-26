@@ -6,6 +6,14 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    
+    public function boot()
+    {
+        $config = app('wechat.official_account')->jssdk->buildConfig(['openProductSpecificView'], $debug = false, $beta = false, $json = true);
+        view()->composer('layout',function($view) {
+            $view->with('config',$config);
+        })
+    }
     /**
      * Register any application services.
      *
