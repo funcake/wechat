@@ -47,7 +47,7 @@ class UserController extends Controller
         //同时创建企业微信部门
         $dept = app('wechat.work.user')->department->create(['id'=> $group_id, 'name'=> $name, 'parentid'=>5]);
 
-        return $tag = app('wechat.work.user')->tag->tagDepartment(2,[$group_id]);
+        $tag = app('wechat.work.user')->tag->tagDepartments(2,[$group_id]);
 
         app('wechat.work.user')->user->update($request->id,['department'=>$group_id]);
 
