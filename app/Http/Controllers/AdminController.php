@@ -87,7 +87,7 @@ class AdminController extends Controller
             ],
             "name"=> "", //商品名称
 
-            "main_img"=> 'https://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7d4scsYfueOS7icPDVwMtYdiadEN4biaQhiaehIzsGOHay1QpUTPJ6R6buVkxHcB1UvQGSsfL80Fjs8sQ/0?wx_fmt=jpeg',
+            "main_img"=> 'http://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7d4scsYfueOS7icPDVwMtYdiadEN4biaQhiaehIzsGOHay1QpUTPJ6R6buVkxHcB1UvQGSsfL80Fjs8sQ/0?wx_fmt=jpeg',
             "img"=>[ // 商品图片列表
             ],
             "detail"=>[
@@ -95,7 +95,7 @@ class AdminController extends Controller
                     "text"=>""
                 ],
                 [
-                    "img"=>"https://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7djyj1nkyDJXzrno3g92gKicwMcQWGp7eu3ftmBRSNJQl0CAGt5UFpwr4jkhWacEyKKcVRvxicbjQQg/0?wx_fmt=jpeg"
+                    "img"=>"http://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7djyj1nkyDJXzrno3g92gKicwMcQWGp7eu3ftmBRSNJQl0CAGt5UFpwr4jkhWacEyKKcVRvxicbjQQg/0?wx_fmt=jpeg"
                 ]
             ],
             "buy_limit"=>1,
@@ -111,7 +111,7 @@ class AdminController extends Controller
             [
               "sku_id"=>"",
               "price"=>100, // 1分 微信价必须比原价ori_price小，不然添加失败
-              "icon_url"=> 'https://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7d4scsYfueOS7icPDVwMtYdiadEN4biaQhiaehIzsGOHay1QpUTPJ6R6buVkxHcB1UvQGSsfL80Fjs8sQ/0?wx_fmt=jpeg',
+              "icon_url"=> 'http://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7d4scsYfueOS7icPDVwMtYdiadEN4biaQhiaehIzsGOHay1QpUTPJ6R6buVkxHcB1UvQGSsfL80Fjs8sQ/0?wx_fmt=jpeg',
               // 部门人员每次申请新产品上架 会在通知里留下自己的部门ID
               "product_code"=> "", //字符串 这个是产品分组id也就是部门id, department_id
               "ori_price"=>'', //100分
@@ -132,6 +132,7 @@ class AdminController extends Controller
           ],
         ];
         return app('wechat.official_account')->merchant->create($post);
+
         $merchant = app('wechat.official_account')->merchant;
 
         $list = $merchant->orderList();
