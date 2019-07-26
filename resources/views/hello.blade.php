@@ -260,7 +260,7 @@
 	$('#submit2').on("click",function() {
 		var key = $(this).attr("key");
 		post = data.status2[key];
-		post.product_base.property = [];
+		post.product_base.property = [{'id' : 1075743464,'vid'  : 1079783184}];
 		post.product_base.name=$('#name').val();
 		// post.product_base.detail.push({text:$('#detail').val()});
 		post.sku_list[0].price=$('#price2').val()*100;
