@@ -265,8 +265,7 @@
 		// post.product_base.detail.push({text:$('#detail').val()});
 		post.sku_list[0].price=$('#price2').val()*100;
 		post.status = 1;
-		post.product_base.property.concat(
-		[
+		post.product_base.property.push(
 			{
 				"id": "{{$material['id']}}",
 				"vid": $('#material').val(),
@@ -279,7 +278,7 @@
 				"id": "{{$usage['id']}}",
 				"vid": $('#usage').val(),
 			}
-		] );
+		 );
 
 		$("#list2 [key='"+key+"']").remove();
 		data.status1.unshift(post);
