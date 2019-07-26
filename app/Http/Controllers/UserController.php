@@ -45,9 +45,9 @@ class UserController extends Controller
         //创建微信小店的商品分组 返回分组id 整型
         $group_id = app('wechat.official_account')->merchant->groupAdd($name);
         //同时创建企业微信部门
-        return $dept = app('wechat.work.user')->department->create(['id'=> $group_id, 'name'=> $name, 'parentid'=>5]);
+        $dept = app('wechat.work.user')->department->create(['id'=> $group_id, 'name'=> $name, 'parentid'=>5]);
 
-        $tag = app('wechat.work.user')->tag->tagDepartment(2,[$group_id]);
+        return $tag = app('wechat.work.user')->tag->tagDepartment(2,[$group_id]);
 
         app('wechat.work.user')->user->update($request->id,['department'=>$group_id]);
 
