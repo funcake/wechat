@@ -41,6 +41,7 @@ class UserController extends Controller
     }
 
     public function registDepartment(Request $request) {
+        return $request->name;
         $name = $request->name;
         //创建微信小店的商品分组 返回分组id 整型
         $group_id = app('wechat.official_account')->merchant->groupAdd($name);
@@ -49,7 +50,7 @@ class UserController extends Controller
 
         $tag = app('wechat.work.user')->tag->tagDepartment(2,[$group_id]);
 
-        // app('wechat.work.user')->user->update($request->id,['department'=>$group_id]);
+        app('wechat.work.user')->user->update($request->id,['department'=>$group_id]);
 
         Redis::hset('groups', $group_id, $name);
 
