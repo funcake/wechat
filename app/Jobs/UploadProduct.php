@@ -56,7 +56,7 @@ class UploadProduct extends Job
                         "img"=>"https://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7d4scsYfueOS7icPDVwMtYdiadEN4biaQhiaehIzsGOHay1QpUTPJ6R6buVkxHcB1UvQGSsfL80Fjs8sQ/0?wx_fmt=jpeg"
                     ],
                     [
-                        "img"=>app('wechat.official_account')->merchant->uploadImage(($i+1).'.jpg'),
+                        "img"=>app('wechat.official_account')->merchant->uploadImage(($i+1).'z.jpg'),
                     ],
                     [
                         "img"=>"https://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7djyj1nkyDJXzrno3g92gKicwMcQWGp7eu3ftmBRSNJQl0CAGt5UFpwr4jkhWacEyKKcVRvxicbjQQg/0?wx_fmt=jpeg"
