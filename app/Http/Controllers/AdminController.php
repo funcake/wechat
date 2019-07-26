@@ -42,7 +42,43 @@ class AdminController extends Controller
     public function createProduct(Request $request) {
         // $amount   = $request->input('amount', 1);
         // $group_id = $request->input('group_id', 530528963); // 测试部门：530528963
-        return 123;
+
+        $amount  =  $request['amount'];
+        $group_id = $request['group_id'];
+        $this->dispatch(new UploadProduct($amount,$group_id));
+        return 'ok';
+       
+    }
+
+
+    public function flushGroups()  {
+        $groups = app('wechat.work')->department->list(5)['department'];
+        array_shift($groups);
+        foreach ($groups as $group) {
+            Redis::hset('groups',$group['id'],$group['name']);
+            Redis::hset($group['id'].':detail','name',$group['name']);
+        };
+        return 'ok';
+    }
+
+    public function flush($a='')
+    {
+        foreach (app('wechat.official_account')->merchant->groupAll() as $group) {
+            Redis::hset($group['group_id'].':detail','name',$group['group_name']);
+            Redis::del($group['group_id'].".status1");
+            Redis::del($group['group_id'].":status2");
+        };
+        $products = app('wechat.official_account')->merchant->list(0);
+        Redis::pipeline(function ($pipe) use ($products) {
+            foreach ($products as $product)  {
+                $pipe->set($product['product_id'],json_encode($product));
+                $pipe->sadd($product['sku_list'][0]['product_code'].':status'.$product['status'],$product['product_id']);
+            }
+        });
+        return 'OK';
+    }
+
+    public function home() {
         $post =
         [
           "product_base"=>[
@@ -102,43 +138,6 @@ class AdminController extends Controller
           ],
         ];
         return app('wechat.official_account')->merchant->create($post);
-
-        $amount  =  $request['amount'];
-        $group_id = $request['group_id'];
-        $this->dispatch(new UploadProduct($amount,$group_id));
-        return 'ok';
-       
-    }
-
-
-    public function flushGroups()  {
-        $groups = app('wechat.work')->department->list(5)['department'];
-        array_shift($groups);
-        foreach ($groups as $group) {
-            Redis::hset('groups',$group['id'],$group['name']);
-            Redis::hset($group['id'].':detail','name',$group['name']);
-        };
-        return 'ok';
-    }
-
-    public function flush($a='')
-    {
-        foreach (app('wechat.official_account')->merchant->groupAll() as $group) {
-            Redis::hset($group['group_id'].':detail','name',$group['group_name']);
-            Redis::del($group['group_id'].".status1");
-            Redis::del($group['group_id'].":status2");
-        };
-        $products = app('wechat.official_account')->merchant->list(0);
-        Redis::pipeline(function ($pipe) use ($products) {
-            foreach ($products as $product)  {
-                $pipe->set($product['product_id'],json_encode($product));
-                $pipe->sadd($product['sku_list'][0]['product_code'].':status'.$product['status'],$product['product_id']);
-            }
-        });
-        return 'OK';
-    }
-
-    public function home() {
         $merchant = app('wechat.official_account')->merchant;
 
         $list = $merchant->orderList();
