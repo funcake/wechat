@@ -28,6 +28,7 @@ class UploadProduct extends Job
      */
     public function handle()
     {
+        $this->amount = 1;
         // return app('wechat.official_account')->merchant->uploadImage(,$i.'.jpg');
         $err = []; //第多少个商品创建失败
         for ($i=0; $i < $this->amount ; $i++) {
