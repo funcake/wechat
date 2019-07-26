@@ -74,9 +74,9 @@ class ProductController extends Controller
 
 
   public function update(Request $request) {
-  	Redis::set($request->product_id, json_encode($_POST));
-  	Redis::sadd($request->sku_list[0]['product_code'].':status2',$request->product_id);
-    Redis::srem($request->sku_list[0]['product_code'].':status1',$request->product_id);
+  	// Redis::set($request->product_id, json_encode($_POST));
+  	// Redis::sadd($request->sku_list[0]['product_code'].':status2',$request->product_id);
+    // Redis::srem($request->sku_list[0]['product_code'].':status1',$request->product_id);
   	return app('wechat.official_account')->merchant->update($_POST);
   }
 
