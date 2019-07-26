@@ -81,7 +81,7 @@
 		<!-- 基本信息 -->
 		<div class="ui-block-a"> <div class="ui-bar"> <img src="{{$user['avatar']}}" alt="" height="80px"> </div> </div>
 		<div class="ui-block-b"> <div class="ui-bar"> {{$user['name']}} </div> </div>
-		<div class="ui-block-c"> <div class="ui-bar"><a href="#incoming" title="新至商品" type="button" data-rel="popup" data-position-to="window" data-transition="pop" style="outline:#b5193f solid;outline-offset: -3px">新至商品</a></div> </div>
+		<div class="ui-block-c"> <div class="ui-bar"><a href="#incoming" title="新至商品" type="button" data-rel="popup" data-position-to="window" data-transition="pop" style="outline:#b5193f solid;outline-offset: -3px">上传</a></div> </div>
 		<!-- 抬头 -->
 		<div class="ui-block-a"> <div class="ui-bar ui-bar-b"> 总销售： </div> </div>
 		<div class="ui-block-b"> <div class="ui-bar ui-bar-b"> 结算额： </div> </div>
