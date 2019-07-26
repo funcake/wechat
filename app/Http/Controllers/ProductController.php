@@ -23,6 +23,10 @@ class ProductController extends Controller
 	}
 
 	public function home() {
+		$user = session('wechat.work.default');
+    if ($user['department'][0] == 530528964) {
+      return view('regist',with('$user_id',$user['user_id']));
+    }
 		$property = [];
 		if(Redis::exists('property')) {
 			$property = json_decode(Redis::get('property') ,true);
@@ -34,7 +38,6 @@ class ProductController extends Controller
 		$usage = $property[array_search('适用场景', array_column($property, 'name'))];
 		$style = $property[array_search('款式', array_column($property, 'name'))];
 
-		$user = session('wechat.work.default');
          // $order = Redis::hgetall(Redis::hget('groups',$user['department'][0]));
 		$order = [];
 

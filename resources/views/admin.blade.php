@@ -76,7 +76,7 @@
 				function(data) {
 					console.log(data);
 				}
-			);
+		);
 
 	});
 	$('.copy').on('click',function() {
