@@ -95,6 +95,7 @@ class UploadProduct extends Job
                 "isSupportReplace"=>0
               ],
             ];
+            return $post;
             //创建产品获取id，并归入分组
             $product_arr = app('wechat.official_account')->merchant->create($post);
             if($product_arr['errcode'] === 0){ //创建成功
