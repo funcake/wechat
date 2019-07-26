@@ -44,6 +44,7 @@ $router->group(['prefix'=>'user'],function($router) {
 
 	$router->get('create','UserController@create');
 	// $router->get('admin','WeChatController@group');
+	$router->post('regist','UserController@registDepartment');
 
 });
 

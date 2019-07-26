@@ -6,6 +6,13 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    
+    public function boot()
+    {
+        view()->composer('layout',function($view) {
+            $view->with('config',\App\Jssdk::config());
+        });
+    }
     /**
      * Register any application services.
      *

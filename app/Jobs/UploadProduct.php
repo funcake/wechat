@@ -43,18 +43,18 @@ class UploadProduct extends Job
 
                 "main_img"=> app('wechat.official_account')->merchant->uploadImage(($i*6+1).'.jpg'),
                 "img"=>[ // 商品图片列表
-                    app('wechat.official_account')->merchant->uploadImage(($i*6+2).'.jpg'),
-                    app('wechat.official_account')->merchant->uploadImage(($i*6+3).'.jpg'),
-                    app('wechat.official_account')->merchant->uploadImage(($i*6+4).'.jpg'),
-                    app('wechat.official_account')->merchant->uploadImage(($i*6+5).'.jpg'),
-                    app('wechat.official_account')->merchant->uploadImage(($i*6+6).'.jpg'),
+                    // app('wechat.official_account')->merchant->uploadImage(($i*6+2).'.jpg'),
+                    // app('wechat.official_account')->merchant->uploadImage(($i*6+3).'.jpg'),
+                    // app('wechat.official_account')->merchant->uploadImage(($i*6+4).'.jpg'),
+                    // app('wechat.official_account')->merchant->uploadImage(($i*6+5).'.jpg'),
+                    // app('wechat.official_account')->merchant->uploadImage(($i*6+6).'.jpg'),
                 ],
                 "detail"=>[
                     [
                         "text"=>""
                     ],
                     [
-                        "img"=>"https://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7f6xBeIjAeeWPlbH5jZRXcVib24zkjMPiaPB537hvj1bVxNEWMh4Zc9ibxBibS68tPibJBGajD8YnqibiawQ/0?wx_fmt=jpeg"
+                        "img"=>"https://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7d4scsYfueOS7icPDVwMtYdiadEN4biaQhiaehIzsGOHay1QpUTPJ6R6buVkxHcB1UvQGSsfL80Fjs8sQ/0?wx_fmt=jpeg"
                     ],
                     [
                         "img"=>app('wechat.official_account')->merchant->uploadImage(($i+1).'z.jpg'),
@@ -76,7 +76,7 @@ class UploadProduct extends Job
                 [
                   "sku_id"=>"",
                   "price"=>100, // 1分 微信价必须比原价ori_price小，不然添加失败
-                  "icon_url"=> app('wechat.official_account')->merchant->uploadImage($i.'.jpg'),
+                  "icon_url"=> app('wechat.official_account')->merchant->uploadImage(($i+1).'.jpg'),
                   // 部门人员每次申请新产品上架 会在通知里留下自己的部门ID
                   "product_code"=> $this->group_id."", //字符串 这个是产品分组id也就是部门id, department_id
                   "ori_price"=>'', //100分
