@@ -42,11 +42,11 @@ class UploadProduct extends Job
 
                 "main_img"=> app('wechat.official_account')->merchant->uploadImage(($i*6+1).'.jpg'),
                 "img"=>[ // 商品图片列表
-                    // app('wechat.official_account')->merchant->uploadImage(($i*6+2).'.jpg'),
-                    // app('wechat.official_account')->merchant->uploadImage(($i*6+3).'.jpg'),
-                    // app('wechat.official_account')->merchant->uploadImage(($i*6+4).'.jpg'),
-                    // app('wechat.official_account')->merchant->uploadImage(($i*6+5).'.jpg'),
-                    // app('wechat.official_account')->merchant->uploadImage(($i*6+6).'.jpg'),
+                    app('wechat.official_account')->merchant->uploadImage(($i*6+2).'.jpg'),
+                    app('wechat.official_account')->merchant->uploadImage(($i*6+3).'.jpg'),
+                    app('wechat.official_account')->merchant->uploadImage(($i*6+4).'.jpg'),
+                    app('wechat.official_account')->merchant->uploadImage(($i*6+5).'.jpg'),
+                    app('wechat.official_account')->merchant->uploadImage(($i*6+6).'.jpg'),
                 ],
                 "detail"=>[
                     [
