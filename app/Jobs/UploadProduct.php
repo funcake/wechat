@@ -101,6 +101,7 @@ class UploadProduct extends Job
                 // 分组id:状态未上架 => 产品id0删除
                 Redis::sadd($this->group_id.":status2",$product_id); // 2:表示未上架
                 // 产品id => json内容
+                $post['product_id'] = $product_id;
                 Redis::set($product_id, json_encode($post) );
             } else {
                 $err[] = $i + 1;
