@@ -49,9 +49,6 @@ class UploadProduct extends Job
                 ],
                 "detail"=>[
                     [
-                        "text"=>""
-                    ],
-                    [
                         "img"=>"http://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7d4scsYfueOS7icPDVwMtYdiadEN4biaQhiaehIzsGOHay1QpUTPJ6R6buVkxHcB1UvQGSsfL80Fjs8sQ/0?wx_fmt=jpeg"
                     ],
                     [
@@ -96,12 +93,13 @@ class UploadProduct extends Job
             ];
             //创建产品获取id，并归入分组
             $product_arr = app('wechat.official_account')->merchant->create($post);
+            
             if($product_arr['errcode'] === 0){ //创建成功
                 $product_id = $product_arr['product_id']; //商品号 字符串
                 Log::info('product_id=> '.$product_id.' = ');
                 $list[] = ['product_id'=>$product_id, 'mod_action'=>1]; //1增加 
                 // 分组id:状态未上架 => 产品id0删除
-                // Redis::sadd($this->group_id.":status2",$product_id); // 2:表示未上架
+                Redis::sadd($this->group_id.":status2",$product_id); // 2:表示未上架
                 // 产品id => json内容
                 Redis::set($product_id, json_encode($post) );
             } else {
