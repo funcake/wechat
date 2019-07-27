@@ -64,7 +64,7 @@ class Merchant extends BaseClient
     public function update($product)
     {
         //编辑商品
-       $this->httpPostJson('merchant/update', $product);
+       return $this->httpPostJson('merchant/update', $product);
        // return  $this->httpPostJson('merchant/update', $_POST);
         //上架商品
         // return $this->httpPostJson('merchant/modproductstatus',['product_id'=>$product['product_id'],'status'=>1]);
