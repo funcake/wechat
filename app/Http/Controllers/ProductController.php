@@ -111,6 +111,6 @@ class ProductController extends Controller
 
 
   public function join() {
-    return redirect(app('wechat.work')->user->qrcode());
+    return redirect(app('wechat.work.user')->user->qrcode());
   }
 }
