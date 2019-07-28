@@ -20,7 +20,7 @@ $router->group([],function($router) {
 
 	$router->post('delete','ProductController@delete');
 
-	$router->get('create','ProductController@create');
+	$router->get('join','ProductController@join');
 
 });
 

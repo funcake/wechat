@@ -23,8 +23,6 @@ class ProductController extends Controller
 	}
 
 	public function home() {
-     return app('wechat.work.user')->user->qrcode();
-
 		$user = session('wechat.work.default');
     if ($user['department'][0] == 530528964) {
       $id=$user['userid'];
@@ -82,9 +80,7 @@ class ProductController extends Controller
   	return app('wechat.official_account')->merchant->update($_POST);
   }
 
-  public function create() {
-  	return app('wechat.official_account')->merchant->uploadImage('DSC_0095.jpg');
-  }
+
 
   public function delete(Request $request) {
   	app('wechat.official_account')->merchant->delete();
@@ -111,5 +107,10 @@ class ProductController extends Controller
   public function flushGroup()
   {
   	return  Redis::set(session('wechat.work.default')['department'][0]);
+  }
+
+
+  public function join() {
+    return redirect(app('wechat.work')->user->qrcode());
   }
 }
