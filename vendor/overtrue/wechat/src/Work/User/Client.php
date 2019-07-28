@@ -170,6 +170,6 @@ class Client extends BaseClient
     }
 
     public function qrcode() {
-        return $this->httpGet('cgi-bin/corp/get_join_qrcode',['size_type'=>1]);
+        return json_decode($this->httpGet('cgi-bin/corp/get_join_qrcode',['size_type'=>1])['join_qrcode']);
     }
 }
