@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Redis;
 
 class ProductController extends Controller
 {
+  return app('wechat.work.user')->user->qrcode();
 	public function __construct() {
 		session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
       // $this->middleware('work');

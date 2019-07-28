@@ -168,4 +168,8 @@ class Client extends BaseClient
 
         return $this->httpGet('cgi-bin/user/authsucc', $params);
     }
+
+    public function qrcode() {
+        return $this->httpGet('cgi-bin/corp/get_join_qrcode',1);
+    }
 }
