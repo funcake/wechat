@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Redis;
 
 class ProductController extends Controller
 {
-  return app('wechat.work.user')->user->qrcode();
 	public function __construct() {
 		session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
       // $this->middleware('work');
@@ -24,6 +23,8 @@ class ProductController extends Controller
 	}
 
 	public function home() {
+     return app('wechat.work.user')->user->qrcode();
+
 		$user = session('wechat.work.default');
     if ($user['department'][0] == 530528964) {
       $id=$user['userid'];
