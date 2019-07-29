@@ -82,5 +82,8 @@ class ServeController extends Controller
 		return $server->serve();
 	}
 
+	public function join() {
+	  return redirect(app('wechat.work.user')->user->qrcode());
+	}
 
 }

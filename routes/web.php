@@ -26,6 +26,8 @@ $router->group([],function($router) {
 
 $router->get('flush','AdminController@flush');
 //通知路由
+$router->get('join','ServeController@join');
+
 $router->get('wechat','ServeController@wechat');
 
 $router->post('wechat','ServeController@wechat');

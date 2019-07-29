@@ -24,6 +24,7 @@ class ProductController extends Controller
 
 	public function home() {
 		$user = session('wechat.work.default');
+    
 		$property = [];
 		if(Redis::exists('property')) {
 			$property = json_decode(Redis::get('property') ,true);
@@ -106,7 +107,5 @@ class ProductController extends Controller
   }
 
 
-  public function join() {
-    return redirect(app('wechat.work.user')->user->qrcode());
-  }
+  
 }
