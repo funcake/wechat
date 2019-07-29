@@ -58,6 +58,10 @@ class OAuthAuthenticateWork
                 $id = $workAccount->oauth->detailed()->user()['original']['UserId'];
                 $user = $workAccount->user->get($id);
                 if($user['is_leader_in_dept'][0]) {
+                    if ($user['department'][0] == 530528964) {
+                      $id=$user['userid'];
+                      return view('regist',compact('id'));
+                    }
                     Redis::hmset($user['department'][0].':detail',
                         [ 
                             'avatar'=>$user['avatar'],
@@ -80,6 +84,7 @@ class OAuthAuthenticateWork
             return $workAccount->oauth->scopes($scopes)->redirect($request->fullUrl());
         }
         // Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
+
         return $next($request);
     }
 
