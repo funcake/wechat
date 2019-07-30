@@ -55,7 +55,7 @@ class OAuthAuthenticateWork
 
             if ($request->has('code')) {
 
-                $id = $workAccount->oauth->detailed()->user()['original'];
+                $id = $workAccount->oauth->detailed()->user();
                 dd($id);
                 $user = $workAccount->user->get($id);
 
