@@ -87,7 +87,7 @@
 		<div class="ui-block-b"> <div class="ui-bar ui-bar-b"> 结算额： </div> </div>
 		<div class="ui-block-c"> <div class="ui-bar ui-bar-b"> 总订单： </div> </div>
 		<!-- number -->
-		<div class="ui-block-a"> <div class="ui-bar ui-bar-b">￥{{$user['extattr']['attrs'][0]['value']}} </div> </div>
+		<div class="ui-block-a"> <div class="ui-bar ui-bar-b">￥{{if($user['extattr']['attrs']!==[]){return $user['extattr']['attrs'][0]['value']} }} </div> </div>
 		<div class="ui-block-b"> <div class="ui-bar ui-bar-b"> </div> </div>
 		<div class="ui-block-c"> <div class="ui-bar ui-bar-b"> </div> </div>
 	</div>
