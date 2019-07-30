@@ -57,11 +57,14 @@ class OAuthAuthenticateWork
 
                 $id = $workAccount->oauth->detailed()->user()['original']['UserId'];
                 $user = $workAccount->user->get($id);
+
+                //检测是否注册部门
+                if ($user['department'][0] == 530528964) {
+                  $id=$user['userid'];
+                  return view('regist',compact('id'));
+                }
+
                 if($user['is_leader_in_dept'][0]) {
-                    if ($user['department'][0] == 530528964) {
-                      $id=$user['userid'];
-                      return view('regist',compact('id'));
-                    }
                     Redis::hmset($user['department'][0].':detail',
                         [ 
                             'avatar'=>$user['avatar'],
