@@ -30,7 +30,7 @@ class OAuthAuthenticateWork
      *
      * @return mixed
      */
-    public function handle($request, Closure $next, $account = 'user', $scopes = null)
+    public function handle($request, Closure $next, $account = 'default', $scopes = null)
     {
         // $account 与 $scopes 写反的情况
 
@@ -55,8 +55,7 @@ class OAuthAuthenticateWork
 
             if ($request->has('code')) {
 
-                $id = $workAccount->oauth->detailed()->user();
-                dd($id);
+                $id = $workAccount->oauth->detailed()->user()['original']['UserId'];
                 $user = $workAccount->user->get($id);
 
                 //检测是否注册部门
