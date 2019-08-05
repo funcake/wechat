@@ -61,8 +61,8 @@
 				@endforeach
 				</select>
 			</fieldset>
-			<label for="textarea">详情描述:</label>
-			<textarea cols="40" rows="8" name="textarea" id="detail" placeholder=" 宽高厚cm  1.1|1.1|1.1 &#13;&#10;&#13;&#10;【如月之恒，如日之升，如南山之寿】"></textarea>
+			<!-- <label for="textarea">详情描述:</label>
+			<textarea cols="40" rows="8" name="textarea" id="detail" placeholder=" 宽高厚cm  1.1|1.1|1.1 &#13;&#10;&#13;&#10;【如月之恒，如日之升，如南山之寿】"></textarea> -->
 			<br>
 			<fieldset class="ui-grid-a">
 				<div class="ui-block-a"><a href="" data-rel="back" class="ui-shadow ui-btn  ui-btn-a ui-corner-all " style="outline:#b5193f solid;outline-offset: -3px"  key="" id="submit2">上架</a></div>
@@ -262,7 +262,7 @@
 		post = data.status2[key];
 		post.product_base.property = [{'id' : 1075743464,'vid'  : 1079783184}];
 		post.product_base.name=$('#name').val();
-		post.product_base.detail.unshift({text:$('#detail').val()});
+		// post.product_base.detail.unshift({text:$('#detail').val()});
 		post.sku_list[0].price=$('#price2').val()*100;
 		post.status = 1;
 		post.product_base.property.push(
