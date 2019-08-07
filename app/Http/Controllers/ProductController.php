@@ -23,6 +23,7 @@ class ProductController extends Controller
 	}
 
 	public function home() {
+    return sys_get_temp_dir();
 		$user = session('wechat.work.default');
     
 		$property = [];
