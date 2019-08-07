@@ -32,7 +32,7 @@
 	</ul>
 	<div data-role="popup" id="popup2" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
 		<form>
-			<label for="name" class="">名 称:</label><input type="text" name="name" id="name" value="" data-clear-btn="true" placeholder="名" required="required">
+			<label for="name" class="">名 称:</label><input type="text" name="name" id="name" value="" data-clear-btn="true" placeholder="【名称】长|宽|高mm" required="required">
 			<label for="price2" class="">价 格:</label>
 			<select name="level" id = "level2" onchange="select2(this.value)">
 				<option value="1000" >千元档</option>
