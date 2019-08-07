@@ -113,7 +113,7 @@ class AdminController extends Controller
             //获取部门id,名称列表,
         foreach (Redis::hgetall('groups') as $group => $name) {
             //根据部门id,获取订单列表
-            $user = Redis::hgetall($group);
+            $user = Redis::hgetall($group.':detail');
             foreach (Redis::smembers($group.':order') as $order_id) {
                 $orders = Redis::hgetall($order_id.":detail");
                 $orders['products'] = Redis::hgetall($order_id.":products");
@@ -122,12 +122,12 @@ class AdminController extends Controller
             }
             $user['name'] = $name;
             // $users[$group] = $user;
-            $users[] = $user;
+            $users[$group] = $user;
         }
         $config = app('wechat.official_account')->jssdk->buildConfig(['openProductSpecificView'], $debug = false, $beta = false, $json = true);
 
         $photo = Redis::hgetall('photo');       
-return $users;
+
         return view('admin',compact('groupOrders','users','config','photo'));
     }
 
