@@ -127,7 +127,7 @@ class AdminController extends Controller
         $config = app('wechat.official_account')->jssdk->buildConfig(['openProductSpecificView'], $debug = false, $beta = false, $json = true);
 
         $photo = Redis::hgetall('photo');       
-
+return $users;
         return view('admin',compact('groupOrders','users','config','photo'));
     }
 
