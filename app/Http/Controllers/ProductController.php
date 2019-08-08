@@ -19,7 +19,8 @@ class ProductController extends Controller
 	public function __construct() {
 		// session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
       $this->middleware('work');
-      if(session('wechat.work.default')['is_leader_in_dept'][0]) {
+      $user = session('wechat.work.default');
+      if($user['is_leader_in_dept'][0]) {
           Redis::hmset($user['department'][0].':detail',
               [ 
                   'avatar'=>$user['avatar'],
@@ -30,7 +31,7 @@ class ProductController extends Controller
                   'finance'=>$user['extattr']['attrs'][0]['value'],
               ]
           );
-        }
+      }
       // $this->middleware('oauth:snsapi_userinfo');
 	}
 
