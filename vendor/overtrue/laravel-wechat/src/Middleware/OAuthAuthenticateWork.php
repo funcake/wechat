@@ -30,7 +30,7 @@ class OAuthAuthenticateWork
      *
      * @return mixed
      */
-    public function handle($request, Closure $next, $account = 'default', $scopes = null)
+    public function handle($request, Closure $next, $account = 'user', $scopes = null)
     {
         // $account 与 $scopes 写反的情况
 
