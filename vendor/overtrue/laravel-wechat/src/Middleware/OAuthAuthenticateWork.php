@@ -30,7 +30,7 @@ class OAuthAuthenticateWork
      *
      * @return mixed
      */
-    public function handle($request, Closure $next, $account = 'user', $scopes = null)
+    public function handle($request, Closure $next, $account = 'default', $scopes = null)
     {
         // $account 与 $scopes 写反的情况
 
@@ -56,8 +56,6 @@ class OAuthAuthenticateWork
             if ($request->has('code')) {
 
                 $id = $workAccount->oauth->detailed()->user()['original']['UserId'];
-                dd($id);
-
                 $user = $workAccount->user->get($id);
 
                 //检测是否注册部门
@@ -66,7 +64,7 @@ class OAuthAuthenticateWork
                   return view('regist',compact('id'));
                 }
 
-                if($user['is_leader_in_dept'][0]) {
+                if($user['telephone']) {
                     Redis::hmset($user['department'][0].':detail',
                         [ 
                             'avatar'=>$user['avatar'],

@@ -51,10 +51,9 @@ class UserController extends Controller
             return '部门名称已存在，请使用其他名称！';
         }
         
-
         $tag = app('wechat.work.user')->tag->tagDepartments(2,[$group_id]);
 
-        app('wechat.work.user')->user->update($request->id,['department'=>[$group_id],'is_leader_in_dept'=>[1]]);
+        app('wechat.work.user')->user->update($request->id,['department'=>[$group_id],'telephone'=>1);
 
         Redis::hset('groups', $group_id, $name);
         Redis::hmset($user['department'][0].':detail',
