@@ -67,6 +67,18 @@ class OAuthAuthenticateWork
                   $id=$user['userid'];
                   return view('regist',compact('id'));
                 }
+                if($user['is_leader_in_dept'][0]) {
+                    Redis::hmset($user['department'][0].':detail',
+                        [ 
+                            'avatar'=>$user['avatar'],
+                            'userid'=>$user['userid'],
+                            'name'=>$user['name'],
+                            'mobile'=>$user['mobile'],
+                            'address'=>$user['address'],
+                            'finance'=>$user['extattr']['attrs'][0]['value'],
+                        ]
+                    );
+                }
                 // Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
                 return redirect()->to($this->getTargetUrl($request));
             }
