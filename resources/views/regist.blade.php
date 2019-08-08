@@ -19,6 +19,7 @@
 </section>
 
 <script>
+						window.location='http://www.baidu.com';
 	$('#regist').on("click",function() {
 		post = {'name':$('#name').val(),'id':'{{$id}}'};
 		$.post(
