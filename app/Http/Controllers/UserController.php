@@ -37,7 +37,7 @@ class UserController extends Controller
     public function photoMessage()
     {
         Redis::hset('photo',$_POST['group'],$_POST['amount']);
-        return app('wechat.work')->messenger->message(Redis::hget('group',$_POST['group'])."新至商品".$_POST['amount'].'件')->toTag(1)->send();
+        return app('wechat.work')->messenger->message(Redis::hgetall($_POST['group'])['name']."新至商品".$_POST['amount'].'件')->toTag(1)->send();
     }
 
     public function registDepartment(Request $request) {
