@@ -30,6 +30,7 @@ class ProductController extends Controller
                   'finance'=>$user['extattr']['attrs'][0]['value'],
               ]
           );
+        }
       // $this->middleware('oauth:snsapi_userinfo');
 	}
 
