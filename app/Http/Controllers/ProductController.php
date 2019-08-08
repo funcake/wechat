@@ -24,7 +24,6 @@ class ProductController extends Controller
 
 	public function home() {
 		$user = session('wechat.work.default');
-    dd($user);
 		$property = [];
 		if(Redis::exists('property')) {
 			$property = json_decode(Redis::get('property') ,true);
