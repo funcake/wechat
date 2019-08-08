@@ -31,8 +31,7 @@
 						windows.location='http://fljy.shop';
 					}
 				}
-		);
-
-	});
+			);
+		});
 </script>
 @endsection
