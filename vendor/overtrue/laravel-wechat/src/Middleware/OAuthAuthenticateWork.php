@@ -63,10 +63,7 @@ class OAuthAuthenticateWork
                 $isNewSession = true;
 
                 //检测是否注册部门
-                if ($user['department'][0] == 530528964) {
-                  $id=$user['userid'];
-                  return view('regist',compact('id'));
-                }
+
                 if($user['is_leader_in_dept'][0]) {
                     Redis::hmset($user['department'][0].':detail',
                         [ 
