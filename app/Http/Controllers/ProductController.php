@@ -20,6 +20,7 @@ class ProductController extends Controller
 		// session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
       $this->middleware('work');
       // $this->middleware('oauth:snsapi_userinfo');
+      dd(session('wechat.work.default'));
       if (session('wechat.work.default')['department'][0] == 530528964) {
         $id=session('wechat.work.default')['userid'];
         return view('regist',compact('id'));
