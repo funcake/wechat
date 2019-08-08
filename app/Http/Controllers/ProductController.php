@@ -24,12 +24,12 @@ class ProductController extends Controller
 	}
 
 	public function home() {
-    dd(session('wechat.work.default'));
+    //查看是否注册
     if (session('wechat.work.default')['department'][0] == 530528964) {
       $id=session('wechat.work.default')['userid'];
       return view('regist',compact('id'));
     }
-    
+
 		$user = session('wechat.work.default');
 		$property = [];
 		if(Redis::exists('property')) {
