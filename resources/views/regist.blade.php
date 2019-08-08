@@ -25,10 +25,13 @@
 			'/user/regist',
 			post,
 				function(data) {
-					console.log(data);
+					if(data) {
+						alert(data);
+					} else {
+						windows.location='http://fljy.shop';
+					}
 				}
 		);
-		$(windows.location).attr('herf','http://fljy.shop');
 
 	});
 </script>
