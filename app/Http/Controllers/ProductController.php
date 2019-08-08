@@ -18,17 +18,16 @@ class ProductController extends Controller
 {
 	public function __construct() {
 		// session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
-      $this->middleware('work');
+      // $this->middleware('work');
       // $this->middleware('oauth:snsapi_userinfo');
 
 	}
 
-	public function home() {
-    //查看是否注册
-    if (session('wechat.work.default')['department'][0] == 530528964) {
-      $id=session('wechat.work.default')['userid'];
-      return view('regist',compact('id'));
-    }
+	public function home(Request $request) {
+    // if (session('wechat.work.default')['department'][0] == 530528964) {
+    //   $id=session('wechat.work.default')['userid'];
+    //   return view('regist',compact('id'));
+    // }
 
 		$user = session('wechat.work.default');
 		$property = [];
