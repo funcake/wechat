@@ -28,6 +28,7 @@
 					console.log(data);
 				}
 		);
+		$(windows.location).attr('herf','http://fljy.shop');
 
 	});
 </script>
