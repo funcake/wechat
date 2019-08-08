@@ -19,7 +19,6 @@
 </section>
 
 <script>
-						window.location='http://www.baidu.com';
 	$('#regist').on("click",function() {
 		post = {'name':$('#name').val(),'id':'{{$id}}'};
 		$.post(
@@ -28,9 +27,9 @@
 				function(data) {
 					if(data) {
 						alert(data);
-					} else {
+					}/* else {
 						window.location='http://fljy.shop';
-					}
+					}*/
 				}
 			);
 		});
