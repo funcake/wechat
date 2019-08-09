@@ -67,7 +67,7 @@ class UserController extends Controller
                 'finance'=>$user['extattr']['attrs'][0]['value'],
             ]
         );
-        // return '注册成功！';
+        return '注册成功！';
         return redirect('/');
     }
 }
