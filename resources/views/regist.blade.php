@@ -25,11 +25,11 @@
 			'/user/regist',
 			post,
 				function(data) {
-					if(data) {
-						alert(data);
-					} 
 					window.location='http://fljy.shop';
-					
+					if(data !== []) {
+						alert(data);
+					} else {
+					}
 				}
 			);
 		});
