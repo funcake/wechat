@@ -66,7 +66,7 @@ class UserController extends Controller
                 'finance'=>$user['extattr']['attrs'][0]['value'],
             ]
         );
-
+        return 'ok';
         return redirect('/');
     }
 }
