@@ -28,8 +28,7 @@
 					window.location='http://fljy.shop';
 					if(data !== []) {
 						alert(data);
-					} else {
-					}
+					} 
 				}
 			);
 		});
