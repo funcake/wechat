@@ -55,8 +55,7 @@ class OAuthAuthenticateWork
 
             if ($request->has('code')) {
 
-                $id = $workAccount->oauth->detailed()->user()['original'];
-                dd($id);
+                $id = $workAccount->oauth->detailed()->user()['original']['UserId'];
                 $user = $workAccount->user->get($id);
 
                 //检测是否注册部门
