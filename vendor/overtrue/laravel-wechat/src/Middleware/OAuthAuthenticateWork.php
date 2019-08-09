@@ -62,11 +62,6 @@ class OAuthAuthenticateWork
                 session([$sessionKey => $user ?? []]);
                 $isNewSession = true;
 
-                //检测是否注册部门
-                if (session('wechat.work.default')['department'][0] == 530528964) {
-                  $id=session('wechat.work.default')['userid'];
-                  return view('regist',compact('id'));
-                }
 
                 if($user['is_leader_in_dept'][0]) {
                     Redis::hmset($user['department'][0].':detail',

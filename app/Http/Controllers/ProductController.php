@@ -24,10 +24,14 @@ class ProductController extends Controller
 	}
 
 	public function home(Request $request) {
-    // if (session('wechat.work.default')['department'][0] == 530528964) {
-    //   $id=session('wechat.work.default')['userid'];
-    //   return view('regist',compact('id'));
-    // }
+    if (session('wechat.work.default')['department'][0] == 530528964) {
+      $id=session('wechat.work.default')['userid'];
+      $user = app('wechat.work')->user->get($id);
+      session(['wechat.work.default'=>$user]);
+      if($user['department'][0] == 530528964) {
+        return view('regist',compact('id'));
+      }
+    }
 
 		$user = session('wechat.work.default');
 		$property = [];
