@@ -27,9 +27,9 @@
 				function(data) {
 					if(data) {
 						alert(data);
-					} else {
-						window.location='http://fljy.shop';
-					}
+					} 
+					window.location='http://fljy.shop';
+					
 				}
 			);
 		});
