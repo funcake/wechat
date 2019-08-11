@@ -306,7 +306,7 @@
 
 // 通知产品拍摄
 	$('#photo').on("click",function() {
-		post = {'group':{{$user['department'][0]}},'amount' : $('#amount').val(),'address':{{$user['address']}} };
+		post = {'group':{{$user['department'][0]}},'amount' : $('#amount').val() };
 		console.log(post);
 		$.post(
 			'user/photo',
