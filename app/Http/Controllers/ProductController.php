@@ -27,10 +27,10 @@ class ProductController extends Controller
     if (session('wechat.work.default')['department'][0] == 530528964) {
       $id=session('wechat.work.default')['userid'];
       $user = app('wechat.work')->user->get($id);
-      session(['wechat.work.default'=>$user]);
       if($user['department'][0] == 530528964) {
         return view('regist',compact('id'));
       }
+      session(['wechat.work.default'=>$user]);
     }
 
 		$user = session('wechat.work.default');
@@ -61,7 +61,7 @@ class ProductController extends Controller
 		}
 
 		$group = json_encode($group);
-
+dd($material,$useage,$style);
 
 
 		return view('hello',compact('material','usage','style','user','order','config','group'));

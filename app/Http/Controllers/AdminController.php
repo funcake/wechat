@@ -45,6 +45,7 @@ class AdminController extends Controller
 
         $amount  =  $request['amount'];
         $group_id = $request['group_id'];
+        Redis::del('photo',$request['group_id']);
         $this->dispatch(new UploadProduct($amount,$group_id));
         return 'ok';
        
@@ -54,6 +55,7 @@ class AdminController extends Controller
     public function flushGroups()  {
         $groups = app('wechat.work')->department->list(5)['department'];
         array_shift($groups);
+        Redis::del('groups');
         foreach ($groups as $group) {
             Redis::hset('groups',$group['id'],$group['name']);
             Redis::hset($group['id'].':detail','name',$group['name']);

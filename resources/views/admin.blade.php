@@ -23,7 +23,7 @@
 	</form>
 	<div data-role="collapsiblesest" data-filter="true" data-input="#orders">
 @foreach($photo as $group_id => $amount)
-	<div>{{$users[$group_id]['name']}} <form method="post" action="/admin/createProduct"><input type="hidden" name="group_id" value="{{$group_id}}" ><input type="hidden" name="amount" value="{{$amount}}"><input type="submit" name="" value="创建"></form></div>
+	<div>{{$users[$group_id]['name']}} 有 {{$amount}} 件 <form method="post" action="/admin/createProduct"><input type="hidden" name="group_id" value="{{$group_id}}" ><input type="hidden" name="amount" value="{{$amount}}"><input type="submit" name="" value="创建"></form></div>
 @endforeach
 	</div>
 
