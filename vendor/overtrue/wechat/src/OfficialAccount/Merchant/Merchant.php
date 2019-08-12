@@ -206,7 +206,7 @@ class Merchant extends BaseClient
         $return_data = curl_exec($ch);
         curl_close($ch);
         Log::info($return_data);
-        return  json_decode($return_data,true)['image_url'];
+        return  json_decode($return_data,true)['image_url'].'wx_fmt=jpeg';
     }
 
 }
