@@ -24,7 +24,7 @@
 
 <script>
 	$('#regist').on("click",function() {
-		post = {'name':$('#name').val(),'mobile':$('#mobile').val(),'address':$('#address').val()'id':'{{$id}}'};
+		post = {'name':$('#name').val(),'mobile':$('#mobile').val(),'address':$('#address').val(),'id':'{{$id}}'};
 		$.post(
 			'/user/regist',
 			post,
