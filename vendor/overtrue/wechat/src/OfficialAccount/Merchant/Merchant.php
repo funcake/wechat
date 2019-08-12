@@ -189,6 +189,8 @@ class Merchant extends BaseClient
 
     public function uploadImage( string $filename)
     {
+        return app('wechat.official_account')->material->uploadImage('/storage/app/public/'.$filename)['url'];
+      /*  
         $path = getcwd().'/storage/app/public/'.$filename;
           if (!file_exists($path) || !is_readable($path)) {
               throw new InvalidArgumentException(sprintf('File does not exist, or the file is unreadable: "%s"', $path));
@@ -206,7 +208,7 @@ class Merchant extends BaseClient
         $return_data = curl_exec($ch);
         curl_close($ch);
         Log::info($return_data);
-        return  json_decode($return_data,true)['image_url'];
+        return  json_decode($return_data,true)['image_url'];*/
     }
 
 }
