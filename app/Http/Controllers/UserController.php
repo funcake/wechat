@@ -56,7 +56,7 @@ class UserController extends Controller
         app('wechat.work.user')->user->update($request->id,['department'=>[$group_id],'is_leader_in_dept'=>[1],'address'=>$request->address,'mobile'=>$request->mobile]);
 
         Redis::hset('groups', $group_id, $name);
-        $user = session('wechat.work.default');
+        $user = app('wechat.work')->user->get($request->id);
         Redis::hmset($user['department'][0].':detail',
             [ 
                 'avatar'=>$user['avatar'],
