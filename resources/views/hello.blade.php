@@ -101,10 +101,10 @@
 		</form>
 	</div>
 	<div data-role="listview" id="order">
-		@foreach($order as $products)
+	<!-- 	@foreach($order as $products)
 			@foreach($products as $product)
 			@endforeach
-		@endforeach
+		@endforeach -->
 	</div>
 </section>
 
