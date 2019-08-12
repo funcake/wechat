@@ -39,7 +39,8 @@ class UploadProduct extends Job
                 ],
                 "name"=> "", //商品名称
 
-                "main_img"=> app('wechat.official_account')->merchant->uploadImage(($i*6+1).'.jpg'),
+                "main_img"=> 'http://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7eJscAo2k22KA4yoaZTaZAqAq5adqAdrw1CuDpaxSOgfaLJbs7CibxnuMFjvYuRdmodUJloZX7ibRtg/0?wx_fmt=jpeg',
+                // "main_img"=> app('wechat.official_account')->merchant->uploadImage(($i*6+1).'.jpg'),
                 "img"=>[ // 商品图片列表
                     app('wechat.official_account')->merchant->uploadImage(($i*6+2).'.jpg'),
                     app('wechat.official_account')->merchant->uploadImage(($i*6+3).'.jpg'),
