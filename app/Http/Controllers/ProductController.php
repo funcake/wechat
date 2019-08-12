@@ -61,7 +61,7 @@ class ProductController extends Controller
 		}
 
 		$group = json_encode($group);
-dd($material,$useage,$style);
+// dd($material,$useage,$style);
 
 
 		return view('hello',compact('material','usage','style','user','order','config','group'));
