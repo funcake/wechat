@@ -189,7 +189,7 @@ class Merchant extends BaseClient
 
     public function uploadImage( string $filename)
     {
-        $data = app('wechat.official_account')->material->uploadImage(getcwd().'/storage/app/public/'.$filename)['url'];
+        $data = app('wechat.official_account')->material->uploadImage(getcwd().'/storage/app/public/'.$filename);
         app('wechat.official_account')->material->delete($data['media_id']);
         return $data['url'];
       /*  
