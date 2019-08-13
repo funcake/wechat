@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-         $this->middleware('work');
+        $this->middleware('work');
     }
 
     public function create() {
@@ -56,7 +56,17 @@ class UserController extends Controller
         app('wechat.work.user')->user->update($request->id,['department'=>[$group_id],'is_leader_in_dept'=>[1],'address'=>$request->address,'mobile'=>$request->mobile]);
 
         Redis::hset('groups', $group_id, $name);
-        session()->forget('wechat.work.default');
+        $user = session('wechat.work.default');
+        Redis::hmset($user['department'][0].':detail',
+            [ 
+                'avatar'=>$user['avatar'],
+                'userid'=>$user['userid'],
+                'name'=>$user['name'],
+                'mobile'=>$request->mobile,
+                'address'=>$request->address,
+                'finance'=>0,
+            ]
+        );
         return '注册成功！';
         return redirect('/');
     }
