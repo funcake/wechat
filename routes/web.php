@@ -39,7 +39,7 @@ $router->post('order','ServeController@Message');
 
 $router->get('test',function () {
 	phpinfo();
-})
+});
 
 //用户路由
 $router->group(['prefix'=>'user'],function($router) {
