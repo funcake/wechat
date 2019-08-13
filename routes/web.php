@@ -38,7 +38,7 @@ $router->post('change','ServeController@work');
 $router->post('order','ServeController@Message');
 
 $router->get('test',function () {
-	phpinfo();
+	chmod();
 });
 
 //用户路由
