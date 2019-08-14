@@ -38,7 +38,7 @@ $router->post('change','ServeController@work');
 $router->post('order','ServeController@Message');
 
 $router->get('test',function () {
-	sys_get_temp_dir();
+	dd( sys_get_temp_dir());
 });
 
 //用户路由
