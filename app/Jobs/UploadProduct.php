@@ -99,7 +99,7 @@ class UploadProduct extends Job
                 "category_id"=>[
                   "536903132" // 微信小店的种类：翡翠，总之不要管这个
                 ],
-                "name"=> $name[$i+1], //商品名称
+                "name"=> $name[$i], //商品名称
 
                 "main_img"=> app('wechat.official_account')->merchant->uploadImage(($i*6+1).'.jpg'),
                 "img"=>[ // 商品图片列表
@@ -132,7 +132,7 @@ class UploadProduct extends Job
               "sku_list"=>[ //商品型号
                 [
                   "sku_id"=>"",
-                  "price"=>100*$price[$i+1], // 1分 微信价必须比原价ori_price小，不然添加失败
+                  "price"=>100*$price[$i], // 1分 微信价必须比原价ori_price小，不然添加失败
                   "icon_url"=> app('wechat.official_account')->merchant->uploadImage(($i+1).'.jpg'),
                   // 部门人员每次申请新产品上架 会在通知里留下自己的部门ID
                   "product_code"=> $this->group_id."", //字符串 这个是产品分组id也就是部门id, department_id
