@@ -12,7 +12,7 @@
 		<label for="name">商 铺 名：</label>
 		<input type="text" name="name" id="name">	
 		<label for="mobile">电 话：</label>
-		<input type="text" name="mobile" id="mobile">
+		<input type="tel" name="mobile" id="mobile">
 		<label for="address">地 址：</label>
 		<input type="text" name="address" id="address">	
 		<fieldset class="ui-grid-a">

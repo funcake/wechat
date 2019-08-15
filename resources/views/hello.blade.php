@@ -10,12 +10,7 @@
 	<div data-role="popup" id="popup1" data-theme="a" data-overlay-theme="b" class="ui-content" style="width:280px; padding-bottom:2em;">
     	<a href="" title="" data-rel="back" class=" ui-btn ui-btn-a ui-corner-all " id="delete" style="background: #b5193f;color:white" key="">删除</a>
     	<br>
-		<select name="level" id = "level1" onchange="select1(this.value)">
-			<option value="1000" >千元档</option>
-			<option value="5000" >五千档</option>
-			<option value="30000" >万元档</option>
-		</select>
-	    <label for="price1" class="ui-hidden-accessible">价:</label><input type="range" name="price" id="price1" value="" min="0" max="100" step="" data-highlight="true" data-popup-enable="true" >
+	    <label for="price1" class="">价 格:</label><input type="number" name="price" id="price1" value="" data-clear-btn="true" >
 	    <br>
 	    <fieldset class="ui-grid-a">
 	    	<div class="ui-block-a"><a href="" data-rel="back" class="ui-shadow ui-btn  ui-btn-a ui-corner-all  "  key="" id="submit1">提交</a></div>
@@ -33,21 +28,17 @@
 	<div data-role="popup" id="popup2" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
 		<form>
 			<label for="name" class="">名 称:</label><input type="text" name="name" id="name" value="" data-clear-btn="true" placeholder="【名称】长|宽|高mm" required="required">
-			<label for="price2" class="">价 格:</label>
-			<select name="level" id = "level2" onchange="select2(this.value)">
-				<option value="1000" >千元档</option>
-				<option value="5000" >五千档</option>
-				<option value="30000" >万元档</option>
-			</select>
-		    <label for="price2" class="ui-hidden-accessible"></label><input type="range" name="price" id="price2" value="" min="0" max="100" step="" data-highlight="true" data-popup-enable="true" >
-			<label for="material" class="select" data-inline='true'>料:</label>
-			<select id="material" name="material"  class='select-choice-mini' data-inline='true' data-mini='true'>
-			@foreach($material['property_value'] as $p)
-				<option value="{{$p['id']}}">{{$p['name']}}</option>
-			@endforeach
-			</select>
+		    <label for="price2" class="">价 格:</label><input type="number" name="price" id="price2" value=""  data-clear-btn="true" >
+			<br>
+
 			<fieldset data-role = "controlgroup" data-type="horizontal" >
 				<legend >属 性:</legend>
+				<label for="material" class="select" data-inline='true'>料:</label>
+				<select id="material" name="material"  class='select-choice-mini' data-inline='true' data-mini='true'>
+				@foreach($material['property_value'] as $p)
+					<option value="{{$p['id']}}">{{$p['name']}}</option>
+				@endforeach
+				</select>
 				<label for="usage" class="select" data-inline='true'>适用场景</label>
 				<select id="usage" name="usage"  class='select-choice-mini' data-inline='true' data-mini='true'>
 				@foreach($usage['property_value'] as $p)
@@ -172,20 +163,6 @@
 			$('.pop1').on('click',function() {
 				var i = $(this).attr('key');
 				$price = data.status1[i].sku_list[0].price/100;
-				if ($price<1000)
-				{
-					$('#level1').val('1000');
-					$('#price1').attr({'step':20,'min':0,'max':1000});
-					$('#level1').prev().html('千元档');
-				} else if($price<5000) {
-					$('#level1').val('5000');
-					$('#price').attr({'step':100,'min':1000,'max':5000});
-					$('#level1').prev().html('五千档');
-				} else if($price<=30000) {
-					$('#level1').val('30000');
-					$('#price1').attr({'step':200,'min':5000,'max':30000});
-					$('#level1').prev().html('万元档');
-				}
 				$('#price1').val($price);
 				$("#delete").attr('key',i);
 				$('#submit1').attr('key',i);
@@ -220,20 +197,6 @@
 				var i = $(this).attr('key');
 				$('#name').val(data.status2[i].product_base.name);
 				$price = data.status2[i].sku_list[0].price/100;
-				if ($price<1000)
-				{
-					$('#level2').val('1000');
-					$('#price2').attr({'step':20,'min':0,'max':1000});
-					$('#level2').prev().html('千元档');
-				} else if($price<5000) {
-					$('#level2').val('5000');
-					$('#price').attr({'step':100,'min':1000,'max':5000});
-					$('#level2').prev().html('五千档');
-				} else if($price<=30000) {
-					$('#level2').val('30000');
-					$('#price2').attr({'step':200,'min':5000,'max':30000});
-					$('#level2').prev().html('万元档');
-				}
 				$('#price2').val($price);
 				$('#submit2').attr('key',i);
 			});
@@ -317,44 +280,6 @@
 			);
 		alert('【已通知工作人员】'); // 有问题
 	});
-
-	function select1(val) {
-		switch (val) {
-			case '1000':
-				$('#price1').val(0);
-				$('#price1').attr({'step':20,'min':0,'max':1000});
-				break;
-			case '5000':
-					$('#price1').val(1000);
-					$('#price1').attr({'step':100,'min':1000,'max':5000});
-				break;
-			case '30000':
-				$('#price1').val(5000);
-				$('#price1').attr({'step':200,'min':5000,'max':30000});
-				break;
-			default:
-				break;
-		}
-	}
-
-	function select2(val) {
-		switch (val) {
-			case '1000':
-				$('#price2').val(0);
-				$('#price2').attr({'step':20,'min':0,'max':1000});
-				break;
-			case '5000':
-					$('#price2').val(1000);
-					$('#price2').attr({'step':100,'min':1000,'max':5000});
-				break;
-			case '30000':
-				$('#price2').val(5000);
-				$('#price2').attr({'step':200,'min':5000,'max':30000});
-				break;
-			default:
-				break;
-		}
-	}
 
 	wx.hideAllNonBaseMenuItem();
 
