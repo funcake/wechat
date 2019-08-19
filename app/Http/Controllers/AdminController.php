@@ -11,6 +11,11 @@ use Log;
 
 class AdminController extends Controller
 {
+
+    public function __construct() {
+
+    }
+
     public function registDepartment(Request $request) {
         $name = $request->name;
         //创建微信小店的商品分组 返回分组id 整型
@@ -85,11 +90,14 @@ class AdminController extends Controller
         $merchant = app('wechat.official_account')->merchant;
 
         $list = $merchant->orderList();
+
+        $products = [];
         // 获取订单列表，并按照group分组注册入redis
-        Redis::pipeline(function($pipe) use ($list) {
+        Redis::pipeline(function($pipe) use ($list,$merchant,&$products) {
             foreach ($list as $order) {
             // 根据订单产品 获取订单分组，
-                Redis::sadd(json_encode(Redis::get($order['product_id']),true)['product_code'].':orders',$order['order_id']);
+
+
                 Redis::hmset($order['order_id'].":detail",
                 [
                     'order_id' => $order['order_id'],
@@ -97,31 +105,24 @@ class AdminController extends Controller
                     'mobile'=>$order['receiver_mobile'],
                     'price'=>$order['order_total_price']/100,
                     'product_id'=>$order['product_id'],
-                    'product_name'=>$order['product_name'],
+                    'products'=>json_encode($order['products']),
                     'product_count'=>$order['product_count'],
                     'receiver_name' => $order['receiver_name'],
                 ]);
-                foreach ($order['products'] as $value) {
-                    $products[$value['product_img']] = $value['product_price']/100;
-                }
-                Redis::hmset($order['order_id'],$products);
+
+                    $p = $merchant->get($order['products'][0]['product_id']);
+                    $products[$p['sku_list'][0]['product_code']][] = $order;
+                    Redis::sadd($p['sku_list'][0]['product_code'].':orders',$order['order_id']);
             }
         });
-
+// dd($products);
         // 部门上级信息
         $users = [];
         // 部门订单
-        $groupOrders = [];
             //获取部门id,名称列表,
         foreach (Redis::hgetall('groups') as $group => $name) {
             //根据部门id,获取订单列表
             $user = Redis::hgetall($group.':detail');
-            foreach (Redis::smembers($group.':order') as $order_id) {
-                $orders = Redis::hgetall($order_id.":detail");
-                $orders['products'] = Redis::hgetall($order_id.":products");
-                $groupOrders[$group]['orders'][] =  $orders;
-                $groupOrders[$group]['total'] +=  Redis::hgetall($order_id.":detail")['price'];
-            }
             $user['name'] = $name;
             // $users[$group] = $user;
             $users[$group] = $user;
@@ -129,8 +130,7 @@ class AdminController extends Controller
         $config = app('wechat.official_account')->jssdk->buildConfig(['openProductSpecificView'], $debug = false, $beta = false, $json = true);
 
         $photo = Redis::hgetall('photo');       
-
-        return view('admin',compact('groupOrders','users','config','photo'));
+        return view('admin',compact('products','users','config','photo'));
     }
 
     public function setDelivery()

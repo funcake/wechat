@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Redis;
 class ProductController extends Controller
 {
 	public function __construct() {
-		// session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
-      $this->middleware('work');
+		session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
+      // $this->middleware('work');
       // $this->middleware('oauth:snsapi_userinfo');
 
 	}
@@ -41,9 +41,10 @@ class ProductController extends Controller
 			$property =  app('wechat.official_account')->merchant->getProperty();
 			Redis::set('property',json_encode($property));
 		}
+    // dd($property);
 		$material = $property[array_search('种地分类', array_column($property, 'name'))];
-		$usage = $property[array_search('适用场景', array_column($property, 'name'))];
-		$style = $property[array_search('款式', array_column($property, 'name'))];
+		$usage = $property[array_search('样式', array_column($property, 'name'))];
+		$style = $property[array_search('金饰', array_column($property, 'name'))];
 
          // $order = Redis::hgetall(Redis::hget('groups',$user['department'][0]));
 		$order = [];

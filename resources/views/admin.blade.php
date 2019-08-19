@@ -31,21 +31,29 @@
 		<input id="orders" data-type="search">
 	</form>
 	<div data-role="collapsiblesest" data-filter="true" data-input="#orders">
-@foreach($groupOrders as $group => $orders)
+@foreach($products as $group => $orders)
 	<div data-role="collapsible">
 		<h3>{{$users[$group]['name']}}</h3>
 			@foreach($orders as $order)
-			<div data-role="collapsible">
-				<h3>
-					@foreach($order['products'] as $img => $price)
-						<img src="{{$img}}" alt=""><p>{{$price}}</p>
+					@foreach($order['products'] as $product)
+					<div style="display: inline-block" >
+						
+						<img src="{{$product['product_img']}}" alt="" width="100px" height="100px">
+						<p>{{$product['product_name']}}</p>
+						<p>￥{{$product['product_price']/100}}</p>
+					</div>
+					<div style="display: inline-block" >
+						
+						<img src="{{$product['product_img']}}" alt="" width="100px" height="100px">
+						<p>{{$product['product_name']}}</p>
+						<p>￥{{$product['product_price']/100}}</p>
+					</div>
 					@endforeach
-				<p>{{$order['price']}}</p>
-				</h3>
-				<p>{{$order['product_name']}}</p>
-				<p>{{$order['address']}}</p>
-				<input type="button" name="$order['order_id']">
-			</div>
+				<input type="text" name="" value="{{$order['receiver_name'].' '.$order['receiver_province']}}">
+				<form action="delivery" method="post" accept-charset="utf-8">
+				<input type="hidden" name="order_id" value="{{$order['order_id']}}">
+				<input type="submit" name="" value="寄出">
+				</form>
 			@endforeach
 		</div>
 @endforeach
