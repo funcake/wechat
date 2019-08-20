@@ -41,13 +41,13 @@
 				</select>
 				<label for="style" class="select" data-inline='true'>样式</label>
 				<select id="style" name="style"  class='select-choice-mini' data-inline='true' data-mini='true'>
-				@foreach($usage['property_value'] as $p)
+				@foreach($style['property_value'] as $p)
 					<option value="{{$p['id']}}">{{$p['name']}}</option>
 				@endforeach
 				</select>
 				<label for="gold" class="select" data-inline='true'>金饰</label>
 				<select id="gold" name="gold"   class='select-choice-mini' data-inline='true' data-mini='true'>
-				@foreach($style['property_value'] as $p)
+				@foreach($gold['property_value'] as $p)
 					<option value="{{$p['id']}}">{{$p['name']}}</option>
 				@endforeach
 				</select>
