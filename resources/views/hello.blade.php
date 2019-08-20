@@ -84,7 +84,7 @@
 	</div>
 	<div data-role="popup" id="incoming" data-theme="a" data-overlay-theme="b" class="ui-content" style="width:280px; padding-bottom:2em;">
 		<form action="user/photo" method="post" accept-charset="utf-8">
-			<label for="amount" class="">新至商品数量</label><input type="range" name="price" id="amount" value="0" min="0" max="50" step="" data-highlight="true" data-popup-enable="true" >
+			<label for="amount" class="">新至商品数量</label><input type="number" id="amount" data-clear-btn="true" data-popup-enable="true" >
 			<fieldset class="ui-grid-a">
 				<div class="ui-block-a"><a href="" data-rel="back" class="ui-shadow ui-btn ui-btn-b ui-corner-all "   key="" id="photo">通知</a></div>
 				<div class="ui-block-b"><a href="" data-rel="back" class="ui-shadow ui-btn ui-btn-a ui-corner-all ">取消</a></div>

@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('work');
+        // $this->middleware('work');
     }
 
     public function create() {
