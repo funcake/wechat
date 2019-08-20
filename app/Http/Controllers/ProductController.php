@@ -43,8 +43,8 @@ class ProductController extends Controller
 		}
     // dd($property);
 		$material = $property[array_search('种地分类', array_column($property, 'name'))];
-		$usage = $property[array_search('样式', array_column($property, 'name'))];
-		$style = $property[array_search('金饰', array_column($property, 'name'))];
+		$style = $property[array_search('样式', array_column($property, 'name'))];
+		$gold = $property[array_search('金饰', array_column($property, 'name'))];
 
          // $order = Redis::hgetall(Redis::hget('groups',$user['department'][0]));
 		$order = [];

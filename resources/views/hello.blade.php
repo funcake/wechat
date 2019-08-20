@@ -39,14 +39,14 @@
 					<option value="{{$p['id']}}">{{$p['name']}}</option>
 				@endforeach
 				</select>
-				<label for="usage" class="select" data-inline='true'>适用场景</label>
-				<select id="usage" name="usage"  class='select-choice-mini' data-inline='true' data-mini='true'>
+				<label for="style" class="select" data-inline='true'>样式</label>
+				<select id="style" name="style"  class='select-choice-mini' data-inline='true' data-mini='true'>
 				@foreach($usage['property_value'] as $p)
 					<option value="{{$p['id']}}">{{$p['name']}}</option>
 				@endforeach
 				</select>
-				<label for="style" class="select" data-inline='true'>款式</label>
-				<select id="style" name="style"   class='select-choice-mini' data-inline='true' data-mini='true'>
+				<label for="gold" class="select" data-inline='true'>金饰</label>
+				<select id="gold" name="gold"   class='select-choice-mini' data-inline='true' data-mini='true'>
 				@foreach($style['property_value'] as $p)
 					<option value="{{$p['id']}}">{{$p['name']}}</option>
 				@endforeach
@@ -238,8 +238,8 @@
 				"vid": $('#style').val(),
 			},
 			{
-				"id": "{{$usage['id']}}",
-				"vid": $('#usage').val(),
+				"id": "{{$gold['id']}}",
+				"vid": $('#gold').val(),
 			}
 		 );
 
