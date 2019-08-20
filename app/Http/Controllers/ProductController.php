@@ -64,7 +64,7 @@ class ProductController extends Controller
 		$group = json_encode($group);
 
 
-		return view('hello',compact('material','usage','style','user','order','group'));
+		return view('hello',compact('material','style','gold','user','order','group'));
 	}
 
   /**
