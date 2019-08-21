@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Redis;
 class ProductController extends Controller
 {
 	public function __construct() {
-		// session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
+		session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
       // $this->middleware('work');
       // $this->middleware('oauth:snsapi_userinfo');
 
