@@ -17,22 +17,27 @@ use Illuminate\Support\Facades\Redis;
 class ProductController extends Controller
 {
 	public function __construct() {
-		// session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
-      $this->middleware('work');
+		session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
+      // $this->middleware('work');
       // $this->middleware('oauth:snsapi_userinfo');
 
 	}
 
-	public function home(Request $request) {
+  private function IsRegist() {
     if (session('wechat.work.default')['department'][0] == 530528964) {
       $id=session('wechat.work.default')['userid'];
       $user = app('wechat.work')->user->get($id);
-      if($user['department'][0] == 530528964) {
-        return view('regist',compact('id'));
-      }
       session(['wechat.work.default'=>$user]);
+      return $id;
     }
+  }
+
+	public function home(Request $request) {
+    $id = $this->IsRegist();
 		$user = session('wechat.work.default'); 
+    if($user['department'][0] == 530528964) {
+      return view('regist',compact('id'));
+    }
 
 		$property = [];
 		if(Redis::exists('property')) {

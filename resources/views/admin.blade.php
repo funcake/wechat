@@ -42,12 +42,6 @@
 						<p>{{$product['product_name']}}</p>
 						<p>￥{{$product['product_price']/100}}</p>
 					</div>
-					<div style="display: inline-block" >
-						
-						<img src="{{$product['product_img']}}" alt="" width="100px" height="100px">
-						<p>{{$product['product_name']}}</p>
-						<p>￥{{$product['product_price']/100}}</p>
-					</div>
 					@endforeach
 				<input type="text" name="" value="{{$order['receiver_name'].' '.$order['receiver_province']}}">
 				<form action="delivery" method="post" accept-charset="utf-8">
