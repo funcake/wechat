@@ -51,8 +51,7 @@ class ProductController extends Controller
 		$style = $property[array_search('样式', array_column($property, 'name'))];
 		$gold = $property[array_search('金饰', array_column($property, 'name'))];
 
-         // $order = Redis::hgetall(Redis::hget('groups',
-    $user['department'][0]));
+         // $order = Redis::hgetall(Redis::hget('groups',$user['department'][0]));
 		$order = [];
 
 		$group = ['status1'=>[],'status2'=>[]];
