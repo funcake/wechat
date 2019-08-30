@@ -192,25 +192,6 @@ class Merchant extends BaseClient
         $data = app('wechat.official_account')->material->uploadImage(getcwd().'/storage/app/public/'.$filename);
         app('wechat.official_account')->material->delete($data['media_id']);
         return $data['url'];
-      /*  
-        $path = getcwd().'/storage/app/public/'.$filename;
-          if (!file_exists($path) || !is_readable($path)) {
-              throw new InvalidArgumentException(sprintf('File does not exist, or the file is unreadable: "%s"', $path));
-          }
-        $url = "https://api.weixin.qq.com/merchant/common/upload_img?access_token=".app('wechat.official_account')->access_token->getToken()['access_token']."&filename=".$filename;
-
-        $data = file_get_contents($path);
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, true );
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $return_data = curl_exec($ch);
-        curl_close($ch);
-        Log::info($return_data);
-        return  json_decode($return_data,true)['image_url'];*/
     }
 
 }

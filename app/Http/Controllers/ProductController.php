@@ -51,7 +51,8 @@ class ProductController extends Controller
 		$style = $property[array_search('样式', array_column($property, 'name'))];
 		$gold = $property[array_search('金饰', array_column($property, 'name'))];
 
-         // $order = Redis::hgetall(Redis::hget('groups',$user['department'][0]));
+         // $order = Redis::hgetall(Redis::hget('groups',
+    $user['department'][0]));
 		$order = [];
 
 		$group = ['status1'=>[],'status2'=>[]];
@@ -71,27 +72,6 @@ class ProductController extends Controller
 
 		return view('hello',compact('material','style','gold','user','order','group'));
 	}
-
-  /**
-   * 处理微信的请求消息
-   *
-   * @return string
-   */
-  public function serve(int $status = 0)
-  {
-  	return app('wechat.official_account')->merchant->list($status);
-  }
-
-
-
-  public function update(Request $request) {
-  	Redis::set($request->product_id, json_encode($_POST));
-  	Redis::sadd($request->sku_list[0]['product_code'].':status1',$request->product_id);
-    Redis::srem($request->sku_list[0]['product_code'].':status2',$request->product_id);
-  	return app('wechat.official_account')->merchant->update($_POST);
-  }
-
-
 
   public function delete(Request $request) {
   	app('wechat.official_account')->merchant->delete();
@@ -114,12 +94,5 @@ class ProductController extends Controller
   	}
   	return $group;
   }
-
-  public function flushGroup()
-  {
-  	return  Redis::set(session('wechat.work.default')['department'][0]);
-  }
-
-
   
 }
