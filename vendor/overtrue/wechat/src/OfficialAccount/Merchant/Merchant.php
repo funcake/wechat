@@ -77,22 +77,21 @@ class Merchant extends BaseClient
 
                     [
                       "group_infos"=>[
-                        "groups"=>[
-
-                              [
-                                "group_id"=>512519882
+                            "groups"=>[
+                                [
+                                    "group_id"=>512519882
+                                ],
+                                 [
+                                    "group_id"=>512519882
+                                ],
+                                 [
+                                    "group_id"=>512519882
+                                ],
+                                 [
+                                    "group_id"=>512519882
+                                ],
                             ],
-                             [
-                                "group_id"=>512519882
-                            ],
-                             [
-                                "group_id"=>512519882
-                            ],
-                             [
-                                "group_id"=>512519882
-                            ],
-                        ],
-                        "img_background"=>"http://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7fCM4PaQ3tia6zU8bvgxT8q28YkDNPNwkj97M23s0IwZIcRYaPjdq2AWGDDqXTMd3IiaCUEzbsn6ojQ/0"
+                            "img_background"=>"http://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7fCM4PaQ3tia6zU8bvgxT8q28YkDNPNwkj97M23s0IwZIcRYaPjdq2AWGDDqXTMd3IiaCUEzbsn6ojQ/0"
                         ],
                         "eid"=>5
                     ]
@@ -101,7 +100,7 @@ class Merchant extends BaseClient
                 "shelf_banner"=>"http://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7fCM4PaQ3tia6zU8bvgxT8q28YkDNPNwkj97M23s0IwZIcRYaPjdq2AWGDDqXTMd3IiaCUEzbsn6ojQ/0",
                 "shelf_name"=>"货架"
                 ]
-        ];
+            ];
 
         return $this->httpPostJson('merchant/shelf/add',$post);
     }
