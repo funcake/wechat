@@ -141,7 +141,7 @@ class AdminController extends Controller
 
     public function shelf() 
     {
-        app('wechat.official_account')->merchant->shelf();
+        return app('wechat.official_account')->merchant->shelf();
     }
 
 }
