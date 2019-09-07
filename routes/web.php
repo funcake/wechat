@@ -66,6 +66,11 @@ $router->group(['prefix'=>'user'],function($router) {
 
 });
 
+// 供应商/货主
+$router->group(['prefix'=>'supplier'],function($router) {
+	$router->get('/','SupplierController@home');
+});
+
 //管理员路由
 $router->group(['prefix'=>'admin'],function($router) {
 
