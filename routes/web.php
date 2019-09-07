@@ -92,6 +92,7 @@ $router->group(['prefix'=>'admin'],function($router) {
 
     $router->post('uploadImage','AdminController@uploadImage');
 
+    $router->get('shelf','AdminController@shelf');
 });
 
 $router->post('express','ExpressController@order');
