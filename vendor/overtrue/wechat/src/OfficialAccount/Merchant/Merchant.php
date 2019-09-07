@@ -74,31 +74,30 @@ class Merchant extends BaseClient
         $post = [
             "shelf_data"=>[
               "module_infos"=>[
-                [
+
                     [
                       "group_infos"=>[
                             "groups"=>[
                                 [
-                                    "group_id"=>512519882
+                                    "group_id"=>1
                                 ],
                                  [
-                                    "group_id"=>512519882
+                                    "group_id"=>1
                                 ],
                                  [
-                                    "group_id"=>512519882
+                                    "group_id"=>1
                                 ],
                                  [
-                                    "group_id"=>512519882
+                                    "group_id"=>1
                                 ],
                             ],
                             "img_background"=>"http://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7fCM4PaQ3tia6zU8bvgxT8q28YkDNPNwkj97M23s0IwZIcRYaPjdq2AWGDDqXTMd3IiaCUEzbsn6ojQ/0"
                         ],
                         "eid"=>5
                     ]
-                ]
 
                 ],
-                "shelf_banner"=>"http://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7fCM4PaQ3tia6zU8bvgxT8q28YkDNPNwkj97M23s0IwZIcRYaPjdq2AWGDDqXTMd3IiaCUEzbsn6ojQ/0",
+                // "shelf_banner"=>"http://mmbiz.qpic.cn/mmbiz_jpg/zjU4wTBaB7fCM4PaQ3tia6zU8bvgxT8q28YkDNPNwkj97M23s0IwZIcRYaPjdq2AWGDDqXTMd3IiaCUEzbsn6ojQ/0",
                 "shelf_name"=>"货架"
                 ]
             ];
