@@ -38,6 +38,8 @@ $router->post('change','ServeController@work');
 $router->post('order','ServeController@Message');
 
 $router->get('test',function () {
+	$response = app('wechat.official_account')->oauth->scopes(['snsapi_userinfo'])
+                          ->redirect();
 	$list = app('wechat.official_account')->merchant->list();
 	$bin = array_filter($list,function($p) {
 		return array_search('冰种', array_column( $p['product_base']['property'],'vid'));
