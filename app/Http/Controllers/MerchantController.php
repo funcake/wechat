@@ -14,7 +14,7 @@ use Overtrue\Socialite\User as SocialiteUser;
 use Illuminate\Support\Facades\Redis;
 
 
-class ProductController extends Controller
+class MerchantController extends Controller
 {
 	public function __construct() {
 		// session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);

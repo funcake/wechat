@@ -97,7 +97,7 @@ class AdminController extends Controller
             foreach ($list as $order) {
             // 根据订单产品 获取订单分组，
 
-
+                // 订单详情
                 Redis::hmset($order['order_id'].":detail",
                 [
                     'order_id' => $order['order_id'],
@@ -109,10 +109,10 @@ class AdminController extends Controller
                     'product_count'=>$order['product_count'],
                     'receiver_name' => $order['receiver_name'],
                 ]);
-
-                    $p = $merchant->get($order['products'][0]['product_id']);
-                    $products[$p['sku_list'][0]['product_code']][] = $order;
-                    Redis::sadd($p['sku_list'][0]['product_code'].':orders',$order['order_id']);
+                // 订单分组
+                $p = $merchant->get($order['products'][0]['product_id']);
+                $products[$p['sku_list'][0]['product_code']][] = $order;
+                Redis::sadd($p['sku_list'][0]['product_code'].':orders',$order['order_id']);
             }
         });
 // dd($products);
@@ -137,6 +137,11 @@ class AdminController extends Controller
     {
         // Redis::hset($_POST['order_id'],);
         app('wechat.official_account')->merchant->setDelivery();
+    }
+
+    public function shelf() 
+    {
+        app('wechat.official_account')->merchant->shelf();
     }
 
 }

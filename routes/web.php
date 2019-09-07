@@ -10,17 +10,17 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-$router->group([],function($router) {
+$router->group(['prefix'=>'merchant'],function($router) {
 
-	$router->get('','ProductController@home');
+	$router->get('','MerchantController@home');
 
-	$router->get('group','ProductController@group');
+	$router->get('group','MerchantController@group');
 
-	$router->post('update','ProductController@update');
+	$router->post('update','MerchantController@update');
 
-	$router->post('delete','ProductController@delete');
+	$router->post('delete','MerchantController@delete');
 
-	$router->get('join','ProductController@join');
+	$router->get('join','MerchantController@join');
 
 });
 
