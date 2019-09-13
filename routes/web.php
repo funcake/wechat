@@ -38,6 +38,7 @@ $router->post('change','ServeController@work');
 $router->post('order','ServeController@Message');
 
 $router->get('test',function () {
+	header("Access-Control-Allow-Origin:http://www.fljy.shop");
 	return app('wechat.official_account')->jssdk->buildConfig(['openProductSpecificView'], $debug = false, $beta = false, $json = true);
 	return $list = app('wechat.official_account')->merchant->list();
 	$response = app('wechat.official_account')->oauth->scopes(['snsapi_userinfo'])
