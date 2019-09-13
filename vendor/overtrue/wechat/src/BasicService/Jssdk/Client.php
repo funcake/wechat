@@ -54,7 +54,7 @@ class Client extends BaseClient
     {
         $config = array_merge(compact('debug', 'beta', 'jsApiList'), $this->configSignature());
 
-        return $json ? json_encode($config) : $config;
+        return $json ? json_encode($config,JSON_UNESCAPED_SLASHES) : $config;
     }
 
     /**

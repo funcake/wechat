@@ -38,6 +38,7 @@ $router->post('change','ServeController@work');
 $router->post('order','ServeController@Message');
 
 $router->get('test',function () {
+	return app('wechat.official_account')->jssdk->buildConfig(['openProductSpecificView'], $debug = false, $beta = false, $json = true);
 	return $list = app('wechat.official_account')->merchant->list();
 	$response = app('wechat.official_account')->oauth->scopes(['snsapi_userinfo'])
                           ->redirect();

@@ -94,4 +94,7 @@ class MerchantController extends Controller
   	return $group;
   }
   
+  public function wxConfig() {
+    return app('wechat.official_account')->jssdk->buildConfig(['openProductSpecificView'], $debug = false, $beta = false, $json = true);
+  }
 }

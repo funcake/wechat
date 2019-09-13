@@ -29,7 +29,7 @@
 			'/user/regist',
 			post,
 				function(data) {
-					window.location='http://fljy.shop';
+					window.location='http://fljy.shop/merchant';
 					if(data !== []) {
 						alert(data);
 					} 
