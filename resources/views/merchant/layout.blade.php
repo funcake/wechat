@@ -148,8 +148,10 @@
 					}
 				);
 
+				var html;
+
 				for (var i = 0; i <10; i++) {
-					var html += 
+					html += 
 					`
 						<article>
 							<a href="#" class="image"><img src="${products[i]['product_base']['main_img']}" alt="" /></a>
@@ -164,7 +166,7 @@
 				}
 				$.('#products').html(html);
 
-				
+
 
 			</script>
 
