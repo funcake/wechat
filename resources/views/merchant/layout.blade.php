@@ -143,7 +143,7 @@
 					'../test',
 					function(data) {
 						products = data;
-						for (var i = 40; i <50; i++) {
+						for (var i = 0; i <20; i++) {
 								products[i]['product_base']['main_img'] = products[i]['product_base']['main_img'].replace(/^https/,'http').replace(/\?wx_fmt=jpeg$/,'');
 								html += 
 								`
