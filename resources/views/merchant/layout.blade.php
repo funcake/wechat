@@ -146,8 +146,7 @@
 					function(data) {
 						products = data;
 						for (var i = 0; i <10; i++) {
-								products[i]['product_base']['main_img'] = products[i]['product_base']['main_img'].replace(/https/,'http');
-								products[i]['product_base']['main_img'] = products[i]['product_base']['main_img'].replace(//?wx_fmt=jpeg/,'http');
+								products[i]['product_base']['main_img'] = products[i]['product_base']['main_img'].replace(/^https/,'http').replace(/\?wx_fmt=jpeg$/,'');
 								html += 
 								`
 									<article>
