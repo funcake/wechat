@@ -12,6 +12,9 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('layout',function($view) {
             $view->with('config',\App\Jssdk::config());
         });
+        view()->composer('merchant.layout',function($view) {
+            $view->with('config',\App\Jssdk::config());
+        });
     }
     /**
      * Register any application services.

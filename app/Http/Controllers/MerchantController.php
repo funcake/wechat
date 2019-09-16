@@ -18,7 +18,7 @@ class MerchantController extends Controller
 {
 	public function __construct() {
 		// session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
-      $this->middleware('work');
+      // $this->middleware('work');
       // $this->middleware('oauth:snsapi_userinfo');
 
 	}
@@ -94,7 +94,7 @@ class MerchantController extends Controller
   	return $group;
   }
   
-  public function wxConfig() {
-    return app('wechat.official_account')->jssdk->buildConfig(['openProductSpecificView'], $debug = false, $beta = false, $json = true);
+  public function merchant() {
+    return view('merchant.layout');
   }
 }

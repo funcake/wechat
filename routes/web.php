@@ -22,6 +22,8 @@ $router->group(['prefix'=>'merchant'],function($router) {
 
 	$router->get('join','MerchantController@join');
 
+	$router->get('merchant','MerchantController@merchant');
+
 });
 
 //通知路由
@@ -38,8 +40,8 @@ $router->post('change','ServeController@work');
 $router->post('order','ServeController@Message');
 
 $router->get('test',function () {
-	header("Access-Control-Allow-Origin:http://www.fljy.shop");
-	return app('wechat.official_account')->jssdk->buildConfig(['openProductSpecificView'], $debug = false, $beta = false, $json = true);
+	// return 123;
+	// return app('wechat.official_account')->jssdk->buildConfig(['openProductSpecificView'], $debug = false, $beta = false, $json = true);
 	return $list = app('wechat.official_account')->merchant->list();
 	$response = app('wechat.official_account')->oauth->scopes(['snsapi_userinfo'])
                           ->redirect();
