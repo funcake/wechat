@@ -145,7 +145,7 @@
 					'../test',
 					function(data) {
 						products = data;
-						for (var i = 0; i <10; i++) {
+						for (var i = 40; i <50; i++) {
 								products[i]['product_base']['main_img'] = products[i]['product_base']['main_img'].replace(/^https/,'http').replace(/\?wx_fmt=jpeg$/,'');
 								html += 
 								`
@@ -157,8 +157,7 @@
 											<li><a href="#" class="button" key="${i}">￥${products[i]['sku_list'][0]['price']/100}</a> <span class="original">￥654</span></li>
 										</ul>
 									</article>			
-								` 
-								products[i]	
+								` ;
 							}
 							$('#products').html(html);
 					}
