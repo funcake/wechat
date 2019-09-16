@@ -40,7 +40,7 @@
 									<header class="major">
 										<h2>Ipsum sed dolor</h2>
 									</header>
-									<div class="posts">
+									<div class="posts" id="products">
 										<article>
 											<a href="#" class="image"><img src="../images/logo.jpg" alt="" /></a>
 											<h3>圆荷泻露</h3>
@@ -142,11 +142,29 @@
 			<script>
 				var products;
 				$.get(
-						'../test',
-						function(data) {
-							products = data;
-						}
-					)
+					'../test',
+					function(data) {
+						products = data;
+					}
+				);
+
+				for (var i = 0; i <10; i++) {
+					var html += 
+					`
+						<article>
+							<a href="#" class="image"><img src="${products[i]['product_base']['main_img']}" alt="" /></a>
+							<h3>${e['product_base']['name']}</h3>
+							<p>索拉卡倒计时了肯定</p>
+							<ul class="actions">
+								<li><a href="#" class="button" key="${i}">￥${products['sku_list'][0]['price']/100}</a> <span class="original">￥654</span></li>
+							</ul>
+						</article>			
+					` 
+					products[i]	
+				}
+				$.('#products').html(html);
+
+				
 
 			</script>
 

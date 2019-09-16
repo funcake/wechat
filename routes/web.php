@@ -42,7 +42,7 @@ $router->post('order','ServeController@Message');
 $router->get('test',function () {
 	// return 123;
 	// return app('wechat.official_account')->jssdk->buildConfig(['openProductSpecificView'], $debug = false, $beta = false, $json = true);
-	return $list = app('wechat.official_account')->merchant->list();
+	return $list = app('wechat.official_account')->merchant->list(1);
 	$response = app('wechat.official_account')->oauth->scopes(['snsapi_userinfo'])
                           ->redirect();
 	$list = app('wechat.official_account')->merchant->list();
