@@ -164,7 +164,7 @@
 					` 
 					products[i]	
 				}
-				$.('#products').html(html);
+				$('#products').html(html);
 
 
 
