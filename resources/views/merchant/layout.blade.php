@@ -145,27 +145,28 @@
 					'../test',
 					function(data) {
 						products = data;
+						for (var i = 0; i <10; i++) {
+								products[i]['product_base']['main_img'] = products[i]['product_base']['main_img'].replace(/https/,'http');
+								html += 
+								`
+									<article>
+										<a href="#" class="image"><img src="${products[i]['product_base']['main_img']}" alt="" /></a>
+										<h3>${products[i]['product_base']['name']}</h3>
+										<p>索拉卡倒计时了肯定</p>
+										<ul class="actions">
+											<li><a href="#" class="button" key="${i}">￥${products[i]['sku_list'][0]['price']/100}</a> <span class="original">￥654</span></li>
+										</ul>
+									</article>			
+								` 
+								products[i]	
+							}
+							$('#products').html(html);
 					}
 				);
 
 				var html;
 
-			for (var i = 0; i <10; i++) {
-					products[i]['product_base']['main_img'] = products[i]['product_base']['main_img'].replace(/https/,'http');
-					html += 
-					`
-						<article>
-							<a href="#" class="image"><img src="${products[i]['product_base']['main_img']}" alt="" /></a>
-							<h3>${products[i]['product_base']['name']}</h3>
-							<p>索拉卡倒计时了肯定</p>
-							<ul class="actions">
-								<li><a href="#" class="button" key="${i}">￥${products[i]['sku_list'][0]['price']/100}</a> <span class="original">￥654</span></li>
-							</ul>
-						</article>			
-					` 
-					products[i]	
-				}
-				$('#products').html(html);
+
 
 
 
