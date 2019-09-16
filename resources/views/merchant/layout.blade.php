@@ -9,6 +9,8 @@
 		<title>福临璟苑</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="referrer" content="never">
+
 		<link rel="shortcut icon"  href="../images/logo-sm.jpg" >
 		
 		<link rel="stylesheet" href="../css/main.css" />
