@@ -125,7 +125,7 @@ input, select, textarea {
 		@media screen and (max-width: 1680px) {
 
 			body, input, select, textarea {
-				font-size: 13pt;
+				font-size: 11pt;
 			}
 
 		}
@@ -133,7 +133,7 @@ input, select, textarea {
 		@media screen and (max-width: 1280px) {
 
 			body, input, select, textarea {
-				font-size: 13pt;
+				font-size: 10pt;
 			}
 
 		}
@@ -141,7 +141,7 @@ input, select, textarea {
 		@media screen and (max-width: 360px) {
 
 			body, input, select, textarea {
-				font-size: 13pt;
+				font-size: 10pt;
 			}
 
 		}
@@ -3138,7 +3138,7 @@ input, select, textarea {
 		-ms-transition: margin-left 0.5s ease, box-shadow 0.5s ease;
 		transition: margin-left 0.5s ease, box-shadow 0.5s ease;
 		background-color: #f5f6f7;
-		font-size: 0.9em;
+		font-size: 1em;
 		position: relative;
 		width: 26em;
 	}
@@ -3231,12 +3231,12 @@ input, select, textarea {
 		@media screen and (max-width: 1680px) {
 
 			#sidebar {
-				width: 16em;
+				width: 20em;
 			}
 
 				#sidebar > .inner {
 					padding: 1.66667em 1.66667em 1.33333em 1.66667em ;
-					width: 16em;
+					width: 20em;
 				}
 
 					#sidebar > .inner > .alt {
@@ -3247,7 +3247,7 @@ input, select, textarea {
 
 				#sidebar .toggle {
 					height: 6.25em;
-					left: 16em;
+					left: 20em;
 					line-height: 6.25em;
 					text-indent: 5em;
 					width: 5em;
@@ -3258,7 +3258,7 @@ input, select, textarea {
 					}
 
 				#sidebar.inactive {
-					margin-left: -16em;
+					margin-left: -20em;
 				}
 
 		}
