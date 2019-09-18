@@ -22,7 +22,11 @@ $router->group(['prefix'=>'merchant'],function($router) {
 
 	$router->get('join','MerchantController@join');
 
-	$router->get('merchant','MerchantController@merchant');
+
+});
+$router->group(['prefix'=>'shop'],function($router) {
+
+	$router->get('','MerchantController@home');
 
 });
 

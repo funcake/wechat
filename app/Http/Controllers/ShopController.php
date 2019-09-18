@@ -13,14 +13,18 @@ use Overtrue\Socialite\User as SocialiteUser;
 
 use Illuminate\Support\Facades\Redis;
 
-
-class MerchantController extends Controller
+/**
+ * 
+ */
+class ShopController extends Controller
 {
-	public function __construct() {
-      // $this->middleware('work');
-      $this->middleware('oauth:snsapi_userinfo');
+  
+  function __construct()  
+  {
+          $this->middleware('oauth:snsapi_userinfo');
+  }
 
-	}
-
- 
+  public function merchant() {
+    return view('merchant.layout');
+  }
 }
