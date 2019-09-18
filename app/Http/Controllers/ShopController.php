@@ -24,7 +24,7 @@ class ShopController extends Controller
           $this->middleware('oauth:snsapi_userinfo');
   }
 
-  public function merchant() {
+  public function home() {
     return view('merchant.layout');
   }
 }
