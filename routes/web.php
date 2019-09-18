@@ -26,7 +26,7 @@ $router->group(['prefix'=>'merchant'],function($router) {
 });
 $router->group(['prefix'=>'shop'],function($router) {
 
-	$router->get('','MerchantController@home');
+	$router->get('','ShopController@home');
 
 });
 
