@@ -9,7 +9,7 @@
 
 		<link rel="shortcut icon"  href="../images/logo-sm.jpg" >
 		
-		<link rel="stylesheet" href="../css/test.css" />
+		<link rel="stylesheet" href="../css/main.css" />
 		<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js" type="text/javascript" charset="utf-8"></script>
 		<!-- <link rel="stylesheet" href="assets/css/icon.css" /> -->
 
