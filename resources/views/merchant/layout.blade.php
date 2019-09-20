@@ -9,7 +9,7 @@
 
 		<link rel="shortcut icon"  href="../images/logo-sm.jpg" >
 		
-		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/test.css" />
 		<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js" type="text/javascript" charset="utf-8"></script>
 		<!-- <link rel="stylesheet" href="assets/css/icon.css" /> -->
 
@@ -80,14 +80,10 @@
 									</header>
 									<ul>
 										<li><a href="index.html">主页</a></li>
-										<li><a href="generic.html">文集</a></li>
+										<li><a href="https://mp.weixin.qq.com/mp/homepage?__biz=MzI1MDc0NjgzOQ==&hid=1&sn=19e41903812445e4137fbd46965f4652">文集</a></li>
 										<li>
 											<span class="opener">资讯</span>
 											<ul>
-												<li><a href="#">Lorem Dolor</a></li>
-												<li><a href="#">Ipsum Adipiscing</a></li>
-												<li><a href="#">Tempus Magna</a></li>
-												<li><a href="#">Feugiat Veroeros</a></li>
 											</ul>
 										</li>
 									</ul>
@@ -114,9 +110,9 @@
 										<h2>千里相会</h2>
 									</header>
 									<p>福临璟苑 欢迎贵客光临，有任何求可以联系我们。 <br><br>
-										同时我们对外开放多方向合作，如果您有合作意向请致电或发送邮件给我们。若有需要我们将会立即回复您。</p>
+										同时我们对外开放多方向合作，有意向请致电给我们。我们将会立即回复您。</p>
 									<ul class="contact">
-										<li class="icon iconfont icon-xiangyun"><a href="" >1078715589@qq.com</a></li>
+										<li class="icon iconfont icon-xiangyun"><img src="../images/公众号指纹.jpg" alt=""></li>
 										<li class="icon iconfont icon-lianxi">137-6797-2574</li>
 										<li class="icon iconfont icon-guwancheng"><a href="https://map.baidu.com/poi/%E7%A6%8F%E4%B8%B4%E7%92%9F%E8%8B%91/@12903304.55,3316567.29,12z?uid=4784889a4efb62ac2102205c&primaryUid=4784889a4efb62ac2102205c&ugc_type=3&ugc_ver=1&device_ratio=2&compat=1&querytype=detailConInfo&da_src=shareurl" title="">站前西路121号福临璟苑<br />
 										江西省 南昌市</a></li>
