@@ -13,3 +13,5 @@ dump.db
 .DS_Store
 blog.sublime*
 wechat.sublime*
+resources/assets/
+.sass/
