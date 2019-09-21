@@ -213,7 +213,7 @@
 		post.sku_list[0].price=$('#price1').val()*100;
 		console.log(post);
 		$("#status1 [key='"+key+"'] p").html('￥'+$('#price1').val());
-		$.post('./update',
+		$.post('merchant/update',
 			post ,
 			function(data) {
 				console.log(data);
@@ -248,7 +248,7 @@
 		data.status1.unshift(post);
 		init1();
 		console.log(post);
-		$.post('update',
+		$.post('merchant/update',
 			post ,
 			function(data) {
 				console.log(data);
@@ -260,7 +260,7 @@
 		var key = $(this).attr("key");
 		post ={'product_id':data.status1[key].product_id,'group':data.status1[key].sku_list[0].product_code};
 		$("#status1 li[key='"+key+"']").remove();
-		$.post('delete',
+		$.post('merchant/delete',
 				post,
 				function(data) {
 					console.log(data);
