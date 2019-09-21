@@ -112,7 +112,7 @@
 									<p>福临璟苑 欢迎贵客光临，有任何求可以联系我们。 <br><br>
 										同时我们对外开放多方向合作，有意向请致电给我们。我们将会立即回复您。</p>
 									<ul class="contact">
-										<li class="icon iconfont icon-xiangyun"><img src="../images/公众号指纹.jpg" alt=""></li>
+										<li class="icon iconfont icon-xiangyun"><img src="../images/公众号指纹.jpg" alt="" width="100"></li>
 										<li class="icon iconfont icon-lianxi">137-6797-2574</li>
 										<li class="icon iconfont icon-guwancheng"><a href="https://map.baidu.com/poi/%E7%A6%8F%E4%B8%B4%E7%92%9F%E8%8B%91/@12903304.55,3316567.29,12z?uid=4784889a4efb62ac2102205c&primaryUid=4784889a4efb62ac2102205c&ugc_type=3&ugc_ver=1&device_ratio=2&compat=1&querytype=detailConInfo&da_src=shareurl" title="">站前西路121号福临璟苑<br />
 										江西省 南昌市</a></li>

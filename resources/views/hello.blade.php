@@ -213,7 +213,7 @@
 		post.sku_list[0].price=$('#price1').val()*100;
 		console.log(post);
 		$("#status1 [key='"+key+"'] p").html('￥'+$('#price1').val());
-		$.post('update',
+		$.post('/update',
 			post ,
 			function(data) {
 				console.log(data);
