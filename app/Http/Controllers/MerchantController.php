@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Redis;
 class MerchantController extends Controller
 {
   public function __construct() {
-    session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
-      // $this->middleware('work');
+    // session(['wechat.work.default'=>app('wechat.work')->user->get('WuKe')]);
+      $this->middleware('work');
       // $this->middleware('oauth:snsapi_userinfo');
 
   }
