@@ -94,5 +94,7 @@ class MerchantController extends Controller
     return $group;
   }
   
-
+  public function update() {
+    return app('wechat.official_account')->merchant->update($_POST);
+  }
 }
