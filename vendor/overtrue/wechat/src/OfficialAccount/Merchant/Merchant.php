@@ -182,14 +182,14 @@ class Merchant extends BaseClient
         return $this->httpPostJson('merchant/order/getbyfilter',['status'=>$status])['order_list'];
     }
 
-    public function setDelivery() {
+    public function setDelivery($order_id,$delivery_track_on) {
       $post = [
-        'order_id' => $_POST['order_id'],
-        'delivery_company' => '',
-        'delivery_track_on' => $_POST['delivery_track_on'],
+        'order_id' => $order_id,
+        'delivery_company' => '066zhongtong',
+        'delivery_track_on' => $delivery_track_on,
         'need_delivery' => 1,
+        'is_others'=>0
       ];
-
         return $this->httpPostJson('merchant/order/setdelivery',$post);
     }
 

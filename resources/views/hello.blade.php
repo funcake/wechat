@@ -247,7 +247,6 @@
 		$("#list2 [key='"+key+"']").remove();
 		data.status1.unshift(post);
 		init1();
-		console.log(post);
 		$.post('merchant/update',
 			post ,
 			function(data) {
