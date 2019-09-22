@@ -149,7 +149,7 @@
 										<h3>${products[i]['product_base']['name']}</h3>
 										<p>索拉卡倒计时了肯定</p>
 										<ul class="actions">
-											<li><a href="#" class="button" key="${i}" onclick="purchase(`${products[i]['product_id']}`)">￥${products[i]['sku_list'][0]['price']/100}</a> <span class="original">￥654</span></li>
+											<li><a href="#" class="button" key="${i}" onclick="purchase(${products[i]['product_id']})">￥${products[i]['sku_list'][0]['price']/100}</a> <span class="original">￥654</span></li>
 										</ul>
 									</article>			
 								` ;
